@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="signin.css"/>
+  <link rel="stylesheet" href="signin.css" />
   <script src="js/formValidation.js"></script>
 </head>
-<body>
-  <form action="register.php" class="form-signin m-auto" 
-  method="POST" name="myForm" onSubmit="return validaForm()">
-<div class="contentLogin py-3 bg1">
-<div class="login">
-<h2>Registrati</h2>
-<div class="ipt">
-<input type="email" name="inputEmail" placeholder="Indirizzo e-mail" required autofocus/> 
-</div>
-<div class="ipt">    
-<input type="password" name="inputPassword" placeholder="Password" required/>
-</div>
-<!--  <div class="ipt">    
-<input type="password" name="inputPassword" placeholder="Inserisci di nuovo la password" required/>
-</div> -->
-<div class="ipt">
-<input type="text" name="inputName" placeholder="Nome" autofocus/>
-</div>
-<div class="ipt">
-<input type="text" name="inputSurname" placeholder="Cognome" autofocus/>
-</div>
-<!-- <div class="ipt">
-<input id="cap" type="text" name="inputCap" placeholder="Cap" size="5" maxlength="5"/>
-</div> -->
-<div id="divRemember" class="checkbox mb-3">
-  <input id="rmb" type="checkbox" name="remember"/>
-  <label for="rmb">Ricordami</label>
-</div>
-<br>
-<button> Invia </button>
-</div>
 
-</div>
-</form>
+<body>
+  <form action="register.php" class="form-signin m-auto" method="POST" name="myForm" onSubmit="return validaForm()">
+    <div class="contentLogin py-3 bg1">
+      <div class="login">
+        <h2>Registrati</h2>
+        <div class="ipt">
+          <input type="email" name="inputEmail" placeholder="Indirizzo e-mail" required autofocus />
+        </div>
+        <div class="ipt">
+          <input type="password" name="inputPassword" placeholder="Password" required />
+        </div>
+        <div class="ipt">
+          <input type="text" name="inputName" placeholder="Nome" autofocus />
+        </div>
+        <div class="ipt">
+          <input type="text" name="inputSurname" placeholder="Cognome" autofocus />
+        </div>
+        <div id="divRemember" class="checkbox mb-3">
+          <input id="rmb" type="checkbox" name="remember" />
+          <label for="rmb">Ricordami</label>
+        </div>
+        <br>
+        <button> Invia </button>
+      </div>
+
+    </div>
+  </form>
 </body>
+
 </html>
