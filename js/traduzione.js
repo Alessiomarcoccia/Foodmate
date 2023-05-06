@@ -14,7 +14,8 @@ var arrLang = {
     'account': "Don't have account?",
     'register': 'Register',
     'header': "Foodmate allows you to manage your pantry in a smart way, so you don't have to throw away food anymore",
-    'letsgo': "Let's go!"
+    'letsgo': "Let's go!",
+    'logout': 'Logout'
   },
 
   "it": {
@@ -32,7 +33,8 @@ var arrLang = {
     'account': 'Non hai un account?',
     'register': 'Registrati',
     'header': 'Foodmate ti permette di gestire la tua dispensa in modo intelligente, cosi da non dover più buttare cibo',
-    'letsgo': "Iniziamo!"
+    'letsgo': "Iniziamo!",
+    'logout': 'Logout'
   }
 };
 

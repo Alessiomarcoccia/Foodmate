@@ -23,6 +23,11 @@ $data = <<<EOD
                     <i class="fa-sharp fa-solid fa-chart-simple"></i>
                 </a>
             </li> 
+            <li>
+                <a href="../php/logout.php?action=logout" class="lang" key="logout" >
+                     <i class="fa-sharp fa-solid fa-sign-out"></i>
+                </a>
+            </li>
         </ul>
     </div>
 EOD;
