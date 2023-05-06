@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 else {
     $dbconn = pg_connect("host=localhost port=5432 dbname=progetto
-                user=Foodmate password=Foodmate") 
+                user=FoodMate password=FoodMate") 
                 or die('Could not connect: ' . pg_last_error());
 }
 ?>

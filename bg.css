@@ -1,0 +1,117 @@
+/* backgroud */
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: url("bg.jpg") center top;
+  background-size: 100% 100%;
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(33, 32, 32, 0.8);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(16, 16, 16, 0.6);
+  border-radius: 10px;
+}
+
+/* Accedi */
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+
+.login-box form button{
+  position: relative;
+ /*  display: inline-block; */
+  padding: 10px 20px;
+  color: #030303;
+  font-size: 16px;
+  text-decoration: none;
+ /*  text-transform: uppercase; */
+  overflow: hidden;
+  /* transition: .5s; */
+  /* margin-left: 10em; */
+  letter-spacing: 4px;
+  background: #03e9f4;
+  border-radius: 5px;
+  box-shadow: 0 0 20px #03e9f4;
+  width: 100%;
+}
+
+.login-box form a {
+  position: relative;
+ /*  display: inline-block; */
+ /* padding: 10px 20px; */
+  color: #11e42a;
+  font-size: 16px;
+  text-decoration: none;
+ /*  text-transform: uppercase; */
+  overflow: hidden;
+  letter-spacing: 2px;
+  
+}
+
+.login-box form span {
+  position: relative;
+ /*  display: inline-block; */
+  padding: 10px 20px;
+  color: #f0edf5;
+  font-size: 16px;
+  text-decoration: none;
+ /*  text-transform: uppercase; */
+  overflow: hidden;
+  letter-spacing: 2px;
+  padding-left: 3.5em;
+}
+
+.padding {
+  padding-right: 50px;
+}

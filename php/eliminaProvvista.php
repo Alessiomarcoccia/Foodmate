@@ -4,7 +4,7 @@ session_start();
 $email = $_SESSION['email'];
 $nomeFrigorifero = $_SESSION['nomeFrigorifero'];
 $id = $_POST['idProvvista'];
-$dbconn = pg_connect("host=localhost password=Foodmate user=Foodmate port=5432 dbname=progetto")
+$dbconn = pg_connect("host=localhost password=FoodMate user=FoodMate port=5432 dbname=progetto")
     or die("Errore di connessione: " . pg_last_error());
 
 if ($dbconn) {

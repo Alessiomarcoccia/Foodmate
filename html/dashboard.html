@@ -12,7 +12,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="../components/sidebar-style.css" rel="stylesheet">
+   
 
     <script src="../js/randomColor.js"></script>
 
@@ -291,7 +291,20 @@
         });
     });
 
-    
+    $(function() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() +1;
+        if(month < 10){
+            month = '0' + month;
+        }
+        var day = date.getDate();
+        if (day < 10){
+            day = '0' + day;
+        }
+        var time = year + '-' + month + '-' + day;
+        $('#expDate').attr('min', time);
+    })
 
 
 </script>

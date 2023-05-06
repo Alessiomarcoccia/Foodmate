@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: /");
 }
 else {
-    $dbconn = pg_connect("host=localhost password=Foodmate user=Foodmate port=5432 dbname=progetto") 
+    $dbconn = pg_connect("host=localhost password=FoodMate user=FoodMate port=5432 dbname=progetto") 
                 or die("Errore di connessione: " .pg_last_error()); 
 }
 ?>
