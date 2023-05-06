@@ -5,6 +5,7 @@ var arrLang = {
     "login": "Login",
     "signup": "Sign up",
     "letsgo": "Let's go!",
+    "chart1_title":"Whats in your pantry?",
   },
   "it": {
     "slogan": "Dì addio allo spreco",
@@ -12,6 +13,7 @@ var arrLang = {
     "login": "Accedi",
     "signup": "Registrati",
     "letsgo": "Iniziamo!",
+    "chart1_title":"Cosa c'è nella tua dispensa?",
   }
 
 };
@@ -31,6 +33,10 @@ $(document).ready(function () {
   // Traduco la pagina
   $(".lang").each(function (index, element) {
     $(this).text(arrLang[lang][$(this).attr("key")]);
+  });
+
+  $(".langChart").each(function (index, element) {
+    $(this).data("chart").options.title.text = arrLang[lang][$(this).attr("key")];
   });
   });
 

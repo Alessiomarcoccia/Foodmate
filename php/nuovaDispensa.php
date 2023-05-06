@@ -15,5 +15,5 @@ if ($dbconn) {
         $data = pg_query_params($dbconn, $q2,array($nome, $email));
         }
     }
-    header("Location: ../dashboard.html");
+    header("Location: ../html/dashboard.html");
 ?>

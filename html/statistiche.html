@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="../components/sidebar-style.css">
+
+  <script src="../js/chartColors.js"></script>
+
+  <title>Foodmate </title>
+</head>
+
+<body>
+  <div id="sidebar-container"></div>
+
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row" style="width: 100%;">
+        <div class="col-md-12 col-sm-12">
+          <!-- <div class="content"> -->
+            <!-- <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
+            <h5 style="text-align: center;">Conteggio unitario</h5> -->
+          <canvas id="myChart" style="height: 500px; width: 400px; margin: 0 auto;" class="langChart" key="chart1_title"></canvas>
+          <!--  </div> -->
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-12">
+            <!-- <div class="content"> -->
+              <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
+            <h5 style="text-align: center;">Conteggio unitario</h5>
+            <canvas id="myChart2" style="height: 300px; width: 700px; margin: 0 auto;"></canvas>
+            <!--  </div> -->
+          </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      url: '../components/sidebar-component.php',
+      method: 'GET',
+      dataType: 'text',
+      success(data) {
+        console.log(data);
+        $('#sidebar-container').html(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log('Error: ' + errorThrown);
+        console.log('Status: ' + textStatus);
+      }
+    });
+  });
+  $(document).ready(function () {
+    $.ajax({
+      url: '../php/chart_tipologia_contenuto.php',
+      method: 'GET',
+      dataType: 'json',
+      success(data) {
+        var labels = data.labels;
+        var values = data.values;
+        var backgroundColors = colors(labels);
+        console.log(backgroundColors);
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'My Dataset',
+              data: values,
+              backgroundColor: backgroundColors,
+              borderColor: 'rgba(255, 255, 255,1)',
+              borderWidth: 2
+            }]
+          },
+          options: { 
+            responsive: false,
+            plugins:{
+              title:{
+                display: true,
+                text: 'Cosa c\'è nelle tue dispense',
+                font: {
+                  size: 30
+                }
+              },
+              }
+            }
+          });
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log('Error: ' + errorThrown);
+        console.log('Status: ' + textStatus);
+      }
+    });
+  });
+
+
+
+
+
+  $(document).ready(function () {
+    $.ajax({
+      url: '../php/chart_scadenze.php',
+      method: 'GET',
+      dataType: 'json',
+      success(data) {
+        var labels = data.labels;
+        var values = data.values;
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar', 
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'My Dataset',
+              data: values,
+              backgroundColor: ["rgb(200,0,0)","rgb(255, 204, 0)","rgb(0, 100, 0)"],
+              borderColor: 'rgba(255, 255, 255,1)',
+              borderWidth: 2
+            }]
+          },
+          options: { 
+            responsive: false,
+            plugins:{
+              legend:{
+                display: false
+              },
+            } 
+          }
+        });
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log('Error: ' + errorThrown);
+        console.log('Status: ' + textStatus);
+      }
+    })
+  });
+
+</script>
+
+<style>
+
+  /* #sidebar-container{
+    width: 100%;
+  } */
+ body::-webkit-scrollbar {
+        display: none;
+    }
+    
+</style>
+
+</html>

@@ -7,7 +7,7 @@
     $dbconn = pg_connect("host=localhost password=Foodmate user=Foodmate port=5432 dbname=progetto") or die("Errore di connessione: " . pg_last_error());
 
     if($dbconn){
-        $q1 = "SELECT p.nome as nome,p.dataScadenza as dataScadenza,p.tipo as tipologia,c.quantita as quantita
+        $q1 = "SELECT p.nome as nome,p.dataScadenza as dataScadenza,p.tipo as tipologia,c.quantita as quantita,p.id as id
                 FROM contiene c,provvista p
                 WHERE nomeDispensa = $1 AND nomeUtente = $2 AND c.provvista = p.id";
         $result = pg_query_params($dbconn, $q1, array($nomeFrigo,$email));

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Foodmate</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-ligth bg-ligth">
+    <a class="navbar-brand" href="/">
+      <img src="../assets/logo.png" width="60" height="60" alt=".">
+      <strong>Foodmate</strong>
+    </a>
+  </nav>
+  <div class="login">
+    <h1 class="h1 mb-6">
+      Registrati a Foodmate
+    </h1>
+    <p class="fs-8 fw-semibold text-secondary mb-6">
+      Oppure se hai già un account <a href="login.html">accedi</a>
+    </p>
+    <form action="register.php" class="form-signin" method="POST" name="myForm">
+      <div>
+        <input type="text" name="inputName" placeholder="Nome" autofocus />
+      </div>
+      <div>
+        <input type="text" name="inputSurname" placeholder="Cognome" autofocus />
+      </div>
+      <div>
+        <input type="email" name="inputEmail" placeholder="Indirizzo e-mail" required autofocus />
+      </div>
+      <div>
+        <input type="password" name="inputPassword" placeholder="Password" required />
+      </div>
+      <br>
+      <div>
+      <button type="submit" class="btn btn-outline-success" id="signupButton"> Tutto pronto,iniziamo! </button>
+      </div>
+    </div>
+  </form>
+</body>
+
+</html>
+
+<style>
+
+  a.navbar-brand {
+    text-decoration: none;
+    color: black;
+  }
+
+  #signupButton {
+    border-radius: 40px;
+    padding: 10px;
+    width: 200px;
+    text-decoration: white;
+  }
+
+  .login {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: large;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  
+  .form-signin input {
+  margin-bottom: 5px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* .form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+} */
+</style>

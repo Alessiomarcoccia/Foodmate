@@ -23,9 +23,8 @@ if ($dbconn) {
     $data = pg_query_params($dbconn, $q2, array($nomeFrigorifero, $email, $id, $quantita));
 }
  
-$json_data = json_encode($nomeFrigorifero);
-
-header("Location: ./dashboard.html");
+$response = array('nomeFrigorifero' => $nomeFrigorifero);
 header('Content-Type: application/json');
-echo $json_data;
+echo json_encode($response);
+
 ?>
