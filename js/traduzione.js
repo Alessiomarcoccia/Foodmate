@@ -9,12 +9,14 @@ var arrLang = {
     'statistiche': 'Statistic',
     'dispense': 'Your dispense',
     'invia' : 'Submit',
-    'nome' : 'name',
-    'cognome': 'surname',
-    'account': "Don't have account?",
+    'nome' : 'Name',
+    'cognome': 'Surname',
+    'account': "Don't have an account?",
     'register': 'Register',
     'header': "Foodmate allows you to manage your pantry in a smart way, so you don't have to throw away food anymore",
-    'letsgo': "Let's go!"
+    'letsgo': "Let's go!",
+    'ricette': 'Recipes',
+    'logout':'Logout',
   },
 
   "it": {
@@ -27,12 +29,14 @@ var arrLang = {
     'statistiche': 'Statistiche',
     'dispense': 'Le tue dispense',
     'invia': 'Invia',
-    'nome': 'nome',
-    'cognome': 'cognome',
+    'nome': 'Nome',
+    'cognome': 'Cognome',
     'account': 'Non hai un account?',
     'register': 'Registrati',
     'header': 'Foodmate ti permette di gestire la tua dispensa in modo intelligente, cosi da non dover più buttare cibo',
-    'letsgo': "Iniziamo!"
+    'letsgo': "Iniziamo!",
+    'ricette': 'Ricette',
+    'logout':'Esci',
   }
 };
 

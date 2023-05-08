@@ -8,14 +8,14 @@ body {
   padding: 0;
   font-family: sans-serif;
   background: url("bg.jpg") center top;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 
 .login-box {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 500px;
+  width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
   background: rgba(33, 32, 32, 0.8);
@@ -60,7 +60,8 @@ body {
 }
 
 .login-box .user-box input:focus~label,
-.login-box .user-box input:valid~label {
+.login-box .user-box input:valid~label
+{
   top: -20px;
   left: 0;
   color: #03e9f4;
@@ -96,6 +97,7 @@ body {
  /*  text-transform: uppercase; */
   overflow: hidden;
   letter-spacing: 2px;
+  margin-left: 100px;
   
 }
 

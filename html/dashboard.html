@@ -13,9 +13,7 @@
     <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    
-
-    <script src="../js/randomColor.js"></script>
-
+    <link href="../components/sidebar-style.css" rel="stylesheet">
     <title>Foodmate</title>
 </head>
 
@@ -33,12 +31,12 @@
 
         </div>
         <!-- HEADER -->
-        <div class="row">
+        <div class="row" style="margin-top: 10px;">
             <!-- BOTTONI DISPENSE -->
             <div class="col-10" id="user-fridges"></div>
             <div class="col-2">
                 <!-- BOTTONE NUOVA DISPENSA -->
-                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                     data-bs-target="#nuovaDispensa">
                     Nuova dispensa
                 </button>
@@ -130,7 +128,6 @@
             method: 'GET',
             dataType: 'text',
             success(data) {
-                console.log(data);
                 $('#sidebar-container').html(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -169,8 +166,8 @@
         });
     });
 
-    /* Questa funzione aggiunge un evento su ogni bottoneFrigo.In particolare quando il bottone è cliccato,viene caricato il contenuto del frigo nell'elemento
-    con id = contenutoDispensa. */
+    /* Questa funzione aggiunge un evento su ogni bottoneFrigo.In particolare quando il bottone è cliccato,
+    viene caricato il contenuto del frigo nell'elemento con id = contenutoDispensa. */
     $(document).on('click', '.bottoneFrigo', function () {
         var fridgeName = $(this).text();
         $.ajax({
@@ -199,9 +196,8 @@
                     class: 'card-body'
                 });
                 var list = $('<ul/>', {
-                    class: 'list-group list-group-flush'
+                    class: 'list-group list-group-flush '
                 });
-                console.log(data);
                 $.each(data, function (index, item) {
                     var listItem = $('<li/>', {
                         class: 'list-group-item',
@@ -291,6 +287,7 @@
         });
     });
 
+    //funzione che impedisce di inserire date di scadenza precedenti a quella attuale
     $(function() {
         var date = new Date();
         var year = date.getFullYear();
@@ -397,6 +394,9 @@
         margin-right: 20px;
     }
 
+    
+
+    /*
     /* SIDEBAR MEDIA QUERIES */
 
    /*  @media screen and (max-width: 700px) {

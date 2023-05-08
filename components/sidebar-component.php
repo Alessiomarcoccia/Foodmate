@@ -22,6 +22,15 @@ $data = <<<EOD
                 <a href="statistiche.html" class="lang" key="statistiche">
                     <i class="fa-sharp fa-solid fa-chart-simple"></i>
                 </a>
+            </li>
+            <li>
+                <a href="ricette.html" class="lang" key="ricette">
+                <i class="fa-solid fa-list-ul"></i>
+                </a>
+            <li>
+                <a href="#" class="lang" key="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
             </li> 
         </ul>
     </div>

@@ -16,7 +16,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 
   <link rel="stylesheet" href="../components/sidebar-style.css">
 
-  <script src="../js/chartColors.js"></script>
+  <script src="../js/UtilsCharts.js"></script>
 
   <title>Foodmate </title>
 </head>
@@ -27,23 +27,32 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <div class="content">
     <div class="container-fluid">
       <div class="row" style="width: 100%;">
-        <div class="col-md-12 col-sm-12">
+        <div class="col-12">
           <!-- <div class="content"> -->
             <!-- <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
             <h5 style="text-align: center;">Conteggio unitario</h5> -->
-          <canvas id="myChart" style="height: 500px; width: 400px; margin: 0 auto;" class="langChart" key="chart1_title"></canvas>
+          <canvas id="myChart" style="height: 500px; width: 500px; margin: 0 auto;" class="langChart" key="chart1_title"></canvas>
           <!--  </div> -->
         </div>
       </div>
-        <div class="row">
+        <div class="row" style="margin-top: 50px;">
           <div class="col-12">
             <!-- <div class="content"> -->
-              <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
-            <h5 style="text-align: center;">Conteggio unitario</h5>
-            <canvas id="myChart2" style="height: 300px; width: 700px; margin: 0 auto;"></canvas>
+             <!--  <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
+            <h5 style="text-align: center;">Conteggio unitario</h5> -->
+            <canvas id="myChart2" style="height: 400px; width: 600px; margin: 0 auto;"></canvas>
             <!--  </div> -->
           </div>
       </div>
+      <div class="row" style="margin-top: 50px;">
+        <div class="col-12">
+          <!-- <div class="content"> -->
+          <!-- <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
+          <h5 style="text-align: center;">Conteggio unitario</h5> -->
+          <canvas id="myChart3" style="height: 400px; width: 600px; margin: 0 auto;"></canvas>
+          <!--  </div> -->
+        </div>
+    </div>
     </div>
   </div>
 
@@ -56,7 +65,6 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
       method: 'GET',
       dataType: 'text',
       success(data) {
-        console.log(data);
         $('#sidebar-container').html(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -74,7 +82,6 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
         var labels = data.labels;
         var values = data.values;
         var backgroundColors = colors(labels);
-        console.log(backgroundColors);
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'pie',
@@ -95,7 +102,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
                 display: true,
                 text: 'Cosa c\'è nelle tue dispense',
                 font: {
-                  size: 30
+                  size: 40
                 }
               },
               }
@@ -140,6 +147,13 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
               legend:{
                 display: false
               },
+              title:{
+                display: true,
+                text: 'Scadenze',
+                font: {
+                  size: 40
+                }
+              },
             } 
           }
         });
@@ -147,6 +161,53 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
       error: function (jqXHR, textStatus, errorThrown) {
         console.log('Error: ' + errorThrown);
         console.log('Status: ' + textStatus);
+      }
+    })
+  });
+
+  $(document).ready(function () {
+    $.ajax({
+      url: '../php/chart_scadenze_nel_tempo.php',
+      method: 'GET',
+      dataType: 'json',
+      success(data) {
+        var labels = data.labels;
+        var values = data.values;
+        var newLabels = convertLabels(labels);
+        var ctx = document.getElementById('myChart3').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'line', 
+          data: {
+            labels: newLabels,
+            datasets: [{
+              label: 'My Dataset',
+              data: values,
+              fill:false,
+              borderColor: 'rgb(75, 192, 192)',
+              tension: 0.1
+            }]
+          },
+          options: { 
+            responsive: false,
+            plugins:{
+              legend:{
+                display: false
+              },
+              title:{
+                display: true,
+                text: 'Scadenze nel tempo',
+                font: {
+                  size: 40
+                }
+              },
+            } 
+          }
+        });
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log('Error: ' + errorThrown);
+        console.log('Status: ' + textStatus);
+        console.log('Response: ' + jqXHR.responseText);
       }
     })
   });
