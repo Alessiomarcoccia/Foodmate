@@ -19,13 +19,13 @@
     <div>
         <!-- Navigation bar-->
         <nav class="navbar navbar-expand-md navbar-light">
-            <a class="navbar-brand" href="/">
-                <img src="../assets/logo.png" width="60" height="60" alt=".">
-                <strong>Foodmate</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <a class="navbar-brand" href="/">
+            <img src="../assets/logo.png" width="60" height="60" alt=".">
+            <strong>Foodmate</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto text-center">
                     <li class="nav-item active">
@@ -137,7 +137,15 @@
                     <p>Il codice di Foodmate è interamente consultabile</p>
                 </div>
             </div>
-        </div> -->
+        </div>
+
+         Footer -->
+        <footer>
+            <div class = "container">
+                <p>FoodMate</p>
+                <a href="https://github.com/Alessiomarcoccia/Foodmate"><img src="../assets/icons/GitHub.png" alt="GitHub"></a>
+            </div>
+        </footer>
 </body>
 
 <script src="../js/traduzione.js"></script>
@@ -244,6 +252,24 @@
         to {
             opacity: 1;
         }
+    }
+
+    footer {
+    background-color: #000000;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    }
+
+    footer .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    footer .container img {
+        width: 30px;
+        height: 30px;
     }
 </style>
 
