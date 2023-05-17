@@ -10,6 +10,5 @@
           setcookie('cookiename', NULL);
           session_unset();
           session_destroy();
-          echo 'Return to HomePage afeter 3s';
         }
     ?>

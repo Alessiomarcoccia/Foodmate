@@ -30,10 +30,11 @@ else {
                     $data = pg_query_params($dbconn, $q2,
                         array($nome, $cognome, $email, $password));
                     if ($data) {
-                       header("Location: ../dashboard.html");
+                       header("Location: ../html/dashboard.html");
                        $_SESSION['email'] = $email;
                     }
                 }
+                pg_close($dbconn);
             }
             
         ?> 

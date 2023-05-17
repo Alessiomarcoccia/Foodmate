@@ -18,7 +18,6 @@
 </head>
 
 <body>
-
     <div id="sidebar-container"></div>
     
     <!-- Page content -->
@@ -33,8 +32,8 @@
         <!-- HEADER -->
         <div class="row" style="margin-top: 10px;">
             <!-- BOTTONI DISPENSE -->
-            <div class="col-10" id="user-fridges"></div>
-            <div class="col-2">
+            <div class="col-8" id="user-fridges"></div>
+            <div class="col-4" id="containerNuovaDispensa">
                 <!-- BOTTONE NUOVA DISPENSA -->
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                     data-bs-target="#nuovaDispensa">
@@ -138,6 +137,9 @@
         });
     });
 
+    /* Questa funzione carica i frigoriferi dell'utente nella pagina.Quando la pagina è caricata,
+    viene inviata una richiesta ajax al server per ottenere i frigoriferi dell'utente.
+    */
     $(document).ready(function () {
         // Richiesta AJAX per ottenere i frigoriferi dell'utente
         $.ajax({
@@ -204,7 +206,7 @@
                         id: item.id,
                     });
                     var icon = $('<i/>', {
-                        class: item.tipologia
+                        class: 'iconeDinamiche '+item.tipologia
                     });
                     var span = $('<span/>', {
                         class: 'item-info',
@@ -308,53 +310,11 @@
 
 
 <style>
-    /* SIDEBAR STYLE */
-    .sidebar {
-        margin: 0;
-        padding-top: 20px;
-        width: 200px;
-        background-color: #2f855a;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
-        align-content: center;
-    }
-
-    .sidebar-brand {
-        font-size: 27px;
-    }
-
-    .sidebar-nav {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sidebar-nav li {
-        text-indent: 20px;
-        line-height: 40px;
-    }
-
-    .sidebar-nav li a {
-        display: block;
-        text-decoration: none;
-        color: #fff;
-    }
-
-    .sidebar-nav li a:hover {
-        text-decoration: none;
-        background: rgba(255, 255, 255, 0.2);
-    }
-
-    .sidebar-nav>.sidebar-brand a:hover {
-        background: none;
-    }
-
-    /* PAGE CONTENT WRAPPER STYLE */
-
-    div.content {
-        margin-left: 200px;
-        padding: 1px 16px;
-        /* width: 100%; */
+    
+    #containerNuovaDispensa{
+        display: flex;
+        justify-content: flex-end;
+        min-width: 100px;
     }
 
     /* DELETE BUTTONS STYLE */
@@ -375,23 +335,38 @@
         margin-top: 20px;
     }
 
+
     /* ICON STYLE */
+
+    .iconeDinamiche{
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-style: normal;
+        margin-right: 10px;
+    }
 
     .frutta::before {
         content: "\f5d1";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        font-style: normal;
-        margin-right: 20px;
-        float: left;
     }
 
     .verdura::before {
-        content: "\f06c";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        font-style: normal;
-        margin-right: 20px;
+        content: "\f4d8";
+    }
+
+    .pesce::before{
+        content: "\f578";
+    }
+
+    .carne::before{
+        content: "\f6d7";
+    }
+
+    .uova::before{
+        content:"\f7fb";
+    }
+
+    .dolce::before{
+        content:"\f564";
     }
 
     

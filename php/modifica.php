@@ -27,5 +27,5 @@
   }
 
       header('Location:../html/profilo.html');
-      pg_close($conn);
+      pg_close($dbconn);
   ?>

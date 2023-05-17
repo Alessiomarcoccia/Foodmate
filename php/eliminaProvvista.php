@@ -20,4 +20,5 @@ if ($dbconn) {
 $response = array('nomeFrigorifero' => $nomeFrigorifero);
 header('Content-Type: application/json');
 echo json_encode($response);
+pg_close($dbconn);
 ?>

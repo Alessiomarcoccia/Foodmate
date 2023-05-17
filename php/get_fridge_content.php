@@ -22,7 +22,7 @@
         //output del JSON
         header('Content-Type: application/json');
         echo ($json_data);
-
+        pg_close($dbconn);
     }
     
 

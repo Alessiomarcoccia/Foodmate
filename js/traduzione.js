@@ -17,6 +17,16 @@ var arrLang = {
     'letsgo': "Let's go!",
     'ricette': 'Recipes',
     'logout':'Logout',
+    'colazione': 'Breakfast',
+    'pranzo': 'Lunch',
+    'cena': 'Dinner',
+    'snack': 'Snack',
+    'macedonia_title':'Fruit salad',
+    'macedonia_desc':'Summer is when the fruit salad becomes your best friend, with its sweetness and freshness that refresh you on hot summer days.',
+    'vellutata di verdure_title':'Vegetable soup',
+    'vellutata di verdure_desc':'The vegetable soup is a creamy and delicate first course, perfect for cold winter days.',
+    'paella_title':'Paella',
+    'paella_desc':'The paella is a typical Spanish dish, based on rice and fish, which is prepared in a large pan.',
   },
 
   "it": {
@@ -37,6 +47,16 @@ var arrLang = {
     'letsgo': "Iniziamo!",
     'ricette': 'Ricette',
     'logout':'Esci',
+    'colazione': 'Colazione',
+    'pranzo': 'Pranzo',
+    'cena': 'Cena',
+    'snack': 'Snack',
+    'macedonia_title':'Macedonia di frutta',
+    'macedonia_desc':'Estate è quando la macedonia di frutta diventa la tua migliore amica,con la sua dolcezza e freschezza che ti rinfrescano nelle calde giornate estive.',
+    'vellutata di verdure_title':'Vellutata di verdure',
+    'vellutata di verdure_desc':'La vellutata di verdure è un primo piatto cremoso e delicato, perfetto per le giornate fredde invernali.',
+    'paella_title':'Paella',
+    'paella_desc':'La paella è un piatto tipico spagnolo, a base di riso e pesce, che viene preparato in una grande padella.',
   }
 };
 

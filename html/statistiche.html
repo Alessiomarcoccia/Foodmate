@@ -9,10 +9,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <link rel="stylesheet" href="../components/sidebar-style.css">
 
@@ -26,33 +26,31 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 
   <div class="content">
     <div class="container-fluid">
-      <div class="row" style="width: 100%;">
-        <div class="col-12">
-          <!-- <div class="content"> -->
-            <!-- <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
-            <h5 style="text-align: center;">Conteggio unitario</h5> -->
-          <canvas id="myChart" style="height: 500px; width: 500px; margin: 0 auto;" class="langChart" key="chart1_title"></canvas>
-          <!--  </div> -->
-        </div>
-      </div>
-        <div class="row" style="margin-top: 50px;">
-          <div class="col-12">
-            <!-- <div class="content"> -->
-             <!--  <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
-            <h5 style="text-align: center;">Conteggio unitario</h5> -->
-            <canvas id="myChart2" style="height: 400px; width: 600px; margin: 0 auto;"></canvas>
-            <!--  </div> -->
+      <div class="row">
+        <div class="col-6 chartContainer">
+          <div class="chartContainer">
+            <h2>Cosa c'è nelle tue dispense</h2>
+            <h5>Conteggio unitario</h5>
+            <canvas id="myChart"></canvas>
           </div>
-      </div>
-      <div class="row" style="margin-top: 50px;">
-        <div class="col-12">
-          <!-- <div class="content"> -->
-          <!-- <h1 style="text-align: center;">Cosa c'è nelle tue dispense</h1>
-          <h5 style="text-align: center;">Conteggio unitario</h5> -->
-          <canvas id="myChart3" style="height: 400px; width: 600px; margin: 0 auto;"></canvas>
-          <!--  </div> -->
         </div>
-    </div>
+      </div>
+      <div class="row">
+        <div class="col-6 chartContainer">
+          <div class="chartContainer">
+            <h2>Stato Scadenze</h2>
+            <canvas id="myChart2" style="height: 400px; width: 600px;"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 chartContainer">
+          <div class="chartContainer">
+            <h2>Scadenze nel tempo</h2>
+            <canvas id="myChart3" style="height: 400px; width: 600px; margin: 0 auto;"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -95,19 +93,10 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
               borderWidth: 2
             }]
           },
-          options: { 
-            responsive: false,
-            plugins:{
-              title:{
-                display: true,
-                text: 'Cosa c\'è nelle tue dispense',
-                font: {
-                  size: 40
-                }
-              },
-              }
-            }
-          });
+          options: {
+            responsive: true,
+          }
+        });
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log('Error: ' + errorThrown);
@@ -115,11 +104,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
       }
     });
   });
-
-
-
-
-
+  
   $(document).ready(function () {
     $.ajax({
       url: '../php/chart_scadenze.php',
@@ -130,31 +115,24 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
         var values = data.values;
         var ctx = document.getElementById('myChart2').getContext('2d');
         var myChart = new Chart(ctx, {
-          type: 'bar', 
+          type: 'bar',
           data: {
             labels: labels,
             datasets: [{
               label: 'My Dataset',
               data: values,
-              backgroundColor: ["rgb(200,0,0)","rgb(255, 204, 0)","rgb(0, 100, 0)"],
+              backgroundColor: ["rgb(200,0,0)", "rgb(255, 204, 0)", "rgb(0, 100, 0)"],
               borderColor: 'rgba(255, 255, 255,1)',
               borderWidth: 2
             }]
           },
-          options: { 
-            responsive: false,
-            plugins:{
-              legend:{
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
                 display: false
               },
-              title:{
-                display: true,
-                text: 'Scadenze',
-                font: {
-                  size: 40
-                }
-              },
-            } 
+            }
           }
         });
       },
@@ -176,31 +154,24 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
         var newLabels = convertLabels(labels);
         var ctx = document.getElementById('myChart3').getContext('2d');
         var myChart = new Chart(ctx, {
-          type: 'line', 
+          type: 'line',
           data: {
             labels: newLabels,
             datasets: [{
               label: 'My Dataset',
               data: values,
-              fill:false,
+              fill: false,
               borderColor: 'rgb(75, 192, 192)',
               tension: 0.1
             }]
           },
-          options: { 
-            responsive: false,
-            plugins:{
-              legend:{
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
                 display: false
               },
-              title:{
-                display: true,
-                text: 'Scadenze nel tempo',
-                font: {
-                  size: 40
-                }
-              },
-            } 
+            }
           }
         });
       },
@@ -215,14 +186,51 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </script>
 
 <style>
+  .chartContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
 
-  /* #sidebar-container{
-    width: 100%;
+  /* .barContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 700px;
   } */
- body::-webkit-scrollbar {
-        display: none;
+
+  .row {
+    justify-content: center;
+  }
+
+  div.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+  }
+
+
+  @media (max-width:550px) {
+    .chartContainer {
+      padding-left: 120px;
     }
-    
+  }
+
+  @media (max-width:395px) {
+    .chartContainer {
+      padding-left: 200px;
+    }
+  }
+    @media (max-width:230px) {
+    .chartContainer {
+      padding-left: 250px;
+    }
+  }
 </style>
 
 </html>

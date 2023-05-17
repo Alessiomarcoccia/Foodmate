@@ -70,7 +70,8 @@
                 $.each(data, function (index, item) {
 
                     var col = $('<div/>', {
-                        class: 'col'
+                        //d-flex rende tutte le card della stessa dimensione
+                        class: 'col d-flex'
                     });
                     var img = $('<img/>', {
                         class: 'card-img-top',
@@ -78,20 +79,20 @@
                         alt: '...'
                     });
                     var card = $('<div/>', {
-                        class: 'card w-40 h-40'
+                        class: 'card mt-3'
                     });
                     var cardBody = $('<div/>', {
                         class: 'card-body'
                     });
 
                     var cardTitle = $('<h5/>', {
-                        class: 'card-title',
-                        text: item.nome,
+                        class: 'card-title lang',
+                        key: item.nome + '_title',
                     });
 
                     var cardSubTitle = $('<h6/>', {
-                        class: 'card-title',
-                        text: item.pasto,
+                        class: 'card-title lang',
+                        key: item.pasto,
                     });
 
                     var icon = $('<i/>', {
@@ -106,6 +107,7 @@
                     cardBody.append(cardSubTitle);
                     cardBody.append(icon);
                     cardBody.append(tempo);
+                    cardBody.append('<br>');
                     cardBody.append(span);
                     card.append(img);
                     card.append(cardBody);
@@ -124,13 +126,39 @@
 </script>
 
 <style>
-    .card {
-        width: 50%;
+   
+    .card-img-top {
+        /* rende tutte le immagini della stessa dimensione */
+        width: 100%;
         height: 15vw;
         object-fit: cover;
+        /* l'immagine non diventa più bassa di 190 px */
+        min-height: 190px;
     }
 
-   
+    /* quando la finestra diventa più piccola, le cards non rimpiccioliscono ma si allineano appena non hanno più spazio */
+    .col{
+        flex: 0 0 0%;
+    }
+    .card{
+        min-width: 250px;
+    }
+
+    
+
+/* quando lo schermo diventa cosi piccolo da contenere solo una card per riga,allinea le card al cento */
+@media (max-width:769px){
+    .row{
+        justify-content: center;
+        
+    }
+    .content{
+        overflow: scroll;
+    }
+
+}
+        
+    
 </style>
 
 </html>
