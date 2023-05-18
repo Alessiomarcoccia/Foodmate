@@ -22,5 +22,5 @@
     //output del JSON
     header('Content-Type: application/json');
     echo json_encode($response);
-    pg_close();
+    pg_close($dbconn);
 ?>
