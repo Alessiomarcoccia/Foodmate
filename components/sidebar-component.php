@@ -9,23 +9,26 @@ $data = <<<EOD
                 </a>
             </li>
             <li>
-                <a href="dashboard.html" class="lang" key="home">
+                <a href="dashboard.html" class="langSidebar" key="home">
                     <i class="fas fa-home"></i>
-               <!--  <a href="dashboard.html" class="lang" key="home"></a> -->
+                    <span class="link-text"></span>
                 </a>      
             <li>
-                <a href="profilo.html" class="lang" key="profilo">
+                <a href="profilo.html" class="langSidebar" key="profilo">
                     <i class="fas fa-user"></i>
+                    <span class="link-text"></span>
                 </a>
             </li>
             <li>
-                <a href="statistiche.html" class="lang" key="statistiche">
+                <a href="statistiche.html" class="langSidebar" key="statistiche">
                     <i class="fa-sharp fa-solid fa-chart-simple"></i>
+                    <span class="link-text"></span>
                 </a>
             </li> 
             <li>
-                <a href="../php/logout.php?action=logout" class="lang" key="logout" >
+                <a href="../php/logout.php?action=logout" class="langSidebar" key="logout" >
                      <i class="fa-sharp fa-solid fa-sign-out"></i>
+                     <span class="link-text"></span>
                 </a>
             </li>
         </ul>

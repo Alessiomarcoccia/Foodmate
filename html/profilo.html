@@ -1,53 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profilo</title>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>    
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="../components/sidebar-style.css" rel="stylesheet">
 
-
 </head>
+
 <body>
   <div id="sidebar-container"></div>
   <div>
-    <button class="btn" onclick="show()">Modifica</button>
-    <div class="dialog">
-        <div class="contents">
-            <div class="aclose">
-                <span>Dati personali</span>
-                <a class="close" href="javascript:close();">&times;</a>
-            </div>
-            <div class="contain">
-                <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-                  <label for="current_password">Password attuale:</label>
-                  <input type="password" name="current_password" id="current_password"><br><br>
-              
-                  <label for="new_password"> Nuova password:</label>
-                  <input type="password" name="new_password" id="new_password"><br><br>
-
-                  <label for="current_nome">Nome attuale:</label>
-                  <input type="text" name="current_nome" id="current_nome"><br><br>
-                  
-                  <label for="new_nome">Nuovo nome:</label>
-                  <input type="text" name="new_nome" id="new_nome"><br><br>
-              
-                  <input type="submit" value="Reset">
-                </form>
-            </div>
+    <div class="foto">
+      <div class="contents">
+        <div class="aclose">
+          <!-- <span>Dati personali</span> -->
+          <a class="close" href="javascript:foto();">&times;</a>
         </div>
-    </div>
-    <div id="data-container"></div>
-</body>
+        <div class="contain">
+          <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm"
+            enctype="multipart/form-data">
+            <label for="foto">Foto:</label>
+            <input type="file" name="foto" required><br><br>
 
+            <button class="reset" key="invia">Reset</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="psw">
+      <div class="contents">
+        <div class="aclose">
+          <!-- <span>Dati personali</span> -->
+          <a class="close" href="javascript:psw();">&times;</a>
+        </div>
+        <div class="contain">
+          <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+            <label for="current_password">Password attuale:</label>
+            <input type="password" name="current_password" id="current_password" required><br><br>
+
+            <label for="new_password"> Nuova password:</label>
+            <input type="password" name="new_password" id="new_password" minlength="8" required><br><br>
+
+            <button class="reset" key="invia">Reset</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="nome">
+        <div class="contents">
+          <div class="aclose">
+            <!-- <span>Dati personali</span> -->
+            <a class="close" href="javascript:nome();">&times;</a>
+          </div>
+          <div class="contain">
+            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+              <label for="nome">Nuovo nome:</label>
+              <input type="text" name="nome" id="nome" required><br><br>
+
+              <button class="reset" key="invia">Reset</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="cognome">
+        <div class="contents">
+          <div class="aclose">
+            <!-- <span>Dati personali</span> -->
+            <a class="close" href="javascript:cognome();">&times;</a>
+          </div>
+          <div class="contain">
+            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+              <label for="cognome">Nuovo cognome:</label>
+              <input type="text" name="cognome" id="cognome" required><br><br>
+
+              <button class="reset" key="invia">Reset</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sesso">
+        <div class="contents">
+          <div class="aclose">
+            <!-- <span>Dati personali</span> -->
+            <a class="close" href="javascript:sesso();">&times;</a>
+          </div>
+          <div class="contain">
+            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+              <label class="left_M white">M</label>
+              <input type="radio" name="sesso" value="M" required />
+              <label class="left white">F</label>
+              <input type="radio" name="sesso" value="F" required /><br><br>
+
+              <button class="reset" key="invia">Reset</button>
+
+              <!-- <input class="reset" type="submit" value="Reset"> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
 <script>
   $(document).ready(function () {
     $.ajax({
@@ -55,7 +128,7 @@
       method: 'GET',
       dataType: 'text',
       success(data) {
-        console.log(data);
+        
         $('#sidebar-container').html(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -64,67 +137,174 @@
       }
     });
   });
-$.ajax({
-  url: "../php/profilo.php",
-  type: "GET",
-  dataType: "json",
-  success: function(data){
-    console.log(data);
-    
-    var ul = $("<ul style='margin-left:12em'></ul>");
-    for(var i = 0; i < data.length; i++) {
-      var user = data[i];
-      var li = "<li> Email: " + user.email + "<br>" +
-               "<li> Password: " + user.psw + "<br>" +
-               "<li> Nome: " + user.nome + "<br>" +
-               "<li> Cognome: " + user.cognome + "</li>";
-               
-        ul.append(li);   
+  // funzione ajax che esegue una richiesta get a profilo.php ricevendo un json. E stampa la riposta nella console
+  $.ajax({
+    url: "../php/profilo.php",
+    type: "GET",
+    dataType: "",
+    success: function (data) {
+      console.log(data);
+
+      var div = $("<div class='profilo'></div>");
+      for (var i = 0; i < data.length; i++) {
+        var user = data[i];
+        var stars = '';
+        for (var i = 0; i< user.psw.length-3; i++){
+          stars += '*';
+        }
+        var p = "<img src='" + user.foto + "'" + "alt='Image'>" + "<br>" + "<button class='change' onclick='foto()'>" +"<i class='fas fa-edit edit'></i>" + "</button>"  + 
+              "<p><strong> Email: " + user.email + "</strong></p>"  + 
+              "<p><strong> Password: " + user.psw.substring(0,3) + stars +"</strong>" + "<button class='change' onclick='psw()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+              "<p><strong><label class='lang' key='nome_pro'></label>"+" " + user.nome + "</strong>" + "<button class='change' onclick='nome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+              "<p><strong><label class='lang' key='cognome_pro'></label>"+" " + user.cognome + "</strong>" + "<button class='change' onclick='cognome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+              "<p><strong><label class='lang' key='sex_pro'></label>"+" " + user.sesso + "</strong>" + "<button class='change' onclick='sesso()'>" +"<i class='fas fa-edit edit'></i>" +"</button>" +"</p>" +
+              "<div class='dropdown'>" + "<button class='btn' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown'><p>"+"<i class='fa-solid fa-earth-americas fa-lg'></i>" + "</button>"+"<ul class='dropdown-menu'>"+ 
+                "<li><button class='btn dropdown-item translate' id='it'>Italiano</a></li> " +"<li><button class='btn dropdown-item translate' id='en'>English</a></li>"+"</ul></div></p>"  ;
+
+        div.append(p);
+      }
+      console.log(div);
+      $("body").append(div);
+    },
+
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log('Error: ' + errorThrown);
+      console.log("Status: " + textStatus);
+      console.log("Response Text: " + jqXHR.responseText);
     }
-    console.log(ul);
-    $("body").append(ul);
-  },
-  
-  error: function (jqXHR, textStatus, errorThrown) {
-    console.log('Error: ' + errorThrown);
-    console.log("Status: " + textStatus);
-    console.log("Response Text: " + jqXHR.responseText);
-  }
-});
+  });
 
-function show() {
-  var show = $('.dialog').css('display');
-  $('.dialog').css('display', show == 'none' ? 'block': 'none');
-  
-}
 
-function close() {
-  var show = $('.dialog').css('display');
-  $('.dialog').css('display', show == 'none' ? 'block': 'none');
-}
+  function foto() {
+    var show = $('.foto').css('display');
+    $('.foto').css('display', show == 'none' ? 'block' : 'none');
+
+  };
+
+  function psw() {
+    var show = $('.psw').css('display');
+    $('.psw').css('display', show == 'none' ? 'block' : 'none');
+
+  };
+
+  function nome() {
+    var show = $('.nome').css('display');
+    $('.nome').css('display', show == 'none' ? 'block' : 'none');
+  };
+
+  function cognome() {
+    var show = $('.cognome').css('display');
+    $('.cognome').css('display', show == 'none' ? 'block' : 'none');
+  };
+
+  function sesso() {
+    var show = $('.sesso').css('display');
+    $('.sesso').css('display', show == 'none' ? 'block' : 'none');
+  };
 
 </script>
 
 <script type="text/javascript" src="../js/traduzione.js"></script>
 
 <style>
-  .btn { 
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .sidebar {
+    margin: 0;
+    padding-top: 20px;
     width: 200px;
-    height: 50px;
-    font-size: 20px;
-    color: white;
-    background-color: #006DDC;
-    border: 0px;
-    border-radius: 10px;
-    position:absolute;
-    right:5px;
-    bottom:5px;
+    background-color: #2f855a;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    align-content: center;
   }
-  .btn:hover{
-    box-shadow: 0 0 5px 5px darkgray;
-  
+
+  .sidebar-brand {
+    font-size: 27px;
   }
-  .dialog {
+
+  .sidebar-nav {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+
+  }
+
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .sidebar-nav li a:hover {
+    text-decoration: none;
+  }
+
+  .sidebar-nav>.sidebar-brand a:hover {
+    background: none;
+  }
+
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+  }
+
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .sidebar a {
+      float: left;
+    }
+
+    div.content {
+      margin-left: 0;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
+
+  /* bottone */
+  /* .btn { 
+width: 200px;
+height: 50px;
+font-size: 20px;
+color: white;
+background-color: #006DDC;
+border: 0px;
+border-radius: 10px;
+position:absolute;
+right:5px;
+bottom:5px;
+} 
+
+.btn:hover{
+box-shadow: 0 0 5px 5px darkgray;
+
+} */
+
+  .nome,
+  .psw,
+  .cognome,
+  .foto,
+  .sesso {
     display: none;
     position: fixed;
     top: 0;
@@ -134,37 +314,52 @@ function close() {
     overflow: none;
     background-color: rgba(0, 0, 0, 0.4);
   }
-  
+
   /* contenitore */
   .contents {
     width: 500px;
-    height: 400px;
+    height: auto;
     background-color: #fefefe;
     border-radius: 10px;
     box-shadow: 0 0 5px 5px darkgray;
     left: 35%;
     top: 10%;
     position: absolute;
-   
+
   }
+
+  .reset {
+    border-radius: 5px;
+    height: 25px;
+    width: 55px;
+    background-color: rgb(119, 214, 119);
+    color: white;
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+    padding: 0px;
+  }
+
   .aclose {
     width: 500px;
     height: 60px;
     text-align: center;
   }
+
   .aclose span {
     line-height: 70px;
     font-size: 26px;
     font-weight: 700;
   }
+
   .contain {
     width: 500px;
-    height: 230px;
+    height: auto;
     font-size: 20px;
     margin-top: 10px;
     text-align: center;
   }
-  
+
   .close {
     color: #aaa;
     float: right;
@@ -173,6 +368,61 @@ function close() {
     font-weight: bold;
     text-decoration: none;
   }
-   </style>
+
+  /* foto */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+  }
+
+  .profilo {
+    max-width: 700px;
+    height: auto;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #fff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .change {
+    background: transparent;
+    padding-left: 10px;
+    border-width: 0px;
+  }
+
+  .edit {
+    color: rgb(81, 242, 81);
+  }
+
+  label {
+    font-size: 16px;
+    color: #333;
+    font-family: sans-serif;
+  }
+
+  input {
+    border-radius: 5px;
+    height: 30px
+  }
+
+  .btn {
+    padding-top: 15px;
+  }
 </style>
+
 </html>

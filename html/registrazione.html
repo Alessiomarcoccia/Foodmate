@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
-  <link rel="stylesheet" href="../bg.css">
+  <link rel="stylesheet" href="../components/bg.css">
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -40,14 +40,14 @@
     </div>
   </nav>
   <div class="login-box">
-  <form action="register.php" class="form-signin m-auto" method="POST" name="myForm">
+  <form action="../php/register.php" class="form-signin m-auto" method="POST" name="myForm">
     <h2 class="lang" key="register"></h2>
     <div class="user-box">
       <input type="email" name="inputEmail" required />
       <label>email</label>
     </div>
     <div class="user-box">
-      <input type="password" name="inputPassword" required />
+      <input type="password" name="inputPassword" minlength='8' required />
       <label>password</label>
     </div>
     <div class="user-box">
@@ -58,6 +58,13 @@
       <input type="text" name="inputSurname" required />
       <label class="lang" key="cognome"></label>
     </div>
+    <div>
+      <label class="lang white" key="sesso">sesso</label>
+      <label class="left_M white" >M</label>
+      <input type="radio" name="inputSesso" value="M" required />
+      <label class="left white">F</label>
+      <input type="radio" name="inputSesso" value="F" required />
+  </div><br>
     <div>
     <button class="lang" key="invia"></button>
     </div>

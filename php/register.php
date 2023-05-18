@@ -25,12 +25,14 @@ else {
                 else {
                     $nome = $_POST['inputName'];
                     $cognome = $_POST['inputSurname'];
-                    $password = $_POST['inputPassword'];
-                    $q2 = "insert into utenti values ($1,$2,$3,$4)";
+                    $psw = $_POST['inputPassword'];
+                    $foto = '';
+                    $sesso = $_POST['inputSesso'];
+                    $q2 = "insert into utenti values ($1,$2,$3,$4,$5,$6)";
                     $data = pg_query_params($dbconn, $q2,
-                        array($nome, $cognome, $email, $password));
+                        array($nome, $cognome, $email, $psw, $sesso, $foto));
                     if ($data) {
-                       header("Location: ../dashboard.html");
+                       header("Location: ../html/dashboard.html");
                        $_SESSION['email'] = $email;
                     }
                 }

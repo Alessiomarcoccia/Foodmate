@@ -8,24 +8,47 @@
     if($dbconn) {
       $password_cur = $_POST['current_password'];
       $password_new = $_POST['new_password'];
-      $nome_cur = $_POST['current_nome'];
-      $nome_new = $_POST['new_nome'];
-
+      
       $query_psw = "UPDATE utenti 
                 SET psw = '$password_new'
                 WHERE psw = '$password_cur'";
       
       $result_psw = pg_query($dbconn, $query_psw);
 
+      if($_POST['nome'] != NULL){
       $query_nome = "UPDATE utenti 
-      SET nome = '$nome_new'
-      WHERE nome = '$nome_cur'";
+      SET nome = '$_POST[nome]'
+      WHERE email = '$email'";
+      $result_nome = pg_query($dbconn, $query_nome);
+      }
 
-      $result_nome = pg_query($dbconn, $query_nome);  
-      
-      
-  }
+      if($_POST['cognome'] != NULL){
+      $query_cognome = "UPDATE utenti
+                     SET cognome = '$_POST[cognome]'
+                     WHERE email = '$email'";
+      $result_cognome = pg_query($dbconn, $query_cognome);  
+      }
 
+      if($_POST['sesso'] != NULL){
+      $query_sesso = "UPDATE utenti
+                    SET sesso = '$_POST[sesso]'
+                    WHERE email = '$email'";
+      $result_sesso = pg_query($dbconn, $query_sesso);
+      }
+
+     
+        $image = $_FILES['foto'];
+        $targetPath = '../images/' . $image['name'];
+
+        if (move_uploaded_file($image['tmp_name'], $targetPath)) {
+        $query = "UPDATE utenti
+                  SET foto = '$targetPath'
+                  WHERE email = '$email'";
+        $result = pg_query($dbconn, $query);
+        }
+      } 
+      
+     
       header('Location:../html/profilo.html');
       pg_close($conn);
   ?>
