@@ -210,6 +210,7 @@
                     });
                     var span = $('<span/>', {
                         class: 'item-info',
+                        id: 'item-info',
                         text: 'Qty: ' + item.quantita + ' ' + 'Exp: ' + item.datascadenza
                     });
                     var moreButton = $('<button/>', {
@@ -229,13 +230,17 @@
                         class: 'btn btn-outline-danger bottoneEliminaProvvista',
                         text: 'Elimina'
                     });
-
                     listItem.append(icon);
-                    listItem.append('<strong>' + item.nome + '</strong;> ' + '&nbsp;');
+                    var colore = controllaScadenza(item.datascadenza);
+                    var scadenzaItem = $('<strong>').text(item.nome).attr('style', 'color:' + colore);
+                    listItem.append(scadenzaItem);
+                    listItem.append('&nbsp;');
                     listItem.append(span);
                     listItem.append(deleteButton);
                     listItem.append(moreButton);
-                    listItem.append(lessButton);
+                    if (item.quantita > 1) {
+                        listItem.append(lessButton);
+                    }
                     list.append(listItem);
                     cardBody.append(list);
                 });
@@ -251,6 +256,23 @@
             }
         });
     });
+
+    // Funzione che controlla se la data della scadenza del prodotto non è entro i 5 giorni
+    function controllaScadenza(dataScadenza) {
+        var dataScadenza = new Date(dataScadenza);
+        var colore;
+        var oggi = new Date();
+        var limiteScadenza = new Date();
+        limiteScadenza.setDate(oggi.getDate() + 5);
+        if (dataScadenza > limiteScadenza) {
+            colore = 'black';
+        } else if (dataScadenza < oggi) {
+            colore = 'red';
+        } else if (dataScadenza < limiteScadenza) {
+            colore = 'goldenrod';
+        }
+        return colore;
+    }
 
     /*Funzione che gestisce l'aggiunta di una nuova provvista.Quando viene cliccato il tasto submit del form,l'invio delle informazioni al server è gestito da
     ajax e non dal form.*/
@@ -303,7 +325,7 @@
     });
 
         /* Funzione che gestisce l'INCREMENTO di 1 della quantità di una provvista quando viene cliccato il bottone "moreButton"*/
-        $(document).on('click', ".moreButton", function () {
+    $(document).on('click', ".moreButton", function () {
         $.ajax({
             url: '../php/moreLessProvvista.php',
             type: 'POST',
@@ -323,6 +345,7 @@
             }
         });
     });
+
 
     /* Funzione che gestisce il DECREMENTO di 1 della quantità di una provvista quando viene cliccato il bottone "moreButton"*/
     $(document).on('click', ".lessButton", function () {
