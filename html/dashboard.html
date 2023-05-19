@@ -100,6 +100,7 @@
                                         <option value="pesce">Pesce</option>
                                         <option value="cereali">Cereali</option>
                                         <option value="verdura">Verdura</option>
+                                        <option value="altro">Altro</option>
                                     </select>
                                 </div>
                             </form>
@@ -213,7 +214,7 @@
                     var span = $('<span/>', {
                         class: 'item-info',
                         id: 'item-info',
-                        text: 'Qty: ' + item.quantita + ' ' + 'Exp: ' + item.datascadenza
+                        text: getText(item)
                     });
                     var moreButton = $('<button/>', {
                         type: 'button',
@@ -229,11 +230,8 @@
                     });
                     var deleteButton = $('<button/>', {
                         type: 'button',
-                        class: 'btn btn-outline-danger bottoneEliminaProvvista lang',
-                        key: 'elimina'
-                    }).text(function(){ 
-                        var key = $(this).attr('key')
-                        $(this).text(arrLang[lang][key]);
+                        class: 'btn btn-outline-danger bottoneEliminaProvvista',
+                        text: translate('elimina')
                     });
                     listItem.append(icon);
                     var colore = controllaScadenza(item.datascadenza);
@@ -277,6 +275,14 @@
             colore = 'goldenrod';
         }
         return colore;
+    }
+
+    function getText(item) {
+       /*  var text = 'Qty: ' + item.quantita + ' ' + 'Exp: ' + item.datascadenza; */
+        var quantita = translate('quantita')
+        var scadenza = translate('scadenza')
+        var text = quantita + ': ' + item.quantita + ' ' + scadenza +': ' + item.datascadenza;    
+        return text;
     }
 
     /*Funzione che gestisce l'aggiunta di una nuova provvista.Quando viene cliccato il tasto submit del form,l'invio delle informazioni al server è gestito da
@@ -469,6 +475,10 @@
 
     .cereali::before{
         content:"\e2cd";
+    }
+
+    .altro::before{
+        content:"\f059";
     }
 
 </style>

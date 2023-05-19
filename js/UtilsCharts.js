@@ -7,7 +7,8 @@ function colors(tipologie){
     cereali: "rgb(255, 215, 0)",
     pesce: "rgb(0, 119, 190)",
     dolce: "rgb(255, 99, 71)",
-    latticini: "rgb(128, 128, 128)"
+    latticini: "rgb(248, 240, 221)",
+    altro: "rgb(128, 128, 128)"
   }
 
   var backgroundColors = [];

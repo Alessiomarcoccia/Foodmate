@@ -39,6 +39,11 @@ var arrLang = {
     'spiedini_desc':'The meat skewers are a very tasty and easy to prepare second course, perfect for a dinner with friends.',
     'torta di mele_title':'Apple pie',
     'torta di mele_desc':'The apple pie is a simple and genuine dessert, perfect for breakfast or a snack.',
+    'ravioli_title':'Chinese ravioli',
+    'ravioli_desc':'Chinese ravioli are a typical Chinese dish, made with pasta stuffed with meat or vegetables.',
+    'elimina': 'Delete',
+    'quantita': 'Qty',
+    'scadenza': 'Exp',
     'email': 'Email',
     'password': 'Password',
     'sesso': 'Gender',
@@ -95,6 +100,11 @@ var arrLang = {
     'spiedini_desc':'Gli spiedini di carne sono un secondo piatto molto gustoso e semplice da preparare, perfetto per una cena tra amici.',
     'torta di mele_title':'Torta di mele',
     'torta di mele_desc':'La torta di mele è un dolce semplice e genuino, perfetto per la colazione o la merenda',
+    'ravioli_title':'Ravioli Cinesi',
+    'ravioli_desc':'I ravioli cinesi sono un piatto tipico della cucina cinese, a base di pasta ripiena di carne o verdure.',
+    'elimina': 'Elimina',
+    'quantita': 'Qta',
+    'scadenza': 'Scad',
     'email': 'Email',
     'password': 'Password',
     'sesso': 'Sesso',
@@ -244,5 +254,10 @@ $(".translate").click(function() {
     $(this).text(arrLang[lang][key]);
   });
 });
+
+
+function translate(key) {
+  return arrLang[lang][key];
+}
 
 
