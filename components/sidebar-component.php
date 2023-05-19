@@ -27,13 +27,13 @@ $data = <<<EOD
             </li>
             <li>
                 <a href="listaSpesa.html" class="langSidebar" key="lista spesa">
-                    <i class="fa-sharp fa-solid fa-chart-simple"></i>
+                    <i class="fa-solid fa-list-check"></i>
                     <span class="link-text"></span>
                 </a>
             </li>
             <li>
                 <a href="ricette.html" class="langSidebar" key="ricette">
-                    <i class="fa-solid fa-list-ul"></i>
+                    <i class="fa-regular fa-rectangle-list"></i>
                     <span class="link-text"></span>
                 </a>
             <li>

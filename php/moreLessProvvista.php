@@ -12,10 +12,10 @@
             $q1 = "UPDATE contiene SET quantita = quantita +1 WHERE provvista = $1;";
             $result = pg_query_params($dbconn, $q1, array($id));
         }
-    } elseif ($value == "0") {
+    } else {
         $q1 = "UPDATE contiene SET quantita = quantita -1 WHERE provvista = $1;";
         $result = pg_query_params($dbconn, $q1, array($id));
-    } else {}
+    }
     
     $response = array('nomeFrigorifero' => $nomeFrigorifero);
 

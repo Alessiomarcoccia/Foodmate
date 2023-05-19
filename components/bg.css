@@ -99,7 +99,7 @@ body {
  /*  text-transform: uppercase; */
   overflow: hidden;
   letter-spacing: 2px;
-  margin-left: 160px;
+ /*  margin-left: 160px; */
   
 }
 
@@ -113,7 +113,7 @@ body {
  /*  text-transform: uppercase; */
   overflow: hidden;
   letter-spacing: 2px;
-  padding-left: 5.5em;
+  /* padding-left: 5.5em; */
 }
 
 .padding {

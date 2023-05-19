@@ -96,10 +96,10 @@
                                         <option selected>Open this select menu</option>
                                         <option value="carne">Carne</option>
                                         <option value="dolce">Dolce</option>
-                                        <option value="formaggio">Formaggio</option>
+                                        <option value="latticini">Latticini</option>
                                         <option value="frutta">Frutta</option>
                                         <option value="pesce">Pesce</option>
-                                        <option value="uova">Uova</option>
+                                        <option value="cereali">Cereali</option>
                                         <option value="verdura">Verdura</option>
                                     </select>
                                 </div>
@@ -418,12 +418,6 @@
         margin-right: 5px;
     }
 
-    /* FRIDGE BUTTON STYLE */
-
-    .bottoneFrigo {
-        margin-right: 5px;
-    }
-
     /* FRIDGE CONTENT STYLE */
 
     #contenutoDispensa {
@@ -464,33 +458,14 @@
         content:"\f564";
     }
 
-    
-
-    /*
-    /* SIDEBAR MEDIA QUERIES */
-
-   /*  @media screen and (max-width: 700px) {
-        .sidebar {
-            width: 100%;
-            height: auto;
-            position: relative;
-        }
-
-        .sidebar a {
-            float: left;
-        }
-
-        div.content {
-            margin-left: 0;
-        }
+    .latticini::before{
+        content:"\f7ef";
     }
 
-    @media screen and (max-width: 400px) {
-        .sidebar a {
-            text-align: center;
-            float: none;
-        }
-    } */
+    .cereali::before{
+        content:"\e2cd";
+    }
+
 </style>
 
 </html>

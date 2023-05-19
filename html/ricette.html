@@ -67,53 +67,58 @@
             success(data) {
                 console.log(data);
                 $('#cards-container').empty();
-                $.each(data, function (index, item) {
+                if (data.length == 0) {
+                    $('#cards-container').append('<h1 class="lang" key="no_ricette"></h1>');
+                }
+                else {
+                    $.each(data, function (index, item) {
 
-                    var col = $('<div/>', {
-                        //d-flex rende tutte le card della stessa dimensione
-                        class: 'col d-flex'
-                    });
-                    var img = $('<img/>', {
-                        class: 'card-img-top',
-                        src: '../assets/ricette/' + item.nome + '.jpg',
-                        alt: '...'
-                    });
-                    var card = $('<div/>', {
-                        class: 'card mt-3'
-                    });
-                    var cardBody = $('<div/>', {
-                        class: 'card-body'
-                    });
+                        var col = $('<div/>', {
+                            //d-flex rende tutte le card della stessa dimensione
+                            class: 'col d-flex'
+                        });
+                        var img = $('<img/>', {
+                            class: 'card-img-top',
+                            src: '../assets/ricette/' + item.nome + '.jpg',
+                            alt: '...'
+                        });
+                        var card = $('<div/>', {
+                            class: 'card mt-3'
+                        });
+                        var cardBody = $('<div/>', {
+                            class: 'card-body'
+                        });
 
-                    var cardTitle = $('<h5/>', {
-                        class: 'card-title lang',
-                        key: item.nome + '_title',
-                    });
+                        var cardTitle = $('<h5/>', {
+                            class: 'card-title lang',
+                            key: item.nome + '_title',
+                        });
 
-                    var cardSubTitle = $('<h6/>', {
-                        class: 'card-title lang',
-                        key: item.pasto,
-                    });
+                        var cardSubTitle = $('<h6/>', {
+                            class: 'card-title lang',
+                            key: item.pasto,
+                        });
 
-                    var icon = $('<i/>', {
-                        class: "fa-solid fa-clock"
+                        var icon = $('<i/>', {
+                            class: "fa-solid fa-clock"
+                        });
+                        var tempo = item.tempo + ' min';
+                        var span = $('<span/>', {
+                            class: 'card-text lang',
+                            key: item.nome + '_desc',
+                        });
+                        cardBody.append(cardTitle);
+                        cardBody.append(cardSubTitle);
+                        cardBody.append(icon);
+                        cardBody.append(tempo);
+                        cardBody.append('<br>');
+                        cardBody.append(span);
+                        card.append(img);
+                        card.append(cardBody);
+                        col.append(card);
+                        $('#cards-container').append(col);
                     });
-                    var tempo = item.tempo + ' min';
-                    var span = $('<span/>', {
-                        class: 'card-text lang',
-                        key: item.nome + '_desc',
-                    });
-                    cardBody.append(cardTitle);
-                    cardBody.append(cardSubTitle);
-                    cardBody.append(icon);
-                    cardBody.append(tempo);
-                    cardBody.append('<br>');
-                    cardBody.append(span);
-                    card.append(img);
-                    card.append(cardBody);
-                    col.append(card);
-                    $('#cards-container').append(col);
-                });
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log('Error: ' + errorThrown);
@@ -126,7 +131,6 @@
 </script>
 
 <style>
-   
     .card-img-top {
         /* rende tutte le immagini della stessa dimensione */
         width: 100%;
@@ -137,28 +141,28 @@
     }
 
     /* quando la finestra diventa più piccola, le cards non rimpiccioliscono ma si allineano appena non hanno più spazio */
-    .col{
+    .col {
         flex: 0 0 0%;
     }
-    .card{
+
+    .card {
         min-width: 250px;
     }
 
-    
 
-/* quando lo schermo diventa cosi piccolo da contenere solo una card per riga,allinea le card al cento */
-@media (max-width:769px){
-    .row{
-        justify-content: center;
-        
-    }
-    .content{
-        overflow: scroll;
-    }
 
-}
-        
-    
+    /* quando lo schermo diventa cosi piccolo da contenere solo una card per riga,allinea le card al cento */
+    @media (max-width:769px) {
+        .row {
+            justify-content: center;
+
+        }
+
+        .content {
+            overflow: scroll;
+        }
+
+    }
 </style>
 
 </html>

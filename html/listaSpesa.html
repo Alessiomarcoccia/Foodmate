@@ -24,8 +24,7 @@
         <!-- Header -->
         <div class="row">
             <div class="col-md-12">
-                <h1>La Tua Lista della Spesa</h1>
-                <br>
+                <h1>La Tua Lista della Spesa</h1> 
             </div>
         </div>
 
@@ -140,7 +139,7 @@
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                stampa(data); 
+                stampa(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                     console.log('Error: ' + errorThrown);
@@ -269,6 +268,9 @@
                     dataType: 'json',
                     success: function (data) {
                         stampa(data);
+                        if (data.length === 0) {
+                        $("#button-container").fadeOut();
+                    }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log('Error: ' + errorThrown);
