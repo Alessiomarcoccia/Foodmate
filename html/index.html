@@ -12,6 +12,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="../components/footer-style.css" rel="stylesheet">
     <title>Foodmate</title>
 </head>
 
@@ -139,16 +140,31 @@
             </div>
         </div>
 
-         Footer -->
-        <footer>
-            <div class = "container">
-                <p>FoodMate</p>
-                <a href="https://github.com/Alessiomarcoccia/Foodmate"><img src="../assets/icons/GitHub.png" alt="GitHub"></a>
-            </div>
-        </footer>
+    <!- Footer -->
+    <div id="footer-container"></div>
 </body>
 
 <script src="../js/traduzione.js"></script>
+<script>
+
+    //funzione che gestisce il caricamento del footer
+    $(document).ready(function () {
+        $.ajax({
+            url: '../components/footer-component.php',
+            method: 'GET',
+            dataType: 'text',
+            success(data) {
+                $('#footer-container').html(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error: ' + errorThrown);
+                console.log("Status: " + textStatus);
+                console.log("Response Text: " + jqXHR.responseText);
+            }
+        });
+    });
+
+</script>
 
 <style>
     #cardsWrapper {
@@ -254,23 +270,6 @@
         }
     }
 
-    footer {
-    background-color: #000000;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    }
-
-    footer .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    footer .container img {
-        width: 30px;
-        height: 30px;
-    }
 </style>
 
 </html>
