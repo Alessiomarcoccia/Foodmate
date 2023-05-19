@@ -153,13 +153,13 @@
           stars += '*';
         }
         var p = "<img src='" + user.foto + "'" + "alt='Image'>" + "<br>" + "<button class='change' onclick='foto()'>" +"<i class='fas fa-edit edit'></i>" + "</button>"  + 
-              "<p><strong> Email: " + user.email + "</strong></p>"  + 
-              "<p><strong> Password: " + user.psw.substring(0,3) + stars +"</strong>" + "<button class='change' onclick='psw()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+              "<p><strong><label class='lang' key='email_pro'></label>"+" "+ user.email + "</strong></p>"  + 
+              "<p><strong><label class='lang' key='psw_pro'></label>"+" "+ user.psw.substring(0,3) + stars +"</strong>" + "<button class='change' onclick='psw()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
               "<p><strong><label class='lang' key='nome_pro'></label>"+" " + user.nome + "</strong>" + "<button class='change' onclick='nome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
               "<p><strong><label class='lang' key='cognome_pro'></label>"+" " + user.cognome + "</strong>" + "<button class='change' onclick='cognome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
               "<p><strong><label class='lang' key='sesso_pro'></label>"+" " + user.sesso + "</strong>" + "<button class='change' onclick='sesso()'>" +"<i class='fas fa-edit edit'></i>" +"</button>" +"</p>" +
               "<div class='dropdown'>" + "<button class='btn' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown'><p>"+"<i class='fa-solid fa-earth-americas fa-lg'></i>" + "</button>"+"<ul class='dropdown-menu'>"+ 
-                "<li><button class='btn dropdown-item translate' id='it'>Italiano</a></li> " +"<li><button class='btn dropdown-item translate' id='en'>English</a></li>"+"</ul></div></p>"  ;
+                "<li><button class='btn dropdown-item translate' id='it'>Italiano</a></li> " +"<li><button class='btn dropdown-item translate' id='en'>English</a></li>"+"<li><button class='btn dropdown-item translate' id='cn'>简体中文</a></li>"+"</ul></div></p>";
 
         div.append(p);
       }

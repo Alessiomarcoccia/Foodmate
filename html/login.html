@@ -32,6 +32,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><button class="btn dropdown-item translate" id="it">Italiano</a></li>
                   <li><button class="btn dropdown-item translate" id="en">English</a></li>
+                  <li><button class="btn dropdown-item translate" id="cn">简体中文</a></li>
               </ul>
             </div>
         </li>
@@ -45,11 +46,11 @@
     <form name="myForm" action="../php/login.php" method="POST" class="form-signin m-auto">
       <div class="user-box">
           <input type="email" name="inputEmail" required>
-          <label>Email</label>
+          <label class="lang" key="email"></label>
       </div>
       <div class="user-box">
           <input type="password" name="inputPassword" required>
-          <label>Password</label>
+          <label class="lang" key="password"></label>
       </div>
       <button type="submit" class="lang" key="invia"></button>
       <br>

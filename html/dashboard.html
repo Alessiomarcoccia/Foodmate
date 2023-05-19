@@ -25,7 +25,7 @@
         <!-- Header -->
         <div class="row">
             <div class="col-4">
-                <h1>Le tue dispense</h1>
+                <h1 class="lang" key="dispense"></h1>
             </div>
 
         </div>
@@ -35,30 +35,29 @@
             <div class="col-8" id="user-fridges"></div>
             <div class="col-4" id="containerNuovaDispensa">
                 <!-- BOTTONE NUOVA DISPENSA -->
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                    data-bs-target="#nuovaDispensa">
-                    Nuova dispensa
+                <button type="button" class="btn btn-outline-primary lang" data-bs-toggle="modal"
+                    data-bs-target="#nuovaDispensa" key="newDispensa">
                 </button>
                 <!-- POP UP NUOVA DISPENSA -->
                 <div class="modal fade" id="nuovaDispensa">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Nuova Dispensa</h5>
+                                <h5 class="modal-title lang" key="newDispensa"></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
                                 <form action="../php/nuovaDispensa.php" method="post" id="form-nuova-dispensa">
                                     <div class="mb-3">
-                                        <label for="nomeDispensa" class="form-label">Name</label>
+                                        <label for="nomeDispensa" class="form-label lang" key="Nome"></label>
                                         <input type="text" class="form-control" id="nomeDispensa" name="nomeDispensa"
                                             maxlength="40" required>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" form="form-nuova-dispensa">Submit</button>
+                                <button type="button" class="btn btn-secondary lang" data-bs-dismiss="modal" key="close"></button>
+                                <button type="submit" class="btn btn-primary lang" form="form-nuova-dispensa" key="invia"></button>
                             </div>
                         </div>
                     </div>
@@ -75,25 +74,25 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Nuova Provvista</h5>
+                            <h5 class="modal-title lang" key="provvista"></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
                             <form id="form-nuova-provvista" action="../php/nuovaProvvista.php" method="post">
                                 <div class="mb-3">
-                                    <label for="nomeProvvista" class="form-label">Name</label>
+                                    <label for="nomeProvvista" class="form-label lang" key="nome_pro"></label>
                                     <input type="text" class="form-control" id="nomeProvvista" name="nomeProvvista"
                                         maxlength="40" required>
 
-                                    <label for="expDate" class="form-label">Expiration date</label>
+                                    <label for="expDate" class="form-label lang" key="exp"></label>
                                     <input type="date" class="form-control" id="expDate" name="expDate" required>
 
-                                    <label for="quantita" class="form-label">Quantity</label>
+                                    <label for="quantita" class="form-label lang" key="quantita"></label>
                                     <input type="number" oninput="if(value<=0) value=1" class="form-control" id="quantita" name="quantita" required>
 
-                                    <label for="tipoProvvista" class="form-label">Type</label>
+                                    <label for="tipoProvvista" class="form-label lang" key="type"></label>
                                     <select class="form-select" id="tipoProvvista" name="tipoProvvista">
-                                        <option selected>Open this select menu</option>
+                                        <option selected class="lang" key="menu"></option>
                                         <option value="carne">Carne</option>
                                         <option value="dolce">Dolce</option>
                                         <option value="latticini">Latticini</option>
@@ -106,8 +105,8 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="chiudiFormProvvista">Close</button>
-                            <button type="submit" class="btn btn-primary" form="form-nuova-provvista">Submit</button>
+                            <button type="button" class="btn btn-secondary lang" data-bs-dismiss="modal" id="chiudiFormProvvista" key="close"></button>
+                            <button type="submit" class="btn btn-primary lang" form="form-nuova-provvista" key="invia"></button>
                         </div>
                     </div>
                 </div>
@@ -189,10 +188,13 @@
                 });
                 var button = $('<button/>', {
                     type: 'button',
-                    class: 'btn btn-primary',
-                    text: 'Aggiungi',
+                    class: 'btn btn-primary lang',
+                    key: 'add',
                     'data-bs-toggle': 'modal',
                     'data-bs-target': '#nuovaProvvista'
+                }).text(function(){
+                    var key = $(this).attr('key')
+                    $(this).text(arrLang[lang][key]);
                 });
                 var cardBody = $('<div/>', {
                     class: 'card-body'
@@ -227,8 +229,11 @@
                     });
                     var deleteButton = $('<button/>', {
                         type: 'button',
-                        class: 'btn btn-outline-danger bottoneEliminaProvvista',
-                        text: 'Elimina'
+                        class: 'btn btn-outline-danger bottoneEliminaProvvista lang',
+                        key: 'elimina'
+                    }).text(function(){ 
+                        var key = $(this).attr('key')
+                        $(this).text(arrLang[lang][key]);
                     });
                     listItem.append(icon);
                     var colore = controllaScadenza(item.datascadenza);
