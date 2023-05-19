@@ -13,14 +13,11 @@
     <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    
-
-    <script src="../js/randomColor.js"></script>
-
+    <link href="../components/sidebar-style.css" rel="stylesheet">
     <title>Foodmate</title>
 </head>
 
 <body>
-
     <div id="sidebar-container"></div>
     
     <!-- Page content -->
@@ -33,12 +30,12 @@
 
         </div>
         <!-- HEADER -->
-        <div class="row">
+        <div class="row" style="margin-top: 10px;">
             <!-- BOTTONI DISPENSE -->
-            <div class="col-10" id="user-fridges"></div>
-            <div class="col-2">
+            <div class="col-8" id="user-fridges"></div>
+            <div class="col-4" id="containerNuovaDispensa">
                 <!-- BOTTONE NUOVA DISPENSA -->
-                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                     data-bs-target="#nuovaDispensa">
                     Nuova dispensa
                 </button>
@@ -130,7 +127,6 @@
             method: 'GET',
             dataType: 'text',
             success(data) {
-                console.log(data);
                 $('#sidebar-container').html(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -141,6 +137,9 @@
         });
     });
 
+    /* Questa funzione carica i frigoriferi dell'utente nella pagina.Quando la pagina è caricata,
+    viene inviata una richiesta ajax al server per ottenere i frigoriferi dell'utente.
+    */
     $(document).ready(function () {
         // Richiesta AJAX per ottenere i frigoriferi dell'utente
         $.ajax({
@@ -169,8 +168,8 @@
         });
     });
 
-    /* Questa funzione aggiunge un evento su ogni bottoneFrigo.In particolare quando il bottone è cliccato,viene caricato il contenuto del frigo nell'elemento
-    con id = contenutoDispensa. */
+    /* Questa funzione aggiunge un evento su ogni bottoneFrigo.In particolare quando il bottone è cliccato,
+    viene caricato il contenuto del frigo nell'elemento con id = contenutoDispensa. */
     $(document).on('click', '.bottoneFrigo', function () {
         var fridgeName = $(this).text();
         $.ajax({
@@ -199,22 +198,32 @@
                     class: 'card-body'
                 });
                 var list = $('<ul/>', {
-                    class: 'list-group list-group-flush'
+                    class: 'list-group list-group-flush '
                 });
-                console.log(data);
                 $.each(data, function (index, item) {
                     var listItem = $('<li/>', {
                         class: 'list-group-item',
                         id: item.id,
                     });
                     var icon = $('<i/>', {
-                        class: item.tipologia
+                        class: 'iconeDinamiche '+item.tipologia
                     });
                     var span = $('<span/>', {
                         class: 'item-info',
                         text: 'Qty: ' + item.quantita + ' ' + 'Exp: ' + item.datascadenza
                     });
-
+                    var moreButton = $('<button/>', {
+                        type: 'button',
+                        class: 'btn btn-outline-dark mol moreButton',
+                        text: '+',
+                        dataValue: "1"
+                    });
+                    var lessButton = $('<button/>', {
+                        type: 'button',
+                        class: 'btn btn-outline-dark mol lessButton',
+                        text: '-',
+                        dataValue: "0"
+                    });
                     var deleteButton = $('<button/>', {
                         type: 'button',
                         class: 'btn btn-outline-danger bottoneEliminaProvvista',
@@ -225,6 +234,8 @@
                     listItem.append('<strong>' + item.nome + '</strong;> ' + '&nbsp;');
                     listItem.append(span);
                     listItem.append(deleteButton);
+                    listItem.append(moreButton);
+                    listItem.append(lessButton);
                     list.append(listItem);
                     cardBody.append(list);
                 });
@@ -291,6 +302,51 @@
         });
     });
 
+        /* Funzione che gestisce l'INCREMENTO di 1 della quantità di una provvista quando viene cliccato il bottone "moreButton"*/
+        $(document).on('click', ".moreButton", function () {
+        $.ajax({
+            url: '../php/moreLessProvvista.php',
+            type: 'POST',
+            data: {
+                idProvvista: $(this).parent().attr('id'),
+                valore: $(this).attr('dataValue')
+            },
+            dataType: 'json',
+            success: function (data) {
+                var bottone = $(".bottoneFrigo#" + data.nomeFrigorifero);
+                bottone.click();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error: ' + errorThrown);
+                console.log("Status: " + textStatus);
+                console.log("Response Text: " + jqXHR.responseText);
+            }
+        });
+    });
+
+    /* Funzione che gestisce il DECREMENTO di 1 della quantità di una provvista quando viene cliccato il bottone "moreButton"*/
+    $(document).on('click', ".lessButton", function () {
+        $.ajax({
+            url: '../php/moreLessProvvista.php',
+            type: 'POST',
+            data: {
+                idProvvista: $(this).parent().attr('id'),
+                valore: $(this).attr('dataValue')
+            },
+            dataType: 'json',
+            success: function (data) {
+                var bottone = $(".bottoneFrigo#" + data.nomeFrigorifero);
+                bottone.click();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error: ' + errorThrown);
+                console.log("Status: " + textStatus);
+                console.log("Response Text: " + jqXHR.responseText);
+            }
+        });
+    });
+
+    //funzione che impedisce di inserire date di scadenza precedenti a quella attuale
     $(function() {
         var date = new Date();
         var year = date.getFullYear();
@@ -311,59 +367,32 @@
 
 
 <style>
-    /* SIDEBAR STYLE */
-    .sidebar {
-        margin: 0;
-        padding-top: 20px;
-        width: 200px;
-        background-color: #2f855a;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
-        align-content: center;
-    }
-
-    .sidebar-brand {
-        font-size: 27px;
-    }
-
-    .sidebar-nav {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sidebar-nav li {
-        text-indent: 20px;
-        line-height: 40px;
-    }
-
-    .sidebar-nav li a {
-        display: block;
-        text-decoration: none;
-        color: #fff;
-    }
-
-    .sidebar-nav li a:hover {
-        text-decoration: none;
-        background: rgba(255, 255, 255, 0.2);
-    }
-
-    .sidebar-nav>.sidebar-brand a:hover {
-        background: none;
-    }
-
-    /* PAGE CONTENT WRAPPER STYLE */
-
-    div.content {
-        margin-left: 200px;
-        padding: 1px 16px;
-        /* width: 100%; */
+    
+    #containerNuovaDispensa{
+        display: flex;
+        justify-content: flex-end;
+        min-width: 100px;
     }
 
     /* DELETE BUTTONS STYLE */
 
     li button {
         float: right;
+    }
+
+    /* MORE, LESS BUTTONS STYLE */
+
+    .mol {
+        float: right;
+        width: 36px;
+        height: 37.6px;
+        margin-right: 5px;
+    }
+
+    /* FRIDGE BUTTON STYLE */
+
+    .bottoneFrigo {
+        margin-right: 5px;
     }
 
     /* FRIDGE BUTTON STYLE */
@@ -378,25 +407,43 @@
         margin-top: 20px;
     }
 
+
     /* ICON STYLE */
+
+    .iconeDinamiche{
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-style: normal;
+        margin-right: 10px;
+    }
 
     .frutta::before {
         content: "\f5d1";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        font-style: normal;
-        margin-right: 20px;
-        float: left;
     }
 
     .verdura::before {
-        content: "\f06c";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        font-style: normal;
-        margin-right: 20px;
+        content: "\f4d8";
     }
 
+    .pesce::before{
+        content: "\f578";
+    }
+
+    .carne::before{
+        content: "\f6d7";
+    }
+
+    .uova::before{
+        content:"\f7fb";
+    }
+
+    .dolce::before{
+        content:"\f564";
+    }
+
+    
+
+    /*
     /* SIDEBAR MEDIA QUERIES */
 
    /*  @media screen and (max-width: 700px) {

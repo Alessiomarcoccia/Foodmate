@@ -36,7 +36,7 @@ else {
                         $_SESSION['email'] = $email;
                     }
                 }
-                
+                pg_close($dbconn);
             }
         ?> 
     </body>

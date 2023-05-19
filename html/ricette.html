@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link href="../components/sidebar-style.css" rel="stylesheet">
+    <title>Foodmate</title>
+</head>
+
+<body>
+
+    <div id="sidebar-container"></div>
+
+    <div class="content">
+        <div class="container">
+            <div class="row" id="cards-container">
+                <!-- <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../assets/ricette/macedonia.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Macedonia</h5>
+                            <h6 class="card-title">Cena</h6>
+                            <i class="fa-solid fa-clock"></i> 15 min
+                            <p class="card-text">Estate è quando la macedonia di frutta diventa la tua migliore amica,con la sua dolcezza e freschezza che ti rinfrescano nelle calde giornate estive.</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    /* carica la sidebar */
+    $(document).ready(function () {
+        $.ajax({
+            url: '../components/sidebar-component.php',
+            method: 'GET',
+            dataType: 'text',
+            success(data) {
+                $('#sidebar-container').html(data);
+            },
+            error(err) {
+                console.log(err);
+            }
+        });
+    });
+
+    /* carica le ricette e per ogni ricetta crea una card */
+    $(document).ready(function () {
+        $.ajax({
+            url: '../php/get_ricette.php',
+            mathod: 'GET',
+            dataType: 'json',
+            success(data) {
+                console.log(data);
+                $('#cards-container').empty();
+                $.each(data, function (index, item) {
+
+                    var col = $('<div/>', {
+                        //d-flex rende tutte le card della stessa dimensione
+                        class: 'col d-flex'
+                    });
+                    var img = $('<img/>', {
+                        class: 'card-img-top',
+                        src: '../assets/ricette/' + item.nome + '.jpg',
+                        alt: '...'
+                    });
+                    var card = $('<div/>', {
+                        class: 'card mt-3'
+                    });
+                    var cardBody = $('<div/>', {
+                        class: 'card-body'
+                    });
+
+                    var cardTitle = $('<h5/>', {
+                        class: 'card-title lang',
+                        key: item.nome + '_title',
+                    });
+
+                    var cardSubTitle = $('<h6/>', {
+                        class: 'card-title lang',
+                        key: item.pasto,
+                    });
+
+                    var icon = $('<i/>', {
+                        class: "fa-solid fa-clock"
+                    });
+                    var tempo = item.tempo + ' min';
+                    var span = $('<span/>', {
+                        class: 'card-text lang',
+                        key: item.nome + '_desc',
+                    });
+                    cardBody.append(cardTitle);
+                    cardBody.append(cardSubTitle);
+                    cardBody.append(icon);
+                    cardBody.append(tempo);
+                    cardBody.append('<br>');
+                    cardBody.append(span);
+                    card.append(img);
+                    card.append(cardBody);
+                    col.append(card);
+                    $('#cards-container').append(col);
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error: ' + errorThrown);
+                console.log("Status: " + textStatus);
+                console.log("Response Text: " + jqXHR.responseText);
+            }
+        })
+    });
+
+</script>
+
+<style>
+   
+    .card-img-top {
+        /* rende tutte le immagini della stessa dimensione */
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+        /* l'immagine non diventa più bassa di 190 px */
+        min-height: 190px;
+    }
+
+    /* quando la finestra diventa più piccola, le cards non rimpiccioliscono ma si allineano appena non hanno più spazio */
+    .col{
+        flex: 0 0 0%;
+    }
+    .card{
+        min-width: 250px;
+    }
+
+    
+
+/* quando lo schermo diventa cosi piccolo da contenere solo una card per riga,allinea le card al cento */
+@media (max-width:769px){
+    .row{
+        justify-content: center;
+        
+    }
+    .content{
+        overflow: scroll;
+    }
+
+}
+        
+    
+</style>
+
+</html>

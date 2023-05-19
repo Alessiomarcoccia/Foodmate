@@ -62,7 +62,8 @@ body {
 }
 
 .login-box .user-box input:focus~label,
-.login-box .user-box input:valid~label {
+.login-box .user-box input:valid~label
+{
   top: -20px;
   left: 0;
   color: #03e9f4;
@@ -98,6 +99,7 @@ body {
  /*  text-transform: uppercase; */
   overflow: hidden;
   letter-spacing: 2px;
+  margin-left: 160px;
   
 }
 
@@ -111,7 +113,7 @@ body {
  /*  text-transform: uppercase; */
   overflow: hidden;
   letter-spacing: 2px;
-  padding-left: 3em;
+  padding-left: 5.5em;
 }
 
 .padding {
@@ -119,10 +121,11 @@ body {
 }
 
 .left {
-  margin-left: 3em;
+  margin-left: 4em;
 }
+
 .left_M {
-  margin-left: 7em;
+  margin-left: 5em;
 }
 
 .white {

@@ -19,4 +19,5 @@
     /* header('Location:./profilo.html'); */
     header('Content-Type: application/json');
     echo ($json_data);
+    pg_close($dbconn);
   ?>

@@ -24,7 +24,16 @@ $data = <<<EOD
                     <i class="fa-sharp fa-solid fa-chart-simple"></i>
                     <span class="link-text"></span>
                 </a>
-            </li> 
+            </li>
+            <li>
+                <a href="listaSpesa.html" class="lang" key="lista spesa">
+                    <i class="fa-sharp fa-solid fa-chart-simple"></i>
+                </a>
+            </li>
+            <li>
+                <a href="ricette.html" class="lang" key="ricette">
+                <i class="fa-solid fa-list-ul"></i>
+                </a>
             <li>
                 <a href="../php/logout.php?action=logout" class="langSidebar" key="logout" >
                      <i class="fa-sharp fa-solid fa-sign-out"></i>

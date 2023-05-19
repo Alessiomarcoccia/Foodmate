@@ -16,4 +16,5 @@ if ($dbconn) {
         }
     }
     header("Location: ../html/dashboard.html");
+    pg_close($dbconn);
 ?>
