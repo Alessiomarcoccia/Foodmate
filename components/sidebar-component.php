@@ -26,13 +26,15 @@ $data = <<<EOD
                 </a>
             </li>
             <li>
-                <a href="listaSpesa.html" class="lang" key="lista spesa">
+                <a href="listaSpesa.html" class="langSidebar" key="lista spesa">
                     <i class="fa-sharp fa-solid fa-chart-simple"></i>
+                    <span class="link-text"></span>
                 </a>
             </li>
             <li>
-                <a href="ricette.html" class="lang" key="ricette">
-                <i class="fa-solid fa-list-ul"></i>
+                <a href="ricette.html" class="langSidebar" key="ricette">
+                    <i class="fa-solid fa-list-ul"></i>
+                    <span class="link-text"></span>
                 </a>
             <li>
                 <a href="../php/logout.php?action=logout" class="langSidebar" key="logout" >
