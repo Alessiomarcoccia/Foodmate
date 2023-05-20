@@ -1,4 +1,3 @@
-
 function colors(tipologie){
   var colori = {
     frutta:"rgb(34,139,34)",
@@ -40,6 +39,16 @@ function convertLabels(labels){
       newLabels.push(mesi[labels[i]]);
     }
   return newLabels;
+
+
+  /* function translateLabels(labels){
+    rez = [];
+    for (var i = 0; i <labels.length; i++) {
+      rez.push(translate(labels[i]));
+    }
+    return rez;
+  } */
+
 }
 
 

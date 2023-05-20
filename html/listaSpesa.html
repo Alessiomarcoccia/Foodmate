@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,9 +15,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="../components/sidebar-style.css" rel="stylesheet">
     <title>Foodmate</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <script src="../js/traduzione.js"></script>
 </head>
+
 <body>
-    
+
     <div id="sidebar-container"></div>
 
     <!-- Page content -->
@@ -24,7 +28,7 @@
         <!-- Header -->
         <div class="row">
             <div class="col-md-12">
-                <h1>La Tua Lista della Spesa</h1> 
+                <h1>La Tua Lista della Spesa</h1>
             </div>
         </div>
 
@@ -35,17 +39,19 @@
 
         <!-- INPUT AGGIUNGI NUOVA PROVVISTA PER LISTA SPESA -->
         <div class="container mt-3">
-            <form id="form-aggiungiProvvista", action="../php/aggiungiListaSpesa.php" method="post">
+            <form id="form-aggiungiProvvista" , action="../php/aggiungiListaSpesa.php" method="post">
                 <div class="row">
                     <div class="col">
                         Prodotto:
-                        <input type="text" class="form-control" id="nomeProvvista" name="nomeProvvista" value="Aggiungi Prodotto..." onfocus="this.value=''" maxlength="40" required>
+                        <input type="text" class="form-control" id="nomeProvvista" name="nomeProvvista"
+                            onfocus="this.value=''" maxlength="40" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        Descizione:
-                        <textarea class="form-control" id="descrizioneProvvista" name="descrizioneProvvista" value="Inserisci una descizione (Opzionale)" onfocus="this.value=''" rows="2"></textarea>
+                        Descrizione:
+                        <textarea class="form-control" id="descrizioneProvvista" name="descrizioneProvvista"
+                            value="Inserisci una descizione (Opzionale)" onfocus="this.value=''" rows="2"></textarea>
                     </div>
                 </div><br>
                 <div class="row">
@@ -58,12 +64,20 @@
 
         <!-- List -->
         <div id="listaSpesa"></div><br>
-        
+
         <!-- Buttoni Sposta in Frigo & Elimina Spesa -->
         <div class="col" id="button-container" style="display: none;">
             <button class="btn btn-success" id="btnSpesaInFrigo">Sposta in Frigo</button>
             <button class="btn btn-danger" id="btnEliminaSpesa">Elimina Spesa</button>
         </div>
+
+        <div id="suggerimenti"></div>
+
+        <div class="col" id="suggestions-button-container" style="display: none; margin-top: 20px;">
+            <button class="btn btn-success" id="btnSuggerimentiInSpesa">Sposta in Spesa</button>
+        </div>
+
+
 
         <!-- POP-UP PER SPOSTARE IN FRIGO LA SPESA SELEZIONATA -->
         <div class="modal fade" id="popupSpesaInFrigo">
@@ -82,7 +96,8 @@
                                 <input type="date" class="form-control" id="expDate" name="expDate" required>
 
                                 <label for="quantita" id="quantita" class="form-label">Quantity</label>
-                                <input type="number" oninput="if(value<=0) value=1" class="form-control" id="quantita" name="quantita" required>
+                                <input type="number" oninput="if(value<=0) value=1" class="form-control" id="quantita"
+                                    name="quantita" required>
 
                                 <label for="tipoProvvista" class="form-label">Type</label>
                                 <select class="form-select" id="tipoProvvista" name="tipoProvvista" required>
@@ -113,73 +128,32 @@
 
     </div>
 
-    
-<script>
-    //funzione che gestisce il caricamento del sidebar
-    $(document).ready(function () {
-        $.ajax({
-            url: '../components/sidebar-component.php',
-            method: 'GET',
-            dataType: 'text',
-            success(data) {
-                $('#sidebar-container').html(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Error: ' + errorThrown);
-                console.log("Status: " + textStatus);
-                console.log("Response Text: " + jqXHR.responseText);
-            }
-        });
-    });
 
-    // stampa lista provviste gia presenti nel database
-    $(document).ready( function() {
-        $.ajax({
-            url: '../php/get_listaSpesa.php',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                stampa(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
+    <script>
+        //funzione che gestisce il caricamento del sidebar
+        $(document).ready(function () {
+            $.ajax({
+                url: '../components/sidebar-component.php',
+                method: 'GET',
+                dataType: 'text',
+                success(data) {
+                    $('#sidebar-container').html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
                     console.log('Error: ' + errorThrown);
                     console.log("Status: " + textStatus);
                     console.log("Response Text: " + jqXHR.responseText);
-            }
+                }
+            });
         });
-    });
 
-    function stampa(data) {
-        $('#listaSpesa').empty();
-        var listaSpesa = $('#listaSpesa');
-        $.each(data, function (index, item) {
-            var container = $('<div>').addClass('container mt-3');
-            var card = $('<div>').addClass('card');
-            var cardBody = $('<div>').addClass('card-body');
-            var cardNome = $('<h1>').addClass('card-nome');
-            var cardDescrizione = $('<p>').addClass('card-descrizione'); 
-            var check = $('<input>').addClass('form-check-input select').attr('type', 'checkbox').attr('id', item.id);
-            cardBody.append(cardNome.text(item.nome));
-            cardBody.append(check);
-            cardBody.append(cardDescrizione.text(item.descrizione));
-            card.append(cardBody);
-            container.append(card);
-            $('#listaSpesa').append(card);
-        });
-    }
-
-    // aggiunta nuovo provviste alla lista della spesa
-    $(document).ready( function() {
-        $('#form-aggiungiProvvista').submit(function (event) {
-            event.preventDefault();
+        // stampa la lista della spesa dal database
+        $(document).ready(function () {
             $.ajax({
-                url: $(this).attr('action'),
-                type: $(this).attr('method'),
-                data: $(this).serialize(),
+                url: '../php/get_listaSpesa.php',
+                type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $('#nomeProvvista').val('');
-                    $('#descrizioneProvvista').val('');
                     stampa(data);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -187,23 +161,223 @@
                     console.log("Status: " + textStatus);
                     console.log("Response Text: " + jqXHR.responseText);
                 }
-            })
-        }); 
-    });  
+            });
+        });
 
-    // Rimozione Con CheckBox
-    $(document).ready(function() {
-        $(document).on('click', '#btnEliminaSpesa', function() {
-            var idP = [];
-            $("input[type='checkbox']:checked").each(function() {
-                idP.push($(this).attr("id"));
-            }); 
+        function stampa(data) {
+            $('#listaSpesa').empty();
+            var listaSpesa = $('#listaSpesa');
+            $.each(data, function (index, item) {
+                /* var container = $('<div>').addClass('container mt-3'); */
+                var card = $('<div>').addClass('card');
+                var cardBody = $('<div>').addClass('card-body');
+                var cardNome = $('<h1>').addClass('card-nome');
+                var cardDescrizione = $('<p>').addClass('card-descrizione');
+                var check = $('<input>').addClass('form-check-input select checkboxSpesa').attr('type', 'checkbox').attr('id', item.id);
+                cardBody.append(cardNome.text(item.nome));
+                cardBody.append(check);
+                cardBody.append(cardDescrizione.text(item.descrizione));
+                card.append(cardBody);
+               /*  container.append(card); */
+                $('#listaSpesa').append(card);
+            });
+        }
+
+        // aggiunta nuovo provviste alla lista della spesa
+        $(document).ready(function () {
+            $('#form-aggiungiProvvista').submit(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#nomeProvvista').val('');
+                        $('#descrizioneProvvista').val('');
+                        stampa(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log('Error: ' + errorThrown);
+                        console.log("Status: " + textStatus);
+                        console.log("Response Text: " + jqXHR.responseText);
+                    }
+                })
+            });
+        });
+
+        // Rimozione Con CheckBox
+        $(document).ready(function () {
+            $(document).on('click', '#btnEliminaSpesa', function () {
+                var idP = [];
+                $("input[type='checkbox']:checked").each(function () {
+                    idP.push($(this).attr("id"));
+                });
+                $.ajax({
+                    url: '../php/eliminaListaSpesa.php',
+                    type: 'POST',
+                    data: {
+                        idProvviste: idP,
+                    },
+                    success: function (data) {
+                        stampa(data);
+                        if (data.length === 0) {
+                            $("#button-container").fadeOut();
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log('Error: ' + errorThrown);
+                        console.log("Status: " + textStatus);
+                        console.log("Response Text: " + jqXHR.responseText);
+                    }
+
+                })
+            });
+        });
+
+        // Script per recuperare nel database i frighi disponibili e impostarli come option nella select
+        $(document).ready(function () {
             $.ajax({
-                url: '../php/eliminaListaSpesa.php',
+                url: '../php/get_user_fridges.php',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (index, frigo) {
+                        $('#nomeFrigo').append('<option value="' + frigo.nome + '">' + frigo.nome + '</option>');
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('Error: ' + errorThrown);
+                    console.log("Status: " + textStatus);
+                    console.log("Response Text: " + jqXHR.responseText);
+                }
+            });
+        });
+
+        // popup con form per aggiungere le nuove provviste al frigo
+        $(document).ready(function () {
+            $(document).on('click', '#btnSpesaInFrigo', function () {
+                var idP = [];
+                var name = [];
+                $("input[type='checkbox']:checked").each(function () {
+                    idP.push($(this).attr("id"));
+                    name.push($(this).siblings(".card-nome").text());
+                });
+                var indice = 0;
+                $('#titoloPopup').text(name[indice]);
+                $('#popupSpesaInFrigo').modal('show');
+                $(document).on('submit', '#form-Spesa-In-Frigo', function (event) {
+                    event.preventDefault();
+                    var formData = $(this).serialize();
+                    var nomeFrigo = $('#nomeFrigo').val();
+                    var additionalData = {
+                        id: idP[indice],
+                        name: name[indice],
+                        nomeFrigo: nomeFrigo
+                    };
+                    var requestData = formData + '&' + $.param(additionalData);
+                    $.ajax({
+                        url: $(this).attr('action'),
+                        type: $(this).attr('method'),
+                        data: requestData,
+                        dataType: 'json',
+                        success: function (data) {
+                            stampa(data);
+                            if (data.length === 0) {
+                                $("#button-container").fadeOut();
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log('Error: ' + errorThrown);
+                            console.log("Status: " + textStatus);
+                            console.log("Response Text: " + jqXHR.responseText);
+                        }
+                    });
+                    indice++;
+                    if (indice < idP.length) {
+                        $('#titoloPopup').text(name[indice]);
+                        $('#quantita').val(0);
+                        $('#expDate').val('');
+                        $('#tipoProvvista').val('');
+                    } else {
+                        $('#popupSpesaInFrigo').modal('hide');
+                    }
+                });
+            });
+        });
+
+
+        // Controllo checkbox per far apparire i tasti "Aggiungi a Frigorifero" e "Elimina Spesa".
+        $(document).ready(function () {
+            $(document).on('change', 'input[type="checkbox"].checkboxSpesa', function () {
+                var checked = $("input[type='checkbox'].checkboxSpesa:checked").length > 0;
+                if (checked) {
+                    $("#button-container").fadeIn(); // Mostra il container dei bottoni con animazione di fade in
+                } else {
+                    $("#button-container").fadeOut(); // Nascondi il container dei bottoni con animazione di fade out
+                }
+            });
+            $(document).on('change', 'input[type="checkbox"].checkboxSuggerimenti', function () {
+                var checked = $("input[type='checkbox'].checkboxSuggerimenti:checked").length > 0;
+                if (checked) {
+                    $("#suggestions-button-container").fadeIn(); // Mostra il container dei bottoni con animazione di fade in
+                } else {
+                    $("#suggestions-button-container").fadeOut(); // Nascondi il container dei bottoni con animazione di fade out
+                }
+            });
+        });
+
+        // funzione che genera suggerimenti per la lista della spesa
+        $(document).ready(function () {
+            $("#suggerimenti").empty();
+            $.ajax({
+                url: "../php/get_suggerimenti.php",
+                dataType: "json",
+                success: function (data) {
+                    if (data.length > 0) {
+                        var title = $('<h4/>', {
+                            text: translate('suggerimenti_title'),
+                            style: 'margin-bottom: 30px;'
+                        });
+                        $('#suggerimenti').append(title);
+
+                        $.each(data, function (index, item) {
+                        var card = $('<div>').addClass('card');
+                        var cardBody = $('<div>').addClass('card-body');
+                        var cardNome = $('<h3>').addClass('card-nome');
+                        var cardDescrizione = $('<p>').addClass('card-descrizione');
+                        var check = $('<input>').addClass('form-check-input select checkboxSuggerimenti').attr('type', 'checkbox');
+                        cardBody.append(cardNome.text(item.nome));
+                        cardBody.append(check);
+                        cardBody.append(cardDescrizione.text(translate('ne_hai') + ': '+ item.quantita));
+                        card.append(cardBody);
+                        $('#suggerimenti').append(card);})
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('Error: ' + errorThrown);
+                    console.log("Status: " + textStatus);
+                    console.log("Response Text: " + jqXHR.responseText);
+                }
+            });
+
+        });
+
+        $(document).on("click","#btnSuggerimentiInSpesa",function(){
+            var name = [];
+            $("input[type='checkbox'].checkboxSuggerimenti:checked").each(function () {
+                name.push($(this).siblings(".card-nome").text());
+            });
+            $.each(name, function (index, item) {
+                console.log(item);
+                $.ajax({
+                url: '../php/aggiungiListaSpesa.php',
                 type: 'POST',
                 data: {
-                    idProvviste: idP,
+                    nomeProvvista: item,
+                    descrizioneProvvista: ''
                 },
+                dataType: 'json',
                 success: function (data) {
                     stampa(data);
                     if (data.length === 0) {
@@ -217,142 +391,61 @@
                 }
 
             })
-        });
-    });
-
-    // Script per recuperare nel database i frighi disponibili e impostarli come option nella select
-    $(document).ready(function () {
-        $.ajax({
-            url: '../php/get_user_fridges.php',
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                $.each(data, function (index, frigo) {
-                    $('#nomeFrigo').append('<option value="' + frigo.nome + '">' + frigo.nome + '</option>');
-                });
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Error: ' + errorThrown);
-                console.log("Status: " + textStatus);
-                console.log("Response Text: " + jqXHR.responseText);
-            }
-        });
-    });
-
-    // popup con form per aggiungere le nuove provviste al frigo
-    $(document).ready(function() {
-        $(document).on('click', '#btnSpesaInFrigo', function() {
-            var idP = [];
-            var name = [];
-            $("input[type='checkbox']:checked").each(function() {
-                idP.push($(this).attr("id"));
-                name.push($(this).siblings(".card-nome").text());
             });
-            var indice = 0;
-            $('#titoloPopup').text(name[indice]); 
-            $('#popupSpesaInFrigo').modal('show'); 
-            $(document).on('submit', '#form-Spesa-In-Frigo', function(event) {
-                event.preventDefault();
-                var formData = $(this).serialize();
-                var nomeFrigo = $('#nomeFrigo').val();
-                var additionalData = {
-                    id: idP[indice],
-                    name: name[indice],
-                    nomeFrigo: nomeFrigo
-                };
-                var requestData = formData + '&' + $.param(additionalData);
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: $(this).attr('method'),
-                    data: requestData,
-                    dataType: 'json',
-                    success: function (data) {
-                        stampa(data);
-                        if (data.length === 0) {
-                        $("#button-container").fadeOut();
-                    }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log('Error: ' + errorThrown);
-                        console.log("Status: " + textStatus);
-                        console.log("Response Text: " + jqXHR.responseText);
-                    }
-                });
-                indice++;
-                if (indice < idP.length) {
-                    $('#titoloPopup').text(name[indice]);
-                    $('#quantita').val(0);
-                    $('#expDate').val('');
-                    $('#tipoProvvista').val('');
-                } else {
-                    $('#popupSpesaInFrigo').modal('hide');
-                }
-            });
+            
         });
-    });
 
 
-    // Controllo checkbox per far apparire i tasti "Aggiungi a Frigorifero" e "Elimina Spesa".
-    $(document).ready(function() {
-        $(document).on('change', 'input[type="checkbox"]', function() {
-            var checked = $("input[type='checkbox']:checked").length > 0;
-            if (checked) {
-                $("#button-container").fadeIn(); // Mostra il container dei bottoni con animazione di fade in
-            } else {
-                $("#button-container").fadeOut(); // Nascondi il container dei bottoni con animazione di fade out
+        //funzione che impedisce di inserire date di scadenza precedenti a quella attuale
+        $(function () {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            if (month < 10) {
+                month = '0' + month;
             }
-        });
-    });
+            var day = date.getDate();
+            if (day < 10) {
+                day = '0' + day;
+            }
+            var time = year + '-' + month + '-' + day;
+            $('#expDate').attr('min', time);
+        })
 
 
-    //funzione che impedisce di inserire date di scadenza precedenti a quella attuale
-    $(function() {
-        var date = new Date();
-        var year = date.getFullYear();
-        var month = date.getMonth() +1;
-        if(month < 10){
-            month = '0' + month;
+
+
+    </script>
+    <style>
+        .select {
+            float: right;
         }
-        var day = date.getDate();
-        if (day < 10){
-            day = '0' + day;
+
+        .select {
+            display: inline-block;
         }
-        var time = year + '-' + month + '-' + day;
-        $('#expDate').attr('min', time);
-    })
 
+        #listaSpesa {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
 
+        .card-descrizione {
+            display: inline-block;
+        }
 
+        .aggiornaListaSpesa {
+            display: none;
+        }
 
-</script>
-<style>
-    
-    .select {
-        float: right;
-    }
+        #btnSpesaInFrigo {
+            margin-left: 10px;
+        }
 
-    .select {
-        display: inline-block;
-    }
-
-    #listaSpesa {
-        padding-left: 12px;
-        padding-right: 12px;
-    } 
-
-    .card-descrizione {
-        display: inline-block;
-    }
-
-    .aggiornaListaSpesa {
-        display: none;
-    }
-
-    #btnSpesaInFrigo {
-        margin-left: 10px;
-    }    
-
-
-</style>
+        #suggerimenti {
+            margin-top: 50px;
+        }
+    </style>
 </body>
+
 </html>

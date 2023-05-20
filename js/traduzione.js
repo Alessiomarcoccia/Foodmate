@@ -52,12 +52,34 @@ var arrLang = {
     'close': 'Close',
     'provvista': 'New supply',
     'nome_pro': 'Name:',
-    'exp': 'Expiration date:',
-    'quantita': 'Quantity:',
+    'exp': 'Expiration date',
+    'quantita': 'Quantity',
     'type': 'Type:',
     'menu': 'Open this select menu',
     'elimina': 'Delete',
     'add': 'Add',
+    'carne': 'Meat',
+    'verdura': 'Vegetable',
+    'frutta': 'Fruit',
+    'cereali': 'Cereals',
+    'pesce': 'Fish',
+    'dolce': 'Dessert',
+    'latticini': 'Dairy',
+    'altro': 'Other',
+    'Gennaio': 'January',
+    'Febbraio': 'February',
+    'Marzo': 'March',
+    'Aprile': 'April',
+    'Maggio': 'May',
+    'Giugno': 'June',
+    'Luglio': 'July',
+    'Agosto': 'August',
+    'Settembre': 'September',
+    'Ottobre': 'October',
+    'Novembre': 'November',
+    'Dicembre': 'December',
+    'suggerimenti_title': 'It seems that these foods are about to run out, what about adding them to the shopping list?',
+    'ne_hai': 'You have',
   },
 
   "it": {
@@ -114,11 +136,33 @@ var arrLang = {
     'provvista': 'Nuova Provvista',
     'nome_pro': 'Nome:',
     'exp': 'Data di scadenza:',
-    'quantita': 'Quantità:',
-    'type': 'Tipo:',
+    'quantita': 'Quantità',
+    'type': 'Tipo',
     'menu': 'Apri questo menu a tendina',
     'elimina': 'Elimina',
     'add': 'Aggiungi',
+    'carne': 'Carne',
+    'verdura': 'Verdura',
+    'frutta': 'Frutta',
+    'cereali': 'Cereali',
+    'pesce': 'Pesce',
+    'dolce': 'Dolce',
+    'latticini': 'Latticini',
+    'altro': 'Altro',
+    'Gennaio': 'Gennaio',
+    'Febbraio': 'Febbraio',
+    'Marzo': 'Marzo',
+    'Aprile': 'Aprile',
+    'Maggio': 'Maggio',
+    'Giugno': 'Giugno',
+    'Luglio': 'Luglio',
+    'Agosto': 'Agosto',
+    'Settembre': 'Settembre',
+    'Ottobre': 'Ottobre',
+    'Novembre': 'Novembre',
+    'Dicembre': 'Dicembre',
+    'suggerimenti_title': 'Sembra che questi alimenti stiano per finire,che ne dici di aggiungerli alla lista della spesa?',
+    'ne_hai': 'Ne hai',
   },
 
   "cn": {
@@ -168,52 +212,33 @@ var arrLang = {
     'menu': '打开下拉菜单',
     'elimina': '删除',
     'add': '添加',
+    'ravioli_title':'中国饺子',
+    'ravioli_desc':'中国饺子是中国的一道典型菜肴，用肉或蔬菜做馅，用面皮包裹而成。',
+    'frutta': '水果',
+    'verdura': '蔬菜',
+    'carne': '肉',
+    'cereali': '谷物',
+    'pesce': '鱼',
+    'dolce': '甜点',
+    'latticini': '乳制品',
+    'altro': '其他',
+    'Gennaio': '一月',
+    'Febbraio': '二月',
+    'Marzo': '三月',
+    'Aprile': '四月',
+    'Maggio': '五月',
+    'Giugno': '六月',
+    'Luglio': '七月',
+    'Agosto': '八月',
+    'Settembre': '九月',
+    'Ottobre': '十月',
+    'Novembre': '十一月',
+    'Dicembre': '十二月',
+    'suggerimenti_title': '这些食物似乎快要用完了，把它们加到购物清单上怎么样？',
+    'ne_hai': '你有',
   },
 };
 
-/* // The default language is English
-var lang = "it";
-// Check for localStorage support
-if('localStorage' in window){
-   
-   var usrLang = localStorage.getItem('uiLang');
-   if(usrLang) {
-       lang = usrLang
-   }
-
-}
-
-$(document).ready(function() {
-
-  $(".lang").each(function(index, element) {
-    $(this).append(arrLang[lang][$(this).attr("key")])
-  });
-  $(".langSidebar").each(function(index, element) {
-    $(this).append(arrLang[lang][$(this).attr("key")])
-  });
-});
-
-// get/set the selected language
-$(".translate").click(function() {
-  var lang = $(this).attr("id");
-
-  // update localStorage key
-  if('localStorage' in window){
-        localStorage.setItem('uiLang', lang);
-        console.log( localStorage.getItem('uiLang') );
-  }
-
-  $(".lang").each(function(index, element) {
-    $(this).text(arrLang[lang][$(this).attr("key")]);
-  });
-  $(".langSidebar .link-text").each(function() {
-    var key = $(this).parent().attr("key");
-    var translatedText = arrLang[lang][key];
-    if (translatedText) {
-      $(this).text(translatedText);
-    }
-  });
-}); */
 
 var lang = "en";
 // Check for localStorage support

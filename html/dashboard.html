@@ -15,6 +15,7 @@
    
     <link href="../components/sidebar-style.css" rel="stylesheet">
     <title>Foodmate</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 </head>
 
 <body>
@@ -36,7 +37,7 @@
             <div class="col-4" id="containerNuovaDispensa">
                 <!-- BOTTONE NUOVA DISPENSA -->
                 <button type="button" class="btn btn-outline-primary lang" data-bs-toggle="modal"
-                    data-bs-target="#nuovaDispensa" key="newDispensa">
+                    data-bs-target="#nuovaDispensa" key="newDispensa" id="bottoneNuovaDispensa">
                 </button>
                 <!-- POP UP NUOVA DISPENSA -->
                 <div class="modal fade" id="nuovaDispensa">
@@ -277,6 +278,7 @@
         return colore;
     }
 
+    // Funzione che restituisce il testo da inserire affianco a ogni item nella dispensa
     function getText(item) {
        /*  var text = 'Qty: ' + item.quantita + ' ' + 'Exp: ' + item.datascadenza; */
         var quantita = translate('quantita')
@@ -480,6 +482,16 @@
     .altro::before{
         content:"\f059";
     }
+
+    @media(max-width:307px){
+        #containerNuovaDispensa{
+          justify-content: unset;
+        }
+    
+   
+}
+
+    
 
 </style>
 

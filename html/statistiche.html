@@ -17,8 +17,10 @@
   <link rel="stylesheet" href="../components/sidebar-style.css">
 
   <script src="../js/UtilsCharts.js"></script>
+  <script src="../js/traduzione.js"></script>
 
   <title>Foodmate </title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">  
 </head>
 
 <body>
@@ -30,7 +32,6 @@
         <div class="col-6 chartContainer">
           <div class="chartContainer">
             <h2>Cosa c'è nelle tue dispense</h2>
-            <h5>Conteggio unitario</h5>
             <canvas id="myChart"></canvas>
           </div>
         </div>
@@ -81,11 +82,12 @@
         var labels = data.labels;
         var values = data.values;
         var backgroundColors = colors(labels);
+        var translatedLabels = translateLabels(labels);
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'pie',
           data: {
-            labels: labels,
+            labels: translatedLabels,
             datasets: [{
               label: 'My Dataset',
               data: values,
@@ -153,11 +155,12 @@
         var labels = data.labels;
         var values = data.values;
         var newLabels = convertLabels(labels);
+        var translatedLabels = translateLabels(newLabels);
         var ctx = document.getElementById('myChart3').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'line',
           data: {
-            labels: newLabels,
+            labels: translatedLabels,
             datasets: [{
               label: 'My Dataset',
               data: values,
@@ -184,6 +187,14 @@
     })
   });
 
+  function translateLabels(labels){
+    rez = [];
+    for (var i = 0; i <labels.length; i++) {
+      rez.push(translate(labels[i]));
+    }
+    return rez;
+  }
+
 </script>
 
 <style>
@@ -194,14 +205,6 @@
     align-items: center;
     position: relative;
   }
-
-  /* .barContainer {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    min-height: 700px;
-  } */
 
   .row {
     justify-content: center;

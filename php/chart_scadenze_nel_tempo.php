@@ -37,7 +37,7 @@ if ($dbconn) {
     // Output the JSON data
     header('Content-Type: application/json');   
     echo ($json_data);
-
+    pg_close($dbconn);
 }
 
 
