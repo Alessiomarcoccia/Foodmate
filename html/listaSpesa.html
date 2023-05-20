@@ -32,11 +32,6 @@
             </div>
         </div>
 
-        <!-- Bottone Aggiornamento -->
-        <div>
-            <button class="aggiornaListaSpesa">aggiorna</button>
-        </div>
-
         <!-- INPUT AGGIUNGI NUOVA PROVVISTA PER LISTA SPESA -->
         <div class="container mt-3">
             <form id="form-aggiungiProvvista" , action="../php/aggiungiListaSpesa.php" method="post">
@@ -104,11 +99,12 @@
                                     <option selected>Open this select menu</option>
                                     <option value="carne">Carne</option>
                                     <option value="dolce">Dolce</option>
-                                    <option value="formaggio">Formaggio</option>
+                                    <option value="latticini">Latticini</option>
                                     <option value="frutta">Frutta</option>
                                     <option value="pesce">Pesce</option>
-                                    <option value="uova">Uova</option>
+                                    <option value="cereali">Cereali</option>
                                     <option value="verdura">Verdura</option>
+                                    <option value="altro">Altro</option>
                                 </select>
 
                                 <label for="nomeFrigo" class="form-label"></label>
@@ -367,6 +363,7 @@
             var name = [];
             $("input[type='checkbox'].checkboxSuggerimenti:checked").each(function () {
                 name.push($(this).siblings(".card-nome").text());
+                $(this).prop('checked', false);
             });
             $.each(name, function (index, item) {
                 console.log(item);
