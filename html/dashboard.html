@@ -187,16 +187,22 @@
                 var cardFooter = $('<div/>', {
                     class: 'card-footer'
                 });
-                var button = $('<button/>', {
+                var addSupplyButton = $('<button/>', {
                     type: 'button',
                     class: 'btn btn-primary lang',
+                    text: translate('add'),
                     key: 'add',
                     'data-bs-toggle': 'modal',
                     'data-bs-target': '#nuovaProvvista'
-                }).text(function(){
-                    var key = $(this).attr('key')
-                    $(this).text(arrLang[lang][key]);
                 });
+                var deletePantryButton = $('<button/>', {
+                    type: 'button',
+                    class: 'btn btn-outline-danger bottoneEliminaDispensa',
+                    text: translate('eliminaDispensa'),
+                    style: 'margin-left: 10px;',
+                    id: 'bottoneEliminaDispensa' 
+                });
+
                 var cardBody = $('<div/>', {
                     class: 'card-body'
                 });
@@ -247,7 +253,8 @@
                     list.append(listItem);
                     cardBody.append(list);
                 });
-                cardFooter.append(button);
+                cardFooter.append(addSupplyButton);
+                cardFooter.append(deletePantryButton);
                 card.append(cardBody);
                 card.append(cardFooter);
                 $('#contenutoDispensa').append(card);
@@ -311,6 +318,23 @@
                     console.log("Response Text: " + jqXHR.responseText);
                 }
             });
+        });
+    });
+
+    /*Funzione che gestisce l'eliminazione di una dispensa.Quando viene cliccato il bottone elimina,viene inviata una richiesta ajax al server per eliminare*/
+    $(document).on('click', ".bottoneEliminaDispensa", function () {
+        $.ajax({
+            url: '../php/eliminaDispensa.php',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                location.reload();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error: ' + errorThrown);
+                console.log("Status: " + textStatus);
+                console.log("Response Text: " + jqXHR.responseText);
+            }
         });
     });
 
