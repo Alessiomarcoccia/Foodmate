@@ -38,21 +38,23 @@
             <form id="form-aggiungiProvvista" , action="../php/aggiungiListaSpesa.php" method="post">
                 <div class="row">
                     <div class="col">
-                        Prodotto:
+                        <h6 class="langSidebar" key="prodotto"><span class="link-text"></span></h6>
                         <input type="text" class="form-control" id="nomeProvvista" name="nomeProvvista"
                             onfocus="this.value=''" maxlength="40" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        Descrizione:
+                        <h6 class="langSidebar" key="descrizione"><span class="link-text"></span></h6>
                         <textarea class="form-control" id="descrizioneProvvista" name="descrizioneProvvista"
                             value="Inserisci una descizione (Opzionale)" onfocus="this.value=''" rows="2"></textarea>
                     </div>
                 </div><br>
                 <div class="row">
                     <div class="col">
-                        <button type="submit" class="btn btn-primary" id="aggiungiProvvista">Aggiungi</button>
+                        <button type="submit" class="btn btn-primary langSidebar" key="add" id="aggiungiProvvista">
+                            <span class="link-text"></span>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -447,14 +449,18 @@
         body.dark-mode {
             background-color: #333;
             color: white;
-            }
+        }
         
-            p {
-        font-size: 16px;
-        color: black;
-        margin-bottom: 10px;
-         }
-       
+        p {
+            font-size: 16px;
+            color: black;
+            margin-bottom: 10px;
+        }
+        
+        h3 {
+            color:black;
+        }
+        
 </style>
 
 </body>

@@ -96,6 +96,8 @@ var arrLang = {
     'psw_new' : 'New password',
     'nome_new' : 'New name',
     'cognome_new' : 'New surname',
+    'descrizione': 'Description:',
+    'prodotto': 'Product:',
   },
 
   "it": {
@@ -195,6 +197,8 @@ var arrLang = {
     'pws_new': 'Nuova password',
     'nome_new': 'Nuovo nome',
     'cognome_new': 'Nuovo cognome',
+    'descrizione': 'Descrizione:',
+    'prodotto': 'Prodotto:',
   },
 
   "cn": {
@@ -287,6 +291,8 @@ var arrLang = {
     'psw_new': '新密码',
     'nome_new': '新名字',
     'cognome_new': '新姓氏',
+    'descrizione': '描述:',
+    'prodotto': '产品:',
   },
 };
 
