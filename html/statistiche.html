@@ -115,12 +115,13 @@
       dataType: 'json',
       success(data) {
         var labels = data.labels;
+        var translatedLabels = translateLabels(labels);
         var values = data.values;
         var ctx = document.getElementById('myChart2').getContext('2d');
         var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: labels,
+            labels: translatedLabels,
             datasets: [{
               label: 'My Dataset',
               data: values,

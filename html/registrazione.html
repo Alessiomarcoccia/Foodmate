@@ -43,7 +43,7 @@
     </div>
   </nav>
   <div class="login-box">
-  <form action="../php/register.php" class="form-signin m-auto" method="POST" name="myForm">
+  <form action="../php/register.php" class="form-signin m-auto" method="POST" name="myForm" id="formRegistrazione">
     <h2 class="lang" key="register"></h2>
     <div class="user-box">
       <input type="email" name="inputEmail" required />
@@ -94,6 +94,31 @@
             }
         });
     });
+
+    $(document).ready(function(){
+      $("#formRegistrazione").submit(function(e){
+        e.preventDefault();
+        $.ajax({
+          url: '../php/register.php',
+          method: 'POST',
+          data: $("#formRegistrazione").serialize(),
+          dataType: 'json',
+          success: function(data){
+            if(data.success){
+              window.location.href = "../html/dashboard.html";
+            }else{
+              alert(data.error);
+            }
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Error: ' + errorThrown);
+                console.log("Status: " + textStatus);
+                console.log("Response Text: " + jqXHR.responseText);
+            }
+        });
+      });
+    });
+
 </script>
 </body>
 
