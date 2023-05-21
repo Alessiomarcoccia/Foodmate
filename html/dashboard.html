@@ -12,7 +12,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   
+    <script type="text/javascript" src="../js/darkmode.js"></script>
     <link href="../components/sidebar-style.css" rel="stylesheet">
     <title>Foodmate</title>
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
@@ -63,13 +63,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- CONTENUTO DELLA DISPENSA -->
         <div class="row">
             <div class="col" id="contenutoDispensa"></div>
-
+            
             <!-- POP UP NUOVA PROVVISTA -->
             <div class="modal fade" id="nuovaProvvista">
                 <div class="modal-dialog">
@@ -81,7 +80,7 @@
                         <div class="modal-body">
                             <form id="form-nuova-provvista" action="../php/nuovaProvvista.php" method="post">
                                 <div class="mb-3">
-                                    <label for="nomeProvvista" class="form-label lang" key="nome_pro"></label>
+                                    <label for="nomeProvvista" class="form-label lang" key="nome_prov"></label>
                                     <input type="text" class="form-control" id="nomeProvvista" name="nomeProvvista"
                                         maxlength="40" required>
 
@@ -93,15 +92,15 @@
 
                                     <label for="tipoProvvista" class="form-label lang" key="type"></label>
                                     <select class="form-select" id="tipoProvvista" name="tipoProvvista">
-                                        <option selected class="lang" key="menu"></option>
-                                        <option value="carne">Carne</option>
-                                        <option value="dolce">Dolce</option>
-                                        <option value="latticini">Latticini</option>
-                                        <option value="frutta">Frutta</option>
-                                        <option value="pesce">Pesce</option>
-                                        <option value="cereali">Cereali</option>
-                                        <option value="verdura">Verdura</option>
-                                        <option value="altro">Altro</option>
+                                        <option selected class="lang op" key="menu"></option>
+                                        <option value="carne" class="lang op" key="carne"></option>
+                                        <option value="dolce" class="lang op" key="dolce"></option>
+                                        <option value="latticini" class="lang op" key="latticini"></option>
+                                        <option value="frutta" class="lang op" key="frutta"></option>
+                                        <option value="pesce" class="lang op" key="pesce"></option>
+                                        <option value="cereali" class="lang op" key="cereali"></option>
+                                        <option value="verdura" class="lang op" key="verdura"></option>
+                                        <option value="altro" class="lang op" key="altro"></option>
                                     </select>
                                 </div>
                             </form>
@@ -188,21 +187,15 @@
                 var cardFooter = $('<div/>', {
                     class: 'card-footer'
                 });
-
-                var addSupplybutton = $('<button/>', {
+                var button = $('<button/>', {
                     type: 'button',
                     class: 'btn btn-primary lang',
-                    text: translate('add'),
                     key: 'add',
                     'data-bs-toggle': 'modal',
-                    'data-bs-target': '#nuovaProvvista',
-                });
-                var deletePantryButton = $('<button/>', {
-                    type: 'button',
-                    class: 'btn btn-outline-danger bottoneEliminaDispensa',
-                    text: translate('eliminaDispensa'),
-                    style: 'margin-left: 10px;',
-                    id: 'bottoneEliminaDispensa'
+                    'data-bs-target': '#nuovaProvvista'
+                }).text(function(){
+                    var key = $(this).attr('key')
+                    $(this).text(arrLang[lang][key]);
                 });
                 var cardBody = $('<div/>', {
                     class: 'card-body'
@@ -254,8 +247,7 @@
                     list.append(listItem);
                     cardBody.append(list);
                 });
-                cardFooter.append(addSupplybutton);
-                cardFooter.append(deletePantryButton);
+                cardFooter.append(button);
                 card.append(cardBody);
                 card.append(cardFooter);
                 $('#contenutoDispensa').append(card);
@@ -288,7 +280,7 @@
     // Funzione che restituisce il testo da inserire affianco a ogni item nella dispensa
     function getText(item) {
        /*  var text = 'Qty: ' + item.quantita + ' ' + 'Exp: ' + item.datascadenza; */
-        var quantita = translate('quantita')
+        var quantita = translate('qty')
         var scadenza = translate('scadenza')
         var text = quantita + ': ' + item.quantita + ' ' + scadenza +': ' + item.datascadenza;    
         return text;
@@ -319,23 +311,6 @@
                     console.log("Response Text: " + jqXHR.responseText);
                 }
             });
-        });
-    });
-
-    /*Funzione che gestisce l'eliminazione di una dispensa.Quando viene cliccato il bottone elimina,viene inviata una richiesta ajax al server per eliminare*/
-    $(document).on('click', ".bottoneEliminaDispensa", function () {
-        $.ajax({
-            url: '../php/eliminaDispensa.php',
-            type: 'POST',
-            dataType: 'json',
-            success: function (data) {
-                location.reload();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log('Error: ' + errorThrown);
-                console.log("Status: " + textStatus);
-                console.log("Response Text: " + jqXHR.responseText);
-            }
         });
     });
 
@@ -511,12 +486,29 @@
         #containerNuovaDispensa{
           justify-content: unset;
         }
-    
-   
-}
+    }
 
+    body.dark-mode,
+    .modal-content.dark-mode
+    {
+        background-color: #222;
+        color: #fff;
+    }
     
+    label {
+        font-size: 16px;
+        color: black;
+        font-family: sans-serif;
+        }
 
+    .lang.dark-mode {
+        color:white
+        }
+        
+    .lang.op.dark-mode {
+        color:black
+        }
+    
 </style>
 
 </html>

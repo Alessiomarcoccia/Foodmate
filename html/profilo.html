@@ -14,6 +14,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/darkmode.js"></script>
   <link href="../components/sidebar-style.css" rel="stylesheet">
 
 </head>
@@ -30,10 +31,10 @@
         <div class="contain">
           <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm"
             enctype="multipart/form-data">
-            <label for="foto">Foto:</label>
+            <label for="foto" class="langSidebar" key="img"><span class="link-text"></span></label>
             <input type="file" name="foto" required><br><br>
 
-            <button class="reset" key="invia">Reset</button>
+            <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
           </form>
         </div>
       </div>
@@ -49,13 +50,13 @@
         </div>
         <div class="contain">
           <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-            <label for="current_password">Password attuale:</label>
+            <label for="current_password" class="langSidebar" key="psw_att"><span class="link-text"></span></label>
             <input type="password" name="current_password" id="current_password" required><br><br>
 
-            <label for="new_password"> Nuova password:</label>
+            <label for="new_password" class="langSidebar" key="psw_new"><span class="link-text"></span></label>
             <input type="password" name="new_password" id="new_password" minlength="8" required><br><br>
 
-            <button class="reset" key="invia">Reset</button>
+            <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
           </form>
         </div>
       </div>
@@ -70,10 +71,10 @@
           </div>
           <div class="contain">
             <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-              <label for="nome">Nuovo nome:</label>
+              <label for="nome" class="langSidebar" key="nome_new"><span class="link-text"></span></label>
               <input type="text" name="nome" id="nome" required><br><br>
 
-              <button class="reset" key="invia">Reset</button>
+              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
             </form>
           </div>
         </div>
@@ -89,10 +90,10 @@
           </div>
           <div class="contain">
             <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-              <label for="cognome">Nuovo cognome:</label>
+              <label for="nome" class="langSidebar" key="cognome_new"><span class="link-text"></span></label>
               <input type="text" name="cognome" id="cognome" required><br><br>
 
-              <button class="reset" key="invia">Reset</button>
+              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
             </form>
           </div>
         </div>
@@ -108,12 +109,12 @@
           </div>
           <div class="contain">
             <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-              <label class="left_M white">M</label>
+              <label class="left_M">M</label>
               <input type="radio" name="sesso" value="M" required />
               <label class="left white">F</label>
               <input type="radio" name="sesso" value="F" required /><br><br>
 
-              <button class="reset" key="invia">Reset</button>
+              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
 
               <!-- <input class="reset" type="submit" value="Reset"> -->
             </form>
@@ -121,9 +122,8 @@
         </div>
       </div>
     </div>
+  <div class="profilo"></div>
 </body>
-
-
 
 <script>
   $(document).ready(function () {
@@ -147,28 +147,41 @@
     type: "GET",
     dataType: "",
     success: function (data) {
-      console.log(data);
-
-      var div = $("<div class='profilo'></div>");
-      for (var i = 0; i < data.length; i++) {
-        var user = data[i];
-        var stars = '';
-        for (var i = 0; i< user.psw.length-3; i++){
-          stars += '*';
-        }
-        var p = "<img src='" + user.foto + "'" + "alt='Image'>" + "<br>" + "<button class='change' onclick='foto()'>" +"<i class='fas fa-edit edit'></i>" + "</button>"  + 
-              "<p><strong><label class='lang' key='email_pro'></label>"+" "+ user.email + "</strong></p>"  + 
-              "<p><strong><label class='lang' key='psw_pro'></label>"+" "+ user.psw.substring(0,3) + stars +"</strong>" + "<button class='change' onclick='psw()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
-              "<p><strong><label class='lang' key='nome_pro'></label>"+" " + user.nome + "</strong>" + "<button class='change' onclick='nome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
-              "<p><strong><label class='lang' key='cognome_pro'></label>"+" " + user.cognome + "</strong>" + "<button class='change' onclick='cognome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
-              "<p><strong><label class='lang' key='sesso_pro'></label>"+" " + user.sesso + "</strong>" + "<button class='change' onclick='sesso()'>" +"<i class='fas fa-edit edit'></i>" +"</button>" +"</p>" +
-              "<div class='dropdown'>" + "<button class='btn' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown'><p>"+"<i class='fa-solid fa-earth-americas fa-lg'></i>" + "</button>"+"<ul class='dropdown-menu'>"+ 
-                "<li><button class='btn dropdown-item translate' id='it'>Italiano</a></li> " +"<li><button class='btn dropdown-item translate' id='en'>English</a></li>"+"<li><button class='btn dropdown-item translate' id='cn'>简体中文</a></li>"+"</ul></div></p>";
-
-        div.append(p);
+      var user = data[0];
+      var stars = '';
+      for (var i = 0; i< user.psw.length-3; i++){
+        stars += '*';
       }
+      var contenuto = "<img src='" + user.foto + "'" + "alt='Image'>" + "<br>" + "<button class='change' onclick='foto()'>" +
+                        "<i class='fas fa-edit edit'></i>" + "</button>"  + 
+
+              "<p><strong><label class='lang' key='email_pro'></label>"+" "+ user.email + "</strong></p>"  + 
+
+              "<p><strong><label class='lang' key='psw_pro'></label>"+" "+ user.psw.substring(0,3) + stars +"</strong>" +
+                "<button class='change' onclick='psw()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+
+              "<p><strong><label class='lang' key='nome_pro'></label>"+" " + user.nome + "</strong>" + 
+                "<button class='change' onclick='nome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+
+              "<p><strong><label class='lang' key='cognome_pro'></label>"+" " + user.cognome + "</strong>" +
+                  "<button class='change' onclick='cognome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+
+              "<p><strong><label class='lang' key='sesso_pro'></label>"+" " + user.sesso + "</strong>" + 
+                "<button class='change' onclick='sesso()'>" +"<i class='fas fa-edit edit'></i>" +"</button>" +"</p>" +
+
+              "<div class='dropdown'>" + "<button class='btn' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown'>"+
+                "<i class='fa-solid fa-earth-americas fa-lg'></i>" + "</button>" + 
+                "<button class='btn dark-mode-toggle'><i class='fas fa-moon'></i></button>" +
+                "<ul class='dropdown-menu'>" + 
+                "<li><button class='btn dropdown-item translate' id='it'>Italiano</a></li> " +
+                "<li><button class='btn dropdown-item translate' id='en'>English</a></li>" +
+                "<li><button class='btn dropdown-item translate' id='cn'>简体中文</a></li>" +
+                "</ul></div>";
+      /*var content = $("<div>" + contenuto + "</div>");
+      div.append(contenuto);
       console.log(div);
-      $("body").append(div);
+      $("body").append(div);*/
+      $("body .profilo").append(contenuto);
     },
 
     error: function (jqXHR, textStatus, errorThrown) {
@@ -399,7 +412,13 @@ box-shadow: 0 0 5px 5px darkgray;
 
   p {
     font-size: 16px;
-    color: #333;
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  p.dark-mode {
+    font-size: 16px;
+    color: white;
     margin-bottom: 10px;
   }
 
@@ -409,13 +428,23 @@ box-shadow: 0 0 5px 5px darkgray;
     border-width: 0px;
   }
 
+  .left {
+    margin-left: 4em;
+  }
+  
   .edit {
     color: rgb(81, 242, 81);
   }
 
   label {
     font-size: 16px;
-    color: #333;
+    color: black;
+    font-family: sans-serif;
+  }
+
+  .label.dark-mode {
+    font-size: 16px;
+    color: white;
     font-family: sans-serif;
   }
 
@@ -426,6 +455,26 @@ box-shadow: 0 0 5px 5px darkgray;
 
   .btn {
     padding-top: 15px;
+    color:black;
+  }
+
+  body.dark-mode {
+    background-color: #222;
+    color: #fff;
+  }
+
+  .profilo.dark-mode {
+    background-color: #333;
+    color: white;
+  }
+
+  .contents.dark-mode {
+    background-color: #333;
+    color: white;
+  }
+
+  .link-text.dark-mode {
+    color:white
   }
 </style>
 
