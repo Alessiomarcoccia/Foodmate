@@ -13,7 +13,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="../js/darkmode.js"></script>
   <link href="../components/sidebar-style.css" rel="stylesheet">
 
@@ -21,108 +22,114 @@
 
 <body>
   <div id="sidebar-container"></div>
-  <div>
-    <div class="foto">
-      <div class="contents">
-        <div class="aclose">
-          <!-- <span>Dati personali</span> -->
-          <a class="close" href="javascript:foto();">&times;</a>
-        </div>
-        <div class="contain">
-          <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm"
-            enctype="multipart/form-data">
-            <label for="foto" class="langSidebar" key="img"><span class="link-text"></span></label>
-            <input type="file" name="foto" required><br><br>
+  <div class="content">
 
-            <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
-          </form>
+    <div>
+      <div class="foto">
+        <div class="contents">
+          <div class="aclose">
+            <!-- <span>Dati personali</span> -->
+            <a class="close" href="javascript:foto();">&times;</a>
+          </div>
+          <div class="contain">
+            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm"
+              enctype="multipart/form-data">
+              <label for="foto" class="langSidebar" key="img"><span class="link-text"></span></label>
+              <input type="file" name="foto" required><br><br>
+
+              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
+            </form>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div>
+      <div class="psw">
+        <div class="contents">
+          <div class="aclose">
+            <!-- <span>Dati personali</span> -->
+            <a class="close" href="javascript:psw();">&times;</a>
+          </div>
+          <div class="contain">
+            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+              <label for="current_password" class="langSidebar" key="psw_att"><span class="link-text"></span></label>
+              <input type="password" name="current_password" id="current_password" required><br><br>
+
+              <label for="new_password" class="langSidebar" key="psw_new"><span class="link-text"></span></label>
+              <input type="password" name="new_password" id="new_password" minlength="8" required><br><br>
+
+              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div>
+        <div class="nome">
+          <div class="contents">
+            <div class="aclose">
+              <!-- <span>Dati personali</span> -->
+              <a class="close" href="javascript:nome();">&times;</a>
+            </div>
+            <div class="contain">
+              <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+                <label for="nome" class="langSidebar" key="nome_new"><span class="link-text"></span></label>
+                <input type="text" name="nome" id="nome" required><br><br>
+
+                <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="cognome">
+          <div class="contents">
+            <div class="aclose">
+              <!-- <span>Dati personali</span> -->
+              <a class="close" href="javascript:cognome();">&times;</a>
+            </div>
+            <div class="contain">
+              <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+                <label for="nome" class="langSidebar" key="cognome_new"><span class="link-text"></span></label>
+                <input type="text" name="cognome" id="cognome" required><br><br>
+
+                <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sesso">
+          <div class="contents">
+            <div class="aclose">
+              <!-- <span>Dati personali</span> -->
+              <a class="close" href="javascript:sesso();">&times;</a>
+            </div>
+            <div class="contain">
+              <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
+                <label class="left_M">M</label>
+                <input type="radio" name="sesso" value="M" required />
+                <label class="left white">F</label>
+                <input type="radio" name="sesso" value="F" required /><br><br>
+
+                <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
+
+                <!-- <input class="reset" type="submit" value="Reset"> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="profilo"></div>
+
     </div>
   </div>
-
-  <div>
-    <div class="psw">
-      <div class="contents">
-        <div class="aclose">
-          <!-- <span>Dati personali</span> -->
-          <a class="close" href="javascript:psw();">&times;</a>
-        </div>
-        <div class="contain">
-          <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-            <label for="current_password" class="langSidebar" key="psw_att"><span class="link-text"></span></label>
-            <input type="password" name="current_password" id="current_password" required><br><br>
-
-            <label for="new_password" class="langSidebar" key="psw_new"><span class="link-text"></span></label>
-            <input type="password" name="new_password" id="new_password" minlength="8" required><br><br>
-
-            <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="nome">
-        <div class="contents">
-          <div class="aclose">
-            <!-- <span>Dati personali</span> -->
-            <a class="close" href="javascript:nome();">&times;</a>
-          </div>
-          <div class="contain">
-            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-              <label for="nome" class="langSidebar" key="nome_new"><span class="link-text"></span></label>
-              <input type="text" name="nome" id="nome" required><br><br>
-
-              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="cognome">
-        <div class="contents">
-          <div class="aclose">
-            <!-- <span>Dati personali</span> -->
-            <a class="close" href="javascript:cognome();">&times;</a>
-          </div>
-          <div class="contain">
-            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-              <label for="nome" class="langSidebar" key="cognome_new"><span class="link-text"></span></label>
-              <input type="text" name="cognome" id="cognome" required><br><br>
-
-              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="sesso">
-        <div class="contents">
-          <div class="aclose">
-            <!-- <span>Dati personali</span> -->
-            <a class="close" href="javascript:sesso();">&times;</a>
-          </div>
-          <div class="contain">
-            <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
-              <label class="left_M">M</label>
-              <input type="radio" name="sesso" value="M" required />
-              <label class="left white">F</label>
-              <input type="radio" name="sesso" value="F" required /><br><br>
-
-              <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
-
-              <!-- <input class="reset" type="submit" value="Reset"> -->
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  <div class="profilo"></div>
 </body>
 
 <script>
@@ -132,7 +139,7 @@
       method: 'GET',
       dataType: 'text',
       success(data) {
-        
+
         $('#sidebar-container').html(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -149,34 +156,34 @@
     success: function (data) {
       var user = data[0];
       var stars = '';
-      for (var i = 0; i< user.psw.length-3; i++){
+      for (var i = 0; i < user.psw.length - 3; i++) {
         stars += '*';
       }
       var contenuto = "<img src='" + user.foto + "'" + "alt='Image'>" + "<br>" + "<button class='change' onclick='foto()'>" +
-                        "<i class='fas fa-edit edit'></i>" + "</button>"  + 
+        "<i class='fas fa-edit edit'></i>" + "</button>" +
 
-              "<p><strong><label class='lang' key='email_pro'></label>"+" "+ user.email + "</strong></p>"  + 
+        "<p><strong><label for='email' class='lang' key='email_pro'></label>" + " " + user.email + "</strong></p>" +
 
-              "<p><strong><label class='lang' key='psw_pro'></label>"+" "+ user.psw.substring(0,3) + stars +"</strong>" +
-                "<button class='change' onclick='psw()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+        "<p><strong><label class='lang' key='psw_pro'></label>" + " " + user.psw.substring(0, 3) + stars + "</strong>" +
+        "<button class='change' onclick='psw()'>" + "<i class='fas fa-edit edit'></i>" + "</button>" + "</p>" +
 
-              "<p><strong><label class='lang' key='nome_pro'></label>"+" " + user.nome + "</strong>" + 
-                "<button class='change' onclick='nome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+        "<p><strong><label class='lang' key='nome_pro'></label>" + " " + user.nome + "</strong>" +
+        "<button class='change' onclick='nome()'>" + "<i class='fas fa-edit edit'></i>" + "</button>" + "</p>" +
 
-              "<p><strong><label class='lang' key='cognome_pro'></label>"+" " + user.cognome + "</strong>" +
-                  "<button class='change' onclick='cognome()'>" +"<i class='fas fa-edit edit'></i>" + "</button>" +"</p>" + 
+        "<p><strong><label class='lang' key='cognome_pro'></label>" + " " + user.cognome + "</strong>" +
+        "<button class='change' onclick='cognome()'>" + "<i class='fas fa-edit edit'></i>" + "</button>" + "</p>" +
 
-              "<p><strong><label class='lang' key='sesso_pro'></label>"+" " + user.sesso + "</strong>" + 
-                "<button class='change' onclick='sesso()'>" +"<i class='fas fa-edit edit'></i>" +"</button>" +"</p>" +
+        "<p><strong><label class='lang' key='sesso_pro'></label>" + " " + user.sesso + "</strong>" +
+        "<button class='change' onclick='sesso()'>" + "<i class='fas fa-edit edit'></i>" + "</button>" + "</p>" +
 
-              "<div class='dropdown'>" + "<button class='btn' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown'>"+
-                "<i class='fa-solid fa-earth-americas fa-lg'></i>" + "</button>" + 
-                "<button class='btn dark-mode-toggle'><i class='fas fa-moon'></i></button>" +
-                "<ul class='dropdown-menu'>" + 
-                "<li><button class='btn dropdown-item translate' id='it'>Italiano</a></li> " +
-                "<li><button class='btn dropdown-item translate' id='en'>English</a></li>" +
-                "<li><button class='btn dropdown-item translate' id='cn'>简体中文</a></li>" +
-                "</ul></div>";
+        "<div class='dropdown'>" + "<button class='btn' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown'>" +
+        "<i class='fa-solid fa-earth-americas fa-lg'></i>" + "</button>" +
+        "<button class='btn dark-mode-toggle'><i class='fas fa-moon'></i></button>" +
+        "<ul class='dropdown-menu'>" +
+        "<li><button class='btn dropdown-item translate' id='it'>Italiano</a></li> " +
+        "<li><button class='btn dropdown-item translate' id='en'>English</a></li>" +
+        "<li><button class='btn dropdown-item translate' id='cn'>简体中文</a></li>" +
+        "</ul></div>";
       /*var content = $("<div>" + contenuto + "</div>");
       div.append(contenuto);
       console.log(div);
@@ -224,74 +231,8 @@
 <script type="text/javascript" src="../js/traduzione.js"></script>
 
 <style>
-  .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .sidebar {
-    margin: 0;
-    padding-top: 20px;
-    width: 200px;
-    background-color: #2f855a;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-    align-content: center;
-  }
-
-  .sidebar-brand {
-    font-size: 27px;
-  }
-
-  .sidebar-nav {
-    list-style: none;
-    padding: 0;
-  }
-
-  .sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-
-  }
-
-  .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #fff;
-  }
-
-  .sidebar-nav li a:hover {
-    text-decoration: none;
-  }
-
-  .sidebar-nav>.sidebar-brand a:hover {
-    background: none;
-  }
-
-  div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-  }
-
-  @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-
-    .sidebar a {
-      float: left;
-    }
-
-    div.content {
-      margin-left: 0;
-    }
-  }
-
-  @media screen and (max-width: 400px) {
+ 
+ @media screen and (max-width: 400px) {
     .sidebar a {
       text-align: center;
       float: none;
@@ -415,7 +356,7 @@ box-shadow: 0 0 5px 5px darkgray;
     color: black;
     margin-bottom: 10px;
   }
-  
+
   p.dark-mode {
     font-size: 16px;
     color: white;
@@ -431,7 +372,7 @@ box-shadow: 0 0 5px 5px darkgray;
   .left {
     margin-left: 4em;
   }
-  
+
   .edit {
     color: rgb(81, 242, 81);
   }
@@ -442,7 +383,7 @@ box-shadow: 0 0 5px 5px darkgray;
     font-family: sans-serif;
   }
 
-  .label.dark-mode {
+  label.dark-mode {
     font-size: 16px;
     color: white;
     font-family: sans-serif;
@@ -455,7 +396,7 @@ box-shadow: 0 0 5px 5px darkgray;
 
   .btn {
     padding-top: 15px;
-    color:black;
+    color: black;
   }
 
   body.dark-mode {
@@ -474,7 +415,7 @@ box-shadow: 0 0 5px 5px darkgray;
   }
 
   .link-text.dark-mode {
-    color:white
+    color: white
   }
 </style>
 

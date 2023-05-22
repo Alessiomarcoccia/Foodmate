@@ -54,7 +54,7 @@ var arrLang = {
     'exp': 'Expiration date',
     'quantita': 'Quantity',
     'type': 'Type:',
-    'menu': 'Open this select menu',
+    'menu': 'Open this menu',
     'elimina': 'Delete',
     'add': 'Add',
     'carne': 'Meat',
@@ -98,6 +98,12 @@ var arrLang = {
     'cognome_new' : 'New surname',
     'descrizione': 'Description:',
     'prodotto': 'Product:',
+    'lista_spesa': 'Shopping list',
+    'elimina_spesa': 'Delete shopping list',
+    'sposta_infrigo': 'Move to fridge',
+    'sposta_inspesa': 'Move to shopping list',
+    'scegli_frigo': 'Choose a fridge',
+
   },
 
   "it": {
@@ -199,6 +205,12 @@ var arrLang = {
     'cognome_new': 'Nuovo cognome',
     'descrizione': 'Descrizione:',
     'prodotto': 'Prodotto:',
+    'lista_spesa': 'Lista della spesa',
+    'elimina_listaspesa': 'Elimina spesa',
+    'sposta_infrigo': 'Sposta in frigo',
+    'sposta_inspesa': 'Sposta in spesa',
+    'scegli_frigo': 'Scegli un frigo',
+
   },
 
   "cn": {
@@ -234,6 +246,10 @@ var arrLang = {
     'vellutata di verdure_desc':'蔬菜汤是一道奶油味浓郁的头盘，非常适合寒冷的冬天。',
     'paella_title':'西班牙海鲜饭',
     'paella_desc':'西班牙海鲜饭是一道典型的西班牙菜，以米饭和鱼为主料，在大锅中烹制而成。',
+    'spiedini_title':'肉串',
+    'spiedini_desc':'肉串是一道非常美味且易于制作的主菜，非常适合与朋友共进晚餐。',
+    'torta di mele_title':'苹果派',
+    'torta di mele_desc':'苹果派是一种简单而纯正的甜点，非常适合早餐或小吃。',
     'email': '邮箱',
     'password': '密码',
     'sesso': '性别',
@@ -293,11 +309,16 @@ var arrLang = {
     'cognome_new': '新姓氏',
     'descrizione': '描述:',
     'prodotto': '产品:',
+    'lista_spesa': '购物清单',
+    'elimina_listaspesa': '删除购物清单',
+    'sposta_infrigo': '移动到冰箱',
+    'sposta_inspesa': '移动到购物清单',
+    'scegli_frigo': '选择一个冰箱',
   },
 };
 
 
-var lang = "en";
+var lang = "it";
 // Check for localStorage support
 if ('localStorage' in window) {
   var usrLang = localStorage.getItem('uiLang');

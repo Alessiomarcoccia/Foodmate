@@ -11,13 +11,15 @@
     <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/darkmode.js"></script>
     <link href="../components/sidebar-style.css" rel="stylesheet">
     <title>Foodmate</title>
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-    <script src="../js/traduzione.js"></script>
+   <!--  <script src="../js/traduzione.js"></script> -->
 </head>
 
 <body>
@@ -29,7 +31,7 @@
         <!-- Header -->
         <div class="row">
             <div class="col-md-12">
-                <h1>La Tua Lista della Spesa</h1>
+                <h1 class="lang" key="lista_spesa"></h1>
             </div>
         </div>
 
@@ -65,14 +67,14 @@
 
         <!-- Buttoni Sposta in Frigo & Elimina Spesa -->
         <div class="col" id="button-container" style="display: none;">
-            <button class="btn btn-success" id="btnSpesaInFrigo">Sposta in Frigo</button>
-            <button class="btn btn-danger" id="btnEliminaSpesa">Elimina Spesa</button>
+            <button class="btn btn-success lang" id="btnSpesaInFrigo" key="sposta_infrigo"></button>
+            <button class="btn btn-danger lang" id="btnEliminaSpesa" key="elimina_listaspesa"></button>
         </div>
 
         <div id="suggerimenti"></div>
 
         <div class="col" id="suggestions-button-container" style="display: none; margin-top: 20px;">
-            <button class="btn btn-success" id="btnSuggerimentiInSpesa">Sposta in Spesa</button>
+            <button class="btn btn-success lang" id="btnSuggerimentiInSpesa" key="sposta_inspesa"></button>
         </div>
 
 
@@ -90,34 +92,34 @@
                             <div class="mb-3">
                                 <h5 id="titoloPopup"></h5>
 
-                                <label for="expDate" class="form-label">Expiration date</label>
+                                <label for="expDate" class="form-label lang" key="exp"></label>
                                 <input type="date" class="form-control" id="expDate" name="expDate" required>
 
-                                <label for="quantita" id="quantita" class="form-label">Quantity</label>
+                                <label for="quantita" class="form-label lang" key="quantita"></label>
                                 <input type="number" oninput="if(value<=0) value=1" class="form-control" id="quantita"
                                     name="quantita" required>
 
-                                <label for="tipoProvvista" class="form-label">Type</label>
+                                <label for="tipoProvvista" class="form-label lang" key="type" ></label>
                                 <select class="form-select" id="tipoProvvista" name="tipoProvvista" required>
-                                    <option selected>Open this select menu</option>
-                                    <option value="carne">Carne</option>
-                                    <option value="dolce">Dolce</option>
-                                    <option value="latticini">Latticini</option>
-                                    <option value="frutta">Frutta</option>
-                                    <option value="pesce">Pesce</option>
-                                    <option value="cereali">Cereali</option>
-                                    <option value="verdura">Verdura</option>
-                                    <option value="altro">Altro</option>
+                                    <option selected class="lang op" key="menu"></option>
+                                    <option value="carne" class="lang op" key="carne"></option>
+                                    <option value="dolce" class="lang op" key="dolce"></option>
+                                    <option value="latticini" class="lang op" key="latticini"></option>
+                                    <option value="frutta" class="lang op" key="frutta"></option>
+                                    <option value="pesce" class="lang op" key="pesce"></option>
+                                    <option value="cereali" class="lang op" key="cereali"></option>
+                                    <option value="verdura" class="lang op" key="verdura"></option>
+                                    <option value="altro" class="lang op" key="altro"></option>
                                 </select>
 
                                 <label for="nomeFrigo" class="form-label"></label>
                                 <select class="form-select" id="nomeFrigo" name="nomeFrigo" required>
-                                    <option value="">Seleziona un Frigo</option>
+                                    <option value="" class="lang" key="scegli_frigo"></option>
                                 </select>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" id="inviaSpesaInFrigo">Submit</button>
+                            <button type="submit" class="btn btn-primary lang" id="inviaSpesaInFrigo" key="invia"></button>
                         </div>
                     </form>
                 </div>
@@ -177,7 +179,7 @@
                 cardBody.append(check);
                 cardBody.append(cardDescrizione.text(item.descrizione));
                 card.append(cardBody);
-               /*  container.append(card); */
+                /*  container.append(card); */
                 $('#listaSpesa').append(card);
             });
         }
@@ -341,16 +343,17 @@
                         $('#suggerimenti').append(title);
 
                         $.each(data, function (index, item) {
-                        var card = $('<div>').addClass('card');
-                        var cardBody = $('<div>').addClass('card-body');
-                        var cardNome = $('<h3>').addClass('card-nome');
-                        var cardDescrizione = $('<p>').addClass('card-descrizione');
-                        var check = $('<input>').addClass('form-check-input select checkboxSuggerimenti').attr('type', 'checkbox');
-                        cardBody.append(cardNome.text(item.nome));
-                        cardBody.append(check);
-                        cardBody.append(cardDescrizione.text(translate('ne_hai') + ': '+ item.quantita));
-                        card.append(cardBody);
-                        $('#suggerimenti').append(card);})
+                            var card = $('<div>').addClass('card');
+                            var cardBody = $('<div>').addClass('card-body');
+                            var cardNome = $('<h3>').addClass('card-nome');
+                            var cardDescrizione = $('<p>').addClass('card-descrizione');
+                            var check = $('<input>').addClass('form-check-input select checkboxSuggerimenti').attr('type', 'checkbox');
+                            cardBody.append(cardNome.text(item.nome));
+                            cardBody.append(check);
+                            cardBody.append(cardDescrizione.text(translate('ne_hai') + ': ' + item.quantita));
+                            card.append(cardBody);
+                            $('#suggerimenti').append(card);
+                        })
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -362,7 +365,7 @@
 
         });
 
-        $(document).on("click","#btnSuggerimentiInSpesa",function(){
+        $(document).on("click", "#btnSuggerimentiInSpesa", function () {
             var name = [];
             $("input[type='checkbox'].checkboxSuggerimenti:checked").each(function () {
                 name.push($(this).siblings(".card-nome").text());
@@ -371,28 +374,28 @@
             $.each(name, function (index, item) {
                 console.log(item);
                 $.ajax({
-                url: '../php/aggiungiListaSpesa.php',
-                type: 'POST',
-                data: {
-                    nomeProvvista: item,
-                    descrizioneProvvista: ''
-                },
-                dataType: 'json',
-                success: function (data) {
-                    stampa(data);
-                    if (data.length === 0) {
-                        $("#button-container").fadeOut();
+                    url: '../php/aggiungiListaSpesa.php',
+                    type: 'POST',
+                    data: {
+                        nomeProvvista: item,
+                        descrizioneProvvista: ''
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        stampa(data);
+                        if (data.length === 0) {
+                            $("#button-container").fadeOut();
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log('Error: ' + errorThrown);
+                        console.log("Status: " + textStatus);
+                        console.log("Response Text: " + jqXHR.responseText);
                     }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('Error: ' + errorThrown);
-                    console.log("Status: " + textStatus);
-                    console.log("Response Text: " + jqXHR.responseText);
-                }
 
-            })
+                })
             });
-            
+
         });
 
 
@@ -445,23 +448,23 @@
         #suggerimenti {
             margin-top: 50px;
         }
-        
+
         body.dark-mode {
             background-color: #333;
             color: white;
         }
-        
+
         p {
             font-size: 16px;
             color: black;
             margin-bottom: 10px;
         }
-        
-        h3, h1 {
-            color:black;
+
+        h3,
+        h1 {
+            color: black;
         }
-        
-</style>
+    </style>
 
 </body>
 
