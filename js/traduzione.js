@@ -1,3 +1,4 @@
+// variabile che contiene la lingua selezionata dall'utente
 var arrLang = {
   "en": {
     "accedi": "Sign in",
@@ -99,11 +100,14 @@ var arrLang = {
     'descrizione': 'Description:',
     'prodotto': 'Product:',
     'lista_spesa': 'Shopping list',
-    'elimina_spesa': 'Delete shopping list',
+    'elimina_listaspesa': 'Delete shopping list',
     'sposta_infrigo': 'Move to fridge',
     'sposta_inspesa': 'Move to shopping list',
     'scegli_frigo': 'Choose a fridge',
-
+    'cosa_ce': 'What is in the pantries',
+    'stato_scadenze': 'Expiration status',
+    'scadenze_tempo': 'Expirations by time',
+    'scade': 'How many supplies will expire',
   },
 
   "it": {
@@ -199,8 +203,8 @@ var arrLang = {
     'user_friendly_title':'User Friendly',
     'eliminaDispensa': 'Elimina dispensa',
     'img': 'Immagine',
-    'pws_att': 'Password attuale',
-    'pws_new': 'Nuova password',
+    'psw_att': 'Password attuale',
+    'psw_new': 'Nuova password',
     'nome_new': 'Nuovo nome',
     'cognome_new': 'Nuovo cognome',
     'descrizione': 'Descrizione:',
@@ -210,7 +214,10 @@ var arrLang = {
     'sposta_infrigo': 'Sposta in frigo',
     'sposta_inspesa': 'Sposta in spesa',
     'scegli_frigo': 'Scegli un frigo',
-
+    'cosa_ce': 'Cosa c\'è nelle tue dispense',
+    'stato_scadenze': 'Stato Scadenze',
+    'scadenze_tempo': 'Scadenze nel tempo',
+    'scade': 'Quante provviste scadranno'
   },
 
   "cn": {
@@ -314,12 +321,16 @@ var arrLang = {
     'sposta_infrigo': '移动到冰箱',
     'sposta_inspesa': '移动到购物清单',
     'scegli_frigo': '选择一个冰箱',
+    'cosa_ce': '你的食品储藏室里有什么',
+    'stato_scadenze': '有效期状态',
+    'scadenze_tempo': '到期时间',
+    'scade': '有多少食品将过期',
   },
 };
 
-
+// per il momento la lingua di default è l'italiano
 var lang = "it";
-// Check for localStorage support
+// se l'utente ha già scelto una lingua, la impostiamo come default per lui (anche se chiude il browser) 
 if ('localStorage' in window) {
   var usrLang = localStorage.getItem('uiLang');
   if (usrLang) {
@@ -327,38 +338,41 @@ if ('localStorage' in window) {
   }
 }
 
+// quando la pagina è pronta, traduciamo tutto il contenuto
 $(document).ready(function() {
+  // per ogni elemento che ha la classe lang
   $(".lang").each(function(index, element) {
-    $(this).append(arrLang[lang][$(this).attr("key")])
+    // aggiungiamo il testo tradotto
+    $(this).text(arrLang[lang][$(this).attr("key")])
   });
-
+  // per ogni elemento che ha la classe langSidebar e che ha la classe link-text (cioè i link della sidebar) 
   $(".langSidebar .link-text").each(function() {
     var key = $(this).parent().attr("key");
     $(this).text(arrLang[lang][key]);
   });
 });
 
-// get/set the selected language
+
+// funzione che permette all'utente di cambiare la lingua
 $(".translate").click(function() {
   var lang = $(this).attr("id");
-
   // update localStorage key
   if ('localStorage' in window) {
     localStorage.setItem('uiLang', lang);
     console.log(localStorage.getItem('uiLang'));
   }
-
+// funzione che traduce la pagina in base alla lingua selezionata dall'utente
   $(".lang").each(function(index, element) {
     $(this).text(arrLang[lang][$(this).attr("key")]);
   });
-
+// funzione che traduce la sidebar in base alla lingua selezionata dall'utente
   $(".langSidebar .link-text").each(function() {
     var key = $(this).parent().attr("key");
     $(this).text(arrLang[lang][key]);
   });
 });
 
-
+// funzione che traduce la pagina in base alla lingua selezionata dall'utente
 function translate(key) {
   return arrLang[lang][key];
 }

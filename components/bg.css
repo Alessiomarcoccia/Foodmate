@@ -26,6 +26,12 @@ body {
   border-radius: 10px;
 }
 
+.login-box-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Accedi */
 .login-box h2 {
   margin: 0 0 30px;
@@ -98,7 +104,7 @@ body {
   text-decoration: none;
  /*  text-transform: uppercase; */
   overflow: hidden;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
  /*  margin-left: 160px; */
   
 }
@@ -106,15 +112,15 @@ body {
 .login-box form span {
   position: relative;
  /*  display: inline-block; */
-  padding: 10px 20px;
+  padding: 0px 5px;
   color: #f0edf5;
   font-size: 16px;
   text-decoration: none;
  /*  text-transform: uppercase; */
   overflow: hidden;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   /* padding-left: 5.5em; */
-  padding-left: 35px;
+ /*  padding-left: 35px; */
 
 }
 
@@ -133,3 +139,4 @@ body {
 .white {
   color:white
 }
+
