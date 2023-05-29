@@ -21,14 +21,14 @@
 </head>
 
 <body>
+  <!-- Conterrà la sidebar,caricata dinamicamente -->
   <div id="sidebar-container"></div>
-  <div class="content">
 
+  <div class="content">
     <div>
       <div class="foto">
         <div class="contents">
           <div class="aclose">
-            <!-- <span>Dati personali</span> -->
             <a class="close" href="javascript:foto();">&times;</a>
           </div>
           <div class="contain">
@@ -48,7 +48,6 @@
       <div class="psw">
         <div class="contents">
           <div class="aclose">
-            <!-- <span>Dati personali</span> -->
             <a class="close" href="javascript:psw();">&times;</a>
           </div>
           <div class="contain">
@@ -148,7 +147,8 @@
       }
     });
   });
-  // funzione ajax che esegue una richiesta get a profilo.php ricevendo un json. E stampa la riposta nella console
+
+  // funzione ajax che esegue una richiesta get a profilo.php ricevendo un json contenente i dati dell'utente,che vengono successivamente stampati
   $.ajax({
     url: "../php/profilo.php",
     type: "GET",
@@ -184,10 +184,6 @@
         "<li><button class='btn dropdown-item translate' id='en'>English</a></li>" +
         "<li><button class='btn dropdown-item translate' id='cn'>简体中文</a></li>" +
         "</ul></div>";
-      /*var content = $("<div>" + contenuto + "</div>");
-      div.append(contenuto);
-      console.log(div);
-      $("body").append(div);*/
       $("body .profilo").append(contenuto);
     },
 
@@ -238,25 +234,6 @@
       float: none;
     }
   }
-
-  /* bottone */
-  /* .btn { 
-width: 200px;
-height: 50px;
-font-size: 20px;
-color: white;
-background-color: #006DDC;
-border: 0px;
-border-radius: 10px;
-position:absolute;
-right:5px;
-bottom:5px;
-} 
-
-.btn:hover{
-box-shadow: 0 0 5px 5px darkgray;
-
-} */
 
   .nome,
   .psw,

@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    <!-- Sidebar che viene caricata dinamicamente tramite ajax,poichè è usata in più pagine -->
     <div id="sidebar-container"></div>
     
     <!-- Page content -->
@@ -26,20 +27,24 @@
         <!-- Header -->
         <div class="row">
             <div class="col-4">
-                <h1 class="lang" key="dispense"></h1>
+                <h1 class="lang" key="dispense">
+                     <!-- Conterrà la frase "Le tue dispense" tradotta nella lingua selezionata dall'utente-->
+                </h1>
             </div>
 
         </div>
         <!-- HEADER -->
         <div class="row" style="margin-top: 10px;">
-            <!-- BOTTONI DISPENSE -->
-            <div class="col-8" id="user-fridges"></div>
+            <div class="col-8" id="user-fridges">
+            <!-- Per ogni dispensa dell'utente verrà generato un bottone che permetterà di visualizzarne il contenuto,
+            tutti questi bottoni saranno contenuti in questo <div> -->
+            </div>
             <div class="col-4" id="containerNuovaDispensa">
-                <!-- BOTTONE NUOVA DISPENSA -->
+                <!-- Bottone che permette la creazione di una nuova dispensa -->
                 <button type="button" class="btn btn-outline-primary lang" data-bs-toggle="modal"
                     data-bs-target="#nuovaDispensa" key="newDispensa" id="bottoneNuovaDispensa">
                 </button>
-                <!-- POP UP NUOVA DISPENSA -->
+                <!-- Quando il bottone viene cliccato,spunta questo modal che contiene il form per la creazione della dispensa -->
                 <div class="modal fade" id="nuovaDispensa">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -67,9 +72,13 @@
         </div>
         <!-- CONTENUTO DELLA DISPENSA -->
         <div class="row">
-            <div class="col" id="contenutoDispensa"></div>
+            <div class="col" id="contenutoDispensa">
+                <!-- Quando l'utente clicca il bottone relativo a una dispensa,il suo contenuto verrà messo in questo <div>.
+                    Inoltre ci saranno i pulsanti per aggiungere nuovi item nella dispensa,per eliminarli,per aggiornarne la 
+                    quantità e per eliminare la dispensa -->
+            </div>
             
-            <!-- POP UP NUOVA PROVVISTA -->
+            <!-- Quando l'utente clicca sul pulsante per la creazione di una nuova provvista,spunta questo modal che contiene il form per la creazione della provvista -->
             <div class="modal fade" id="nuovaProvvista">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -80,16 +89,15 @@
                         <div class="modal-body">
                             <form id="form-nuova-provvista" action="../php/nuovaProvvista.php" method="post">
                                 <div class="mb-3">
+                                    <!-- Tutte le label e gli input del form sono tradotti nella lingua selezionata dall'utente -->
                                     <label for="nomeProvvista" class="form-label lang" key="nome_prov"></label>
                                     <input type="text" class="form-control" id="nomeProvvista" name="nomeProvvista"
                                         maxlength="40" required>
-
                                     <label for="expDate" class="form-label lang" key="exp"></label>
                                     <input type="date" class="form-control" id="expDate" name="expDate" required>
-
                                     <label for="quantita" class="form-label lang" key="quantita"></label>
+                                    <!-- L'utente non può inserire una quantità negativa -->
                                     <input type="number" oninput="if(value<=0) value=1" class="form-control" id="quantita" name="quantita" required>
-
                                     <label for="tipoProvvista" class="form-label lang" key="type"></label>
                                     <select class="form-select" id="tipoProvvista" name="tipoProvvista">
                                         <option selected class="lang op" key="menu"></option>
@@ -139,7 +147,7 @@
 
     /* Questa funzione carica i frigoriferi dell'utente nella pagina.Quando la pagina è caricata,
     viene inviata una richiesta ajax al server per ottenere i frigoriferi dell'utente.
-    */
+    Poi per ogni frigorifero viene creato un bottone che permette di visualizzarne il contenuto */
     $(document).ready(function () {
         // Richiesta AJAX per ottenere i frigoriferi dell'utente
         $.ajax({
@@ -154,10 +162,8 @@
                         class: 'btn btn-outline-success bottoneFrigo',
                         id: fridge.nome
                     });
-
                     //Appende il bottone al contenitore
                     $('#user-fridges').append(button);
-
                 });
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -169,9 +175,12 @@
     });
 
     /* Questa funzione aggiunge un evento su ogni bottoneFrigo.In particolare quando il bottone è cliccato,
-    viene caricato il contenuto del frigo nell'elemento con id = contenutoDispensa. */
+    viene caricato il contenuto del frigo nell'elemento con id di vlore "contenutoDispensa".
+    Inoltre vengono creati i bottoni per aggiungere nuovi item,per aggiornarne la quantita, per eliminare la dispensa e per eliminare un item */
     $(document).on('click', '.bottoneFrigo', function () {
+        // ottengo il nome della dispensa selezionata dall'utente
         var fridgeName = $(this).text();
+        // invio una richiesta ajax al server per ottenere il contenuto della dispensa
         $.ajax({
             url: '../php/get_fridge_content.php',
             type: 'GET',
@@ -180,7 +189,9 @@
             },
             dataType: 'json',
             success: function (data) {
+                // svuoto il contenuto della dispensa
                 $('#contenutoDispensa').empty();
+                // creo un nuovo card per la dispensa
                 var card = $('<div/>', {
                     class: 'card'
                 });
@@ -209,44 +220,52 @@
                 var list = $('<ul/>', {
                     class: 'list-group list-group-flush '
                 });
+                // per ogni item nella dispensa creo un nuovo elemento della lista
                 $.each(data, function (index, item) {
                     var listItem = $('<li/>', {
                         class: 'list-group-item',
                         id: item.id,
                     });
+                    //l'icona dell'item dipende dalla sua classe e cambia in base alla sua tipologia
                     var icon = $('<i/>', {
                         class: 'iconeDinamiche '+item.tipologia
                     });
+                    //le informazioni sull'item(quantità e scadenza)
                     var span = $('<span/>', {
                         class: 'item-info',
                         id: 'item-info',
                         text: getText(item)
                     });
+                    //il bottone per aumentare la quantità dell'item di 1
                     var moreButton = $('<button/>', {
                         type: 'button',
                         class: 'btn btn-outline-dark mol moreButton',
                         text: '+',
                         dataValue: "1"
                     });
+                    //il bottone per diminuire la quantità dell'item di 1
                     var lessButton = $('<button/>', {
                         type: 'button',
                         class: 'btn btn-outline-dark mol lessButton',
                         text: '-',
                         dataValue: "0"
                     });
+                    //il bottone per eliminare l'item
                     var deleteButton = $('<button/>', {
                         type: 'button',
                         class: 'btn btn-outline-danger bottoneEliminaProvvista',
                         text: translate('elimina')
                     });
                     listItem.append(icon);
+                    //il colore del nome dell'item dipende da quanto è vicina la sua scadenza
                     var colore = controllaScadenza(item.datascadenza);
-                    var scadenzaItem = $('<strong>').text(item.nome).attr('style', 'color:' + colore);
-                    listItem.append(scadenzaItem);
+                    var nomeItem = $('<strong>').text(item.nome).attr('style', 'color:' + colore);
+                    listItem.append(nomeItem);
                     listItem.append('&nbsp;');
                     listItem.append(span);
                     listItem.append(deleteButton);
                     listItem.append(moreButton);
+                    //se la quantità dell'item è maggiore di 1,aggiungo il bottone per diminuire la quantità.
                     if (item.quantita > 1) {
                         listItem.append(lessButton);
                     }
@@ -267,7 +286,7 @@
         });
     });
 
-    // Funzione che controlla se la data della scadenza del prodotto non è entro i 5 giorni
+    // Funzione che controlla la data della scadenza del prodotto e restituisce il colore da assegnare al nome dell'item
     function controllaScadenza(dataScadenza) {
         var dataScadenza = new Date(dataScadenza);
         var colore;
@@ -284,17 +303,17 @@
         return colore;
     }
 
-    // Funzione che restituisce il testo da inserire affianco a ogni item nella dispensa
+    /* Funzione che restituisce il testo da inserire affianco a ogni item nella dispensa.
+    Affianco a ogni item c'è la stringa "quantità: x scadenza: y",che viene tradotta nella lingua selezionata dall'utente */
     function getText(item) {
-       /*  var text = 'Qty: ' + item.quantita + ' ' + 'Exp: ' + item.datascadenza; */
         var quantita = translate('qty')
         var scadenza = translate('scadenza')
         var text = quantita + ': ' + item.quantita + ' ' + scadenza +': ' + item.datascadenza;    
         return text;
     }
 
-    /*Funzione che gestisce l'aggiunta di una nuova provvista.Quando viene cliccato il tasto submit del form,l'invio delle informazioni al server è gestito da
-    ajax e non dal form.*/
+    /*Funzione che gestisce l'aggiunta di una nuova provvista.Quando viene cliccato il tasto submit del form,
+    viene inviata una richiesta ajax al server per aggiungere la provvista*/
     $(document).ready(function () {
         $('#form-nuova-provvista').submit(function (event) {
             event.preventDefault();
@@ -304,7 +323,7 @@
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function (data) {
-                    //riapre il frigo in cui è stata aggiunta la provvista
+                    //Dopo aver aggiunto la provvista alla dispensa la pagina viene ricaricata e viene cliccato il bottone del frigo per mostrare il contenuto aggiornato
                     var bottone = $(".bottoneFrigo#" + data.nomeFrigorifero);
                     bottone.click();
                     //svuota il form 
@@ -338,7 +357,7 @@
         });
     });
 
-    /*Funzione che gestisce l'eliminazione di una provvista.Quando viene cliccato il bottone elimina,viene inviata una richiesta ajax al server per eliminare*/
+    /*Funzione che gestisce l'eliminazione di una provvista.Quando viene cliccato il bottone elimina,viene inviata una richiesta ajax al server per eliminare la provvista*/
     $(document).on('click', ".bottoneEliminaProvvista", function () {
         $.ajax({
             url: '../php/eliminaProvvista.php',

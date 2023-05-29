@@ -1,11 +1,13 @@
 <?php
     session_set_cookie_params(0);
     session_start();
+    //ottengo l'email dell'utente loggato
     $email = $_SESSION['email'];
     
     $dbconn = pg_connect("host=localhost password=Foodmate user=Foodmate port=5432 dbname=progetto") or die("Errore di connessione: " . pg_last_error());
 
     if ($dbconn) {
+        //ottengo i dati della lista della spesa che dovrà essere stampata
         $q1 = "select id, nome, descrizione 
                from spesa
                 where nomeutente=$1 ";

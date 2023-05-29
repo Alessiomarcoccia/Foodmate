@@ -8,6 +8,7 @@ $dbconn = pg_connect("host=localhost password=Foodmate user=Foodmate port=5432 d
 
 if ($dbconn) {
 
+    //ottengo tutte gli item che hanno una quantità minore di 5
     $q1 = " select p.nome,c.quantita
             from contiene c,provvista p
             where c.nomeutente = $1 and p.id = c.provvista and c.quantita < 5;";

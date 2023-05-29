@@ -7,6 +7,7 @@ $dbconn = pg_connect("host=localhost password=Foodmate user=Foodmate port=5432 d
     or die("Errore di connessione: " . pg_last_error());
 
 if ($dbconn) {
+    //ottengo i nomi delle dispensa dell'utente loggato
     $q1 = "select nome from dispensa where utente=$1";
     $result = pg_query_params($dbconn, $q1, array($email));
     $data = array();

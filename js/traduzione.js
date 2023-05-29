@@ -1,4 +1,4 @@
-// variabile che contiene la lingua selezionata dall'utente
+//arrLang è un array di array, ogni array interno contiene le traduzioni per una lingua
 var arrLang = {
   "en": {
     "accedi": "Sign in",
@@ -353,7 +353,7 @@ $(document).ready(function() {
 });
 
 
-// funzione che permette all'utente di cambiare la lingua
+// funzione che permette all'utente di cambiare la lingua,cliccando sugli elementi di classe translate
 $(".translate").click(function() {
   var lang = $(this).attr("id");
   // update localStorage key

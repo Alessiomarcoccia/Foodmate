@@ -25,6 +25,7 @@
 </head>
 
 <body>
+  <!-- conterrà la sidebar, che verrà caricata con ajax -->
   <div id="sidebar-container"></div>
 
   <div class="content">
@@ -60,6 +61,7 @@
 </body>
 
 <script>
+  /* Funzione che carica la sidebar */
   $(document).ready(function () {
     $.ajax({
       url: '../components/sidebar-component.php',
@@ -74,6 +76,8 @@
       }
     });
   });
+
+  /* Funzione che genera il primo grafo,ovvero un grafo a torta riguardo le categorie di cibo presenti nelle dispense */
   $(document).ready(function () {
     $.ajax({
       url: '../php/chart_tipologia_contenuto.php',
@@ -82,7 +86,9 @@
       success(data) {
         var labels = data.labels;
         var values = data.values;
+        //ottiene i colori per le varie tipologie
         var backgroundColors = colors(labels);
+        //traduce le etichette
         var translatedLabels = translateLabels(labels);
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -109,6 +115,7 @@
     });
   });
   
+  /* Funzione che genera il secondo grafo,ovvero un grafo a barre riguardo lo stato delle scadenze */
   $(document).ready(function () {
     $.ajax({
       url: '../php/chart_scadenze.php',
@@ -147,6 +154,7 @@
     })
   });
 
+  /* Funzione che genera il terzo grafo,ovvero un grafo a linee riguardo le scadenze nel tempo */
   $(document).ready(function () {
     $.ajax({
       url: '../php/chart_scadenze_nel_tempo.php',
@@ -188,6 +196,7 @@
     })
   });
 
+  /* Funzione che traduce le etichette dei grafi */
   function translateLabels(labels){
     rez = [];
     for (var i = 0; i <labels.length; i++) {

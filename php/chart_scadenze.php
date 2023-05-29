@@ -11,8 +11,8 @@ if ($dbconn) {
 
     $labels = array();
     $values = array();
-    /* query che seleziona tutte le provviste contenute nelle dispense di un utente e le divide in tre gruppi:
-    scaduti(con scadenza minore della data attuale),scadenza prossima(con scadenza entro 7 giorni dalla data attuale),ottimo stato(tutti gli alri)*/
+   
+    //ritorna la quantita totale di provviste scadute
     $q1 = " select sum(c.quantita) as scaduti
             from provvista p,contiene c
             where p.id=c.provvista and c.nomeutente=$1 and p.dataScadenza<current_date;";
@@ -22,6 +22,7 @@ if ($dbconn) {
         $values[] = $row['scaduti'];
     }
 
+    //ritorna la quantita totale di provviste che scadono entro una settimana
     $q2 = " select sum(c.quantita) as scadenzaProssima
             from provvista p,contiene c
             where p.id=c.provvista and c.nomeutente=$1 and p.dataScadenza>=current_date and p.dataScadenza<=current_date+7;";
@@ -31,6 +32,7 @@ if ($dbconn) {
         $values[] = $row['scadenzaprossima'];
     }
 
+    //ritorna la quantita totale di provviste che scadono entro un mese
     $q3 = " select sum(c.quantita) as ottimoStato
             from provvista p,contiene c
             where p.id=c.provvista and c.nomeutente=$1 and p.dataScadenza>current_date+7;";

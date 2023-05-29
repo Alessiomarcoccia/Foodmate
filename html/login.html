@@ -19,22 +19,27 @@
 </head>
 
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-light">
+    <!-- Logo cliccabile che rimanda all'index -->
     <a class="navbar-brand" href="index.html">
       <img src="../assets/logo.png" width="60" height="60" alt=".">
       <strong>Foodmate</strong>
     </a>
+    <!-- Bottone in cui collassano tutti i <li> quando la pagina diventa troppo stretta -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto text-center">
+        <!-- Dropdown per la selezione della lingua -->
         <li class="nav-item active">
           <div class="dropdown">
             <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-earth-americas fa-lg, padding"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <!-- Bottoni per la selezione della lingua,quando vengono cliccati,cambia la lingua di tutte le  pagine -->
               <li><button class="btn dropdown-item translate" id="it">Italiano</a></li>
               <li><button class="btn dropdown-item translate" id="en">English</a></li>
               <li><button class="btn dropdown-item translate" id="cn">简体中文</a></li>
@@ -45,7 +50,7 @@
     </div>
   </nav>
 
-
+  <!-- Form di login -->
   <div class="login-box">
     <h2 class="lang" key="accedi"></h2>
     <form name="myForm" action="../php/login.php" method="POST" class="form-signin m-auto" id="loginForm">
@@ -91,6 +96,7 @@
     });
 
 
+    //funzione che gestisce il login,se i dati inseriti sono corretti,si viene reindirizzati alla dashboard
     $(document).ready(function () {
       $('#loginForm').submit(function (event) {
         event.preventDefault();

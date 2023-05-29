@@ -1,8 +1,10 @@
 <?php
     session_set_cookie_params(0);
     session_start();
+    //ottengo l'email dell'utente loggato
     $email = $_SESSION['email'];
 
+    //ottengo i dati dalla form
     $scadenza = $_POST['expDate'];
     $quantita = $_POST['quantita'];
     $tipologia = $_POST['tipoProvvista'];
@@ -24,9 +26,11 @@ if ($dbconn) {
     $q2 = "insert into contiene(nomedispensa,nomeutente,provvista,quantita) values ($1,$2,$3,$4)";
     $data = pg_query_params($dbconn, $q2, array($frigo, $email, $id, $quantita));
 
+    //elimino dalla lista della spesa l'elemento aggiunto
     $q3 = "delete from spesa where id = $1";
     $result = pg_query_params($dbconn, $q3, array($idP));
 
+    //ottengo i dati della lista della spesa che dovrà essere stampata
     $q1 = "select id, nome, descrizione 
                from spesa
                 where nomeutente=$1 ";

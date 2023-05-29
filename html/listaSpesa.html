@@ -11,19 +11,18 @@
     <script src="https://kit.fontawesome.com/d66b1f16f0.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!--  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../js/darkmode.js"></script>
     <link href="../components/sidebar-style.css" rel="stylesheet">
     <title>Foodmate</title>
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-   <!--  <script src="../js/traduzione.js"></script> -->
+  
 </head>
 
 <body>
 
+    <!-- Container per la sidebar, che viene caricata dinamicamente -->
     <div id="sidebar-container"></div>
 
     <!-- Page content -->
@@ -31,15 +30,19 @@
         <!-- Header -->
         <div class="row">
             <div class="col-md-12">
-                <h1 class="lang" key="lista_spesa"></h1>
+                <h1 class="lang" key="lista_spesa">
+                    <!-- Conterrà la frase "Lista della spesa" in base alla lingua selezionata -->
+                </h1>
             </div>
         </div>
 
-        <!-- INPUT AGGIUNGI NUOVA PROVVISTA PER LISTA SPESA -->
+        
         <div class="container mt-3">
+            <!-- Form per aggiungere nuove provviste alla lista della spesa -->
             <form id="form-aggiungiProvvista" , action="../php/aggiungiListaSpesa.php" method="post">
                 <div class="row">
                     <div class="col">
+                        <!-- Conterrà del testo tradotto nella lingua selzionata -->
                         <h6 class="langSidebar" key="prodotto"><span class="link-text"></span></h6>
                         <input type="text" class="form-control" id="nomeProvvista" name="nomeProvvista"
                             onfocus="this.value=''" maxlength="40" required>
@@ -47,6 +50,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
+                        <!-- Conterrà del testo tradotto nella lingua selzionata -->
                         <h6 class="langSidebar" key="descrizione"><span class="link-text"></span></h6>
                         <textarea class="form-control" id="descrizioneProvvista" name="descrizioneProvvista"
                             value="Inserisci una descizione (Opzionale)" onfocus="this.value=''" rows="2"></textarea>
@@ -62,7 +66,7 @@
             </form>
         </div><br>
 
-        <!-- List -->
+        <!-- Conterrà la lista della spesa dell'utente -->
         <div id="listaSpesa"></div><br>
 
         <!-- Buttoni Sposta in Frigo & Elimina Spesa -->
@@ -71,15 +75,17 @@
             <button class="btn btn-danger lang" id="btnEliminaSpesa" key="elimina_listaspesa"></button>
         </div>
 
+        <!-- Conterrà degli item già acquistati dall'utente potrebbe voler ricomprare -->
         <div id="suggerimenti"></div>
 
+        <!-- Bottone che permette di spostare degli item dai suggerimenti alla lista della spesa -->
         <div class="col" id="suggestions-button-container" style="display: none; margin-top: 20px;">
             <button class="btn btn-success lang" id="btnSuggerimentiInSpesa" key="sposta_inspesa"></button>
         </div>
 
 
 
-        <!-- POP-UP PER SPOSTARE IN FRIGO LA SPESA SELEZIONATA -->
+        <!-- Modal per aggiungere le provviste nella lista della spesa ad una determinata dispensa -->
         <div class="modal fade" id="popupSpesaInFrigo">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -87,6 +93,7 @@
                         <h5 class="modal-title">Spesa In Frigo</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
+                    <!-- Per ogni item selezionati dalla lista della spesa,viene chiesto di inserire i dati per aggiungerlo ad una determinata dispensa -->
                     <form id="form-Spesa-In-Frigo" action="../php/aggiungiListaInFrigo.php" method="post">
                         <div class="modal-body">
                             <div class="mb-3">
@@ -148,7 +155,7 @@
             });
         });
 
-        // stampa la lista della spesa dal database
+        // Carica la lista della spesa dell'utente dal database
         $(document).ready(function () {
             $.ajax({
                 url: '../php/get_listaSpesa.php',
@@ -165,11 +172,13 @@
             });
         });
 
+        /* Funzione che stampa la lista della spesa */
         function stampa(data) {
+            // Svuota il container della lista della spesa
             $('#listaSpesa').empty();
             var listaSpesa = $('#listaSpesa');
+            // per ogni item nella lista della spesa crea una card e la popola con i dati,poi la aggiunge al container
             $.each(data, function (index, item) {
-                /* var container = $('<div>').addClass('container mt-3'); */
                 var card = $('<div>').addClass('card');
                 var cardBody = $('<div>').addClass('card-body');
                 var cardNome = $('<h1>').addClass('card-nome');
@@ -179,14 +188,15 @@
                 cardBody.append(check);
                 cardBody.append(cardDescrizione.text(item.descrizione));
                 card.append(cardBody);
-                /*  container.append(card); */
+               
                 $('#listaSpesa').append(card);
             });
         }
 
-        // aggiunta nuovo provviste alla lista della spesa
+        // funzione che gestisce l'aggiunta di nuove provviste alla lista della spesa
         $(document).ready(function () {
             $('#form-aggiungiProvvista').submit(function (event) {
+                //quando il form viene sottometto,viene inviata una richiesta ajax al server con i dati inseriti dall'utente
                 event.preventDefault();
                 $.ajax({
                     url: $(this).attr('action'),
@@ -194,8 +204,10 @@
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function (data) {
+                        //svuota i campi del form
                         $('#nomeProvvista').val('');
                         $('#descrizioneProvvista').val('');
+                        //stampa la lista della spesa aggiornata
                         stampa(data);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
@@ -207,10 +219,12 @@
             });
         });
 
-        // Rimozione Con CheckBox
+        // funzione che gestisce l'eliminazione di provviste dalla lista della spesa
         $(document).ready(function () {
             $(document).on('click', '#btnEliminaSpesa', function () {
+                //array che conterrà tutti gli id delle provviste selezionate
                 var idP = [];
+                //aggiunge gli id delle provviste selezionate all'array
                 $("input[type='checkbox']:checked").each(function () {
                     idP.push($(this).attr("id"));
                 });
@@ -221,7 +235,9 @@
                         idProvviste: idP,
                     },
                     success: function (data) {
+                        // stampa la lista della spesa aggiornata
                         stampa(data);
+                        // se la lista della spesa è vuota,nascondi il container dei bottoni
                         if (data.length === 0) {
                             $("#button-container").fadeOut();
                         }
@@ -236,7 +252,8 @@
             });
         });
 
-        // Script per recuperare nel database i frighi disponibili e impostarli come option nella select
+        /* Quando l'utente deve spostare degli item dalla lista della spesa ad una dispensa,
+        deve scegliere la dispensa target.Questa funzione restituisce le dispense possibili*/
         $(document).ready(function () {
             $.ajax({
                 url: '../php/get_user_fridges.php',
@@ -255,18 +272,21 @@
             });
         });
 
-        // popup con form per aggiungere le nuove provviste al frigo
+        /*Funzione che gestisce l'aggiunta di provviste alla dispensa selezionata dall'utente*/
         $(document).ready(function () {
             $(document).on('click', '#btnSpesaInFrigo', function () {
+                //colleziono gli id e i nomi delle provviste selezionate
                 var idP = [];
                 var name = [];
                 $("input[type='checkbox']:checked").each(function () {
                     idP.push($(this).attr("id"));
                     name.push($(this).siblings(".card-nome").text());
                 });
+                //mostro il form per aggiungere la prima provvista alla dispensa
                 var indice = 0;
                 $('#titoloPopup').text(name[indice]);
                 $('#popupSpesaInFrigo').modal('show');
+                // quando il form viene sottomesso,viene inviata una richiesta ajax al server con i dati inseriti dall'utente
                 $(document).on('submit', '#form-Spesa-In-Frigo', function (event) {
                     event.preventDefault();
                     var formData = $(this).serialize();
@@ -283,7 +303,9 @@
                         data: requestData,
                         dataType: 'json',
                         success: function (data) {
+                            //stampa la lista della spesa aggiornata
                             stampa(data);
+                            //se la lista della spesa è vuota,nascondi il container dei bottoni
                             if (data.length === 0) {
                                 $("#button-container").fadeOut();
                             }
@@ -294,13 +316,16 @@
                             console.log("Response Text: " + jqXHR.responseText);
                         }
                     });
+                    //aggiorno l'indice e mostro il form per aggiungere la provvista successiva,se esiste
                     indice++;
                     if (indice < idP.length) {
                         $('#titoloPopup').text(name[indice]);
                         $('#quantita').val(0);
                         $('#expDate').val('');
                         $('#tipoProvvista').val('');
-                    } else {
+                    } 
+                    //altrimenti nascondo il form
+                    else {
                         $('#popupSpesaInFrigo').modal('hide');
                     }
                 });
@@ -308,8 +333,10 @@
         });
 
 
-        // Controllo checkbox per far apparire i tasti "Aggiungi a Frigorifero" e "Elimina Spesa".
+        /*Funzione che gestisce la comparsa e la scomparsa del container dei bottoni.*/
         $(document).ready(function () {
+            /*Se almeno un elemento della lista della spesa è selezionato,il container dei bottoni viene mostrato,
+            altrimenti viene nascosto*/
             $(document).on('change', 'input[type="checkbox"].checkboxSpesa', function () {
                 var checked = $("input[type='checkbox'].checkboxSpesa:checked").length > 0;
                 if (checked) {
@@ -319,6 +346,8 @@
                 }
             });
             $(document).on('change', 'input[type="checkbox"].checkboxSuggerimenti', function () {
+                /*Se almeno un elemento dei suggerimenti è selezionato,il container dei bottoni viene mostrato,
+                 altrimenti viene nascosto*/
                 var checked = $("input[type='checkbox'].checkboxSuggerimenti:checked").length > 0;
                 if (checked) {
                     $("#suggestions-button-container").fadeIn(); // Mostra il container dei bottoni con animazione di fade in
@@ -330,7 +359,9 @@
 
         // funzione che genera suggerimenti per la lista della spesa
         $(document).ready(function () {
+            //quando la pagina è pronta,svuota il container dei suggerimenti
             $("#suggerimenti").empty();
+            //poi esegue una richiesta ajax al server per ottenere i suggerimenti
             $.ajax({
                 url: "../php/get_suggerimenti.php",
                 dataType: "json",
@@ -341,7 +372,7 @@
                             style: 'margin-bottom: 30px;'
                         });
                         $('#suggerimenti').append(title);
-
+                        //per ogni suggerimento crea una card e la popola con i dati,poi la aggiunge al container
                         $.each(data, function (index, item) {
                             var card = $('<div>').addClass('card');
                             var cardBody = $('<div>').addClass('card-body');
@@ -365,14 +396,16 @@
 
         });
 
+        //funzione che gestisce l'aggiunta dei suggerimenti alla lista della spesa
         $(document).on("click", "#btnSuggerimentiInSpesa", function () {
+            //colleziono i nomi dei suggerimenti selezionati
             var name = [];
             $("input[type='checkbox'].checkboxSuggerimenti:checked").each(function () {
                 name.push($(this).siblings(".card-nome").text());
                 $(this).prop('checked', false);
             });
+            //per ogni suggerimento selezionato,invio una richiesta ajax al server per aggiungerlo alla lista della spesa
             $.each(name, function (index, item) {
-                console.log(item);
                 $.ajax({
                     url: '../php/aggiungiListaSpesa.php',
                     type: 'POST',
@@ -382,7 +415,9 @@
                     },
                     dataType: 'json',
                     success: function (data) {
+                        //stampa la lista della spesa aggiornata
                         stampa(data);
+                        //se la lista della spesa è vuota,nascondi il container dei bottoni
                         if (data.length === 0) {
                             $("#button-container").fadeOut();
                         }
@@ -392,7 +427,6 @@
                         console.log("Status: " + textStatus);
                         console.log("Response Text: " + jqXHR.responseText);
                     }
-
                 })
             });
 
@@ -414,10 +448,6 @@
             var time = year + '-' + month + '-' + day;
             $('#expDate').attr('min', time);
         })
-
-
-
-
     </script>
     
     <style>

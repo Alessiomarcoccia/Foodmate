@@ -21,10 +21,12 @@
     <div>
         <!-- Navigation bar-->
         <nav class="navbar navbar-expand-md navbar-light">
+            <!-- Logo cliccabile che rimanda all'index -->
             <a class="navbar-brand" href="/">
                 <img src="../assets/logo.png" width="60" height="60" alt=".">
                 <strong>Foodmate</strong>
             </a>
+            <!-- Quando la pagina diventa troppo stretta,tutti i <li> collassano in questo bottone e vengono visualizzati solo il bottone è cliccato -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,9 +44,11 @@
                             </ul>
                         </div>
                     </li>
+                    <!-- elemento cliccabile che rimanda alla pagina di login -->
                     <li class="nav-item">
                         <a class="nav-link lang" href="./login.html" key="accedi"></a>
                     </li>
+                    <!-- elemento cliccabile che rimanda alla pagina di registrazione -->
                     <li class="nav-item">
                         <a class="nav-link btn btn-outline-success lang" href="./registrazione.html" id="registerButton"
                             key="register"> </a>
@@ -52,8 +56,8 @@
                 </ul>
             </div>
         </nav>
-        <!-- Presentation-->
 
+        <!-- Presentazione-->
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6">
@@ -89,6 +93,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- CARDS -->
             <div class="row fadeUp" id="cardsWrapper">
                 <div class="col d-flex cardContainer">
@@ -131,12 +136,13 @@
         </div>
     </div>
 
+    <!-- Footer contente un rimando alla pagina github del progetto -->
     <div id="footer-container"></div>
 </body>
 
 <script>
 
- //funzione che gestisce il caricamento del footer
+ //Il footer viene caricato tramite ajax,visto che è presente in più pagine
     $(document).ready(function () {
         $.ajax({
             url: '../components/footer-component.php',
@@ -155,6 +161,7 @@
 
 </script>
 
+<!-- Rende la pagina traducibile in più lingue -->
 <script src="../js/traduzione.js"></script>
 
 <style>
@@ -189,7 +196,7 @@
     }
 
     .card-img-top {
-        /* rende tutte le immagini della stessa dimensione */
+        /* rende tutte le immagini nelle card della stessa dimensione */
         width: 100%;
         height: 15vw;
         object-fit: cover;
@@ -217,10 +224,13 @@
         color: #111827;
     }
 
+    /* nasconde la scrollbar */
     body::-webkit-scrollbar {
         display: none;
     }
 
+
+    /* Animazioni degli elementi*/
     .fadeLeft {
         animation: fadeInLeft 1s ease-in-out;
     }

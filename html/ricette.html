@@ -20,23 +20,13 @@
 
 <body>
 
+    <!-- conterrà la sidebar, che verrà caricata con ajax -->
     <div id="sidebar-container"></div>
 
+    <!-- conterrà le cards delle ricette, che verranno caricate con ajax -->
     <div class="content">
         <div class="container">
-            <div class="row" id="cards-container">
-                <!-- <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="../assets/ricette/macedonia.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Macedonia</h5>
-                            <h6 class="card-title">Cena</h6>
-                            <i class="fa-solid fa-clock"></i> 15 min
-                            <p class="card-text">Estate è quando la macedonia di frutta diventa la tua migliore amica,con la sua dolcezza e freschezza che ti rinfrescano nelle calde giornate estive.</p>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
+            <div class="row" id="cards-container"></div>
         </div>
     </div>
 
@@ -59,25 +49,27 @@
         });
     });
 
-    /* carica le ricette e per ogni ricetta crea una card */
+    /*questa funzione si ottiene le ricette che l'utente può realizzare con gli ingredienti contenuti nelle sue dispense,
+    per ognuna di esse crea una card contenente un'immagine,il nome della ricetta,una descrizione,il tempo necessario a realizzarla e
+    se la ricetta è un primo,un secondo, un dessert...*/
     $(document).ready(function () {
         $.ajax({
             url: '../php/get_ricette.php',
             mathod: 'GET',
             dataType: 'json',
             success(data) {
-                console.log(data);
+                //svuota il contenitore delle cards
                 $('#cards-container').empty();
                 if (data.length == 0) {
                     $('#cards-container').append('<h1 class="lang" key="no_ricette"></h1>');
                 }
                 else {
                     $.each(data, function (index, item) {
-
+                        //ogni card ha una colonna dedicata
                         var col = $('<div/>', {
-                            //d-flex rende tutte le card della stessa dimensione
                             class: 'col d-flex'
                         });
+                        // ogni ricetta è associata a un'immagine
                         var img = $('<img/>', {
                             class: 'card-img-top',
                             src: '../assets/ricette/' + item.nome + '.jpg',
@@ -156,7 +148,6 @@
     @media (max-width:769px) {
         .row {
             justify-content: center;
-
         }
 
         .content {
@@ -164,7 +155,6 @@
         }
 
     }
-    
     body.dark-mode {
         background-color: #222;
         color: black;

@@ -1,3 +1,4 @@
+// funzione che ritorna un array di colori in base alle tipologie di prodotti
 function colors(tipologie){
   var colori = {
     frutta:"rgb(34,139,34)",
@@ -18,7 +19,7 @@ function colors(tipologie){
 
 }
 
-
+//funzione che converte i mesi da numeri a stringhe
 function convertLabels(labels){
   var mesi ={
     "1":"Gennaio",
@@ -39,15 +40,6 @@ function convertLabels(labels){
       newLabels.push(mesi[labels[i]]);
     }
   return newLabels;
-
-
-  /* function translateLabels(labels){
-    rez = [];
-    for (var i = 0; i <labels.length; i++) {
-      rez.push(translate(labels[i]));
-    }
-    return rez;
-  } */
 
 }
 

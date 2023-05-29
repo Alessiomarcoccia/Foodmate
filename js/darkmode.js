@@ -1,58 +1,39 @@
+// funzione che esegue il toggle della classe dark-mode su tutti gli elementi che devono essere in dark mode
 function toggleDarkMode() {
+
+  //creo una variabile che prende il body della pagina e gli eseguo il toggle della classe dark-mode
   var body = document.getElementsByTagName("body")[0];
-  var buttons = document.getElementsByClassName("btn");
-  var profilo = document.getElementsByClassName("profilo")[0];
-  var contents = document.getElementsByClassName("contents");
-  var linktext = document.getElementsByClassName("link-text");
-  var modalcontent = document.getElementsByClassName("modal-content");
-  var lang = document.getElementsByClassName("lang");
   if(body != null) body.classList.toggle("dark-mode");
-  
-  if(buttons != null) {
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].classList.toggle("dark-mode-btn");
-   }
-  }
 
-  if(profilo != null) profilo.classList.toggle("dark-mode");
-  
-  if(contents != null) {
-  for (var i = 0; i < contents.length; i++) {
-    contents[i].classList.toggle("dark-mode");
+  //creo un array di elementi che devono essere in dark mode
+  var elements = ["btn", "profilo", "contents", "link-text", "modal-content", "lang"];
+
+  //uso un ciclo for per prendere tutti gli elementi che devono essere in dark mode
+  for (var i = 0; i < elements.length; i++) {
+    var element = document.getElementsByClassName(elements[i]);
+    //poi se l'elemento non è nullo eseguo il toggle della classe dark-mode
+    if (element != null) {
+      for (var j = 0; j < element.length; j++) {
+        element[j].classList.toggle("dark-mode");
+      }
     }
   }
 
-  if(linktext != null){
-  for (var i = 0; i < linktext.length; i++) {
-    linktext[i].classList.toggle("dark-mode");
-    }
-  }
-
-  if(lang!= null){
-    for (var i = 0; i < lang.length; i++) {
-      lang[i].classList.toggle("dark-mode");
-    }
-  } 
-  
-  if(modalcontent != null){
-    for (var i = 0; i < modalcontent.length; i++) {
-    modalcontent[i].classList.toggle("dark-mode");
-    }
-  }
-
-  /* console.log(profilo.classList); */
+  //infine salvo il valore della variabile dark-mode in local storage
   var isDarkModeEnabled = body.classList.contains("dark-mode");
   localStorage.setItem("darkModeEnabled", isDarkModeEnabled);
 }
 
+
+//funzione che controlla se il dark mode è abilitato o meno, se è abilitato esegue il toggle della classe dark-mode
 window.addEventListener("DOMContentLoaded", function () {
   var isDarkModeEnabled = localStorage.getItem("darkModeEnabled");
-  /* console.log(isDarkModeEnabled); */
   if (isDarkModeEnabled === "true") {
     toggleDarkMode();
   }
 });
 
+//funzione che esegue il toggle del dark mode quando viene cliccato il bottone
 $(document).on("click", ".dark-mode-toggle", function () {
   toggleDarkMode();
 });

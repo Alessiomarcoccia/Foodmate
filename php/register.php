@@ -5,14 +5,18 @@ $dbconn = pg_connect("host=localhost password=Foodmate user=Foodmate port=5432 d
 session_set_cookie_params(0);
 session_start();
 if ($dbconn) {
+    //controllo se l'email è già presente nel database
     $email = $_POST['inputEmail'];
     $q1 = "select * from utenti where email= $1";
     $result = pg_query_params($dbconn, $q1, array($email));
+    //se l'email è già presente nel database, restituisce un errore
     if ($tuple = pg_fetch_array($result, null, PGSQL_ASSOC)) {
         $error = "Email gia' registrata";
         header('Content-Type: application/json');
         echo json_encode(array('error' => $error));
-    } else {
+    } 
+    //altrimenti crea il nuovo utente
+    else {
         $nome = $_POST['inputName'];
         $cognome = $_POST['inputSurname'];
         $psw = $_POST['inputPassword'];

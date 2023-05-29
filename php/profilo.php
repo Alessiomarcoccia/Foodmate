@@ -16,7 +16,6 @@
         $json_data = json_encode($data);
     }
     
-    /* header('Location:./profilo.html'); */
     header('Content-Type: application/json');
     echo ($json_data);
     pg_close($dbconn);
