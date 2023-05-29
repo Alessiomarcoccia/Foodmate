@@ -23,20 +23,23 @@
 <body>
   <!-- Conterrà la sidebar,caricata dinamicamente -->
   <div id="sidebar-container"></div>
-
   <div class="content">
+    <!-- contiene le finestre per caricare la foto, cambiare la password, il nome, il cognome e il sesso.
+      in base al nome della classe la funzione decide quale finestra mostrare. -->
     <div>
+      <!-- div con la classe foto contiene la finestra per caricare la foto, cosi da distinguere le varie finestre -->
       <div class="foto">
         <div class="contents">
           <div class="aclose">
+            <!-- aggiunge una croce per chiudere la finestra, quando cliccata chiama la funzione foto() che chiude la finestra -->
             <a class="close" href="javascript:foto();">&times;</a>
           </div>
           <div class="contain">
+            <!-- form per modificare i dati personali -->
             <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm"
               enctype="multipart/form-data">
               <label for="foto" class="langSidebar" key="img"><span class="link-text"></span></label>
               <input type="file" name="foto" required><br><br>
-
               <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
             </form>
           </div>
@@ -45,6 +48,7 @@
     </div>
 
     <div>
+      <!-- div con la classe psw contiene la finestra per cambiare la password, cosi da distinguere le varie finestre -->
       <div class="psw">
         <div class="contents">
           <div class="aclose">
@@ -54,10 +58,8 @@
             <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
               <label for="current_password" class="langSidebar" key="psw_att"><span class="link-text"></span></label>
               <input type="password" name="current_password" id="current_password" required><br><br>
-
               <label for="new_password" class="langSidebar" key="psw_new"><span class="link-text"></span></label>
               <input type="password" name="new_password" id="new_password" minlength="8" required><br><br>
-
               <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
             </form>
           </div>
@@ -66,17 +68,16 @@
     </div>
 
       <div>
+       <!--  div con la classe nome contiene la finestra per cambiare il nome cosi, da distinguere le varie finestre -->
         <div class="nome">
           <div class="contents">
             <div class="aclose">
-              <!-- <span>Dati personali</span> -->
               <a class="close" href="javascript:nome();">&times;</a>
             </div>
             <div class="contain">
               <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
                 <label for="nome" class="langSidebar" key="nome_new"><span class="link-text"></span></label>
                 <input type="text" name="nome" id="nome" required><br><br>
-
                 <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
               </form>
             </div>
@@ -85,17 +86,16 @@
       </div>
 
       <div>
+        <!-- div con la classe cognome contiene la finestra per cambiare il cognome, cosi da distinguere le varie finestre -->
         <div class="cognome">
           <div class="contents">
             <div class="aclose">
-              <!-- <span>Dati personali</span> -->
               <a class="close" href="javascript:cognome();">&times;</a>
             </div>
             <div class="contain">
               <form action="../php/modifica.php" class="form-signin m-auto" method="POST" name="myForm">
                 <label for="nome" class="langSidebar" key="cognome_new"><span class="link-text"></span></label>
                 <input type="text" name="cognome" id="cognome" required><br><br>
-
                 <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
               </form>
             </div>
@@ -104,10 +104,10 @@
       </div>
 
       <div>
+        <!-- div con la classe sesso contiene la finestra per cambiare il sesso, cosi da distinguere le varie finestre -->
         <div class="sesso">
           <div class="contents">
             <div class="aclose">
-              <!-- <span>Dati personali</span> -->
               <a class="close" href="javascript:sesso();">&times;</a>
             </div>
             <div class="contain">
@@ -116,21 +116,17 @@
                 <input type="radio" name="sesso" value="M" required />
                 <label class="left white">F</label>
                 <input type="radio" name="sesso" value="F" required /><br><br>
-
                 <button class="reset langSidebar" key="invia"><span class="link-text"></span></button>
-
-                <!-- <input class="reset" type="submit" value="Reset"> -->
               </form>
             </div>
           </div>
         </div>
       </div>
+      <!-- div che contiene tutti i dati personali dell'utente che vengono stampati tramite la funzione ajax successivamente -->
       <div class="profilo"></div>
-
-    </div>
   </div>
 </body>
-
+<!-- funzione che gestisce il caricamento del sidebar -->
 <script>
   $(document).ready(function () {
     $.ajax({
@@ -156,15 +152,18 @@
     success: function (data) {
       var user = data[0];
       var stars = '';
+      // In questo for viene aggiunto un numero di asterischi pari alla lunghezza della password meno 3.
       for (var i = 0; i < user.psw.length - 3; i++) {
         stars += '*';
       }
+      // In var contenuto contiene tutti i dati dell'utente ottenuti dalla richiesta ajax.
       var contenuto = "<img src='" + user.foto + "'" + "alt='Image'>" + "<br>" + "<button class='change' onclick='foto()'>" +
         "<i class='fas fa-edit edit'></i>" + "</button>" +
 
         "<p><strong><label for='email' class='lang' key='email_pro'></label>" + " " + user.email + "</strong></p>" +
-
+        // substring(0,3) restituisce i primi 3 caratteri della password e i resti viene sostituito con asterischi.
         "<p><strong><label class='lang' key='psw_pro'></label>" + " " + user.psw.substring(0, 3) + stars + "</strong>" +
+          // il bottone che permette di aprire la finestra per cambiare la password.
         "<button class='change' onclick='psw()'>" + "<i class='fas fa-edit edit'></i>" + "</button>" + "</p>" +
 
         "<p><strong><label class='lang' key='nome_pro'></label>" + " " + user.nome + "</strong>" +
@@ -184,46 +183,48 @@
         "<li><button class='btn dropdown-item translate' id='en'>English</a></li>" +
         "<li><button class='btn dropdown-item translate' id='cn'>简体中文</a></li>" +
         "</ul></div>";
+      // aggiunge il contenuto in div con classe profilo nel body.
       $("body .profilo").append(contenuto);
     },
-
+    // in caso di errore stampa un messaggio di errore.
     error: function (jqXHR, textStatus, errorThrown) {
       console.log('Error: ' + errorThrown);
       console.log("Status: " + textStatus);
       console.log("Response Text: " + jqXHR.responseText);
     }
   });
-
-
+  
+  // funzione che permette di aprire e chiudere i form per la modifica della foto.
   function foto() {
+    // se la classe foto ha display none allora viene cambiato in block altrimenti viene cambiato in none, cosi da aprire e chiudere il form.
     var show = $('.foto').css('display');
     $('.foto').css('display', show == 'none' ? 'block' : 'none');
 
   };
-
+  // funzione che permette di aprire e chiudere i form per la modifica della password.
   function psw() {
     var show = $('.psw').css('display');
     $('.psw').css('display', show == 'none' ? 'block' : 'none');
 
   };
-
+  // funzione che permette di aprire e chiudere i form per la modifica del nome.
   function nome() {
     var show = $('.nome').css('display');
     $('.nome').css('display', show == 'none' ? 'block' : 'none');
   };
-
+  // funzione che permette di aprire e chiudere i form per la modifica del cognome.
   function cognome() {
     var show = $('.cognome').css('display');
     $('.cognome').css('display', show == 'none' ? 'block' : 'none');
   };
-
+  // funzione che permette di aprire e chiudere i form per la modifica del sesso.
   function sesso() {
     var show = $('.sesso').css('display');
     $('.sesso').css('display', show == 'none' ? 'block' : 'none');
   };
 
 </script>
-
+<!-- script per la traduzione -->
 <script type="text/javascript" src="../js/traduzione.js"></script>
 
 <style>

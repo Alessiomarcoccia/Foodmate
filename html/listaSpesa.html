@@ -181,7 +181,7 @@
             $.each(data, function (index, item) {
                 var card = $('<div>').addClass('card');
                 var cardBody = $('<div>').addClass('card-body');
-                var cardNome = $('<h1>').addClass('card-nome');
+                var cardNome = $('<h2>').addClass('card-nome');
                 var cardDescrizione = $('<p>').addClass('card-descrizione');
                 var check = $('<input>').addClass('form-check-input select checkboxSpesa').attr('type', 'checkbox').attr('id', item.id);
                 cardBody.append(cardNome.text(item.nome));
@@ -493,7 +493,7 @@
             margin-bottom: 10px;
         }
 
-        h3{
+        h2, h3{
             color: black;
         }
     </style>
